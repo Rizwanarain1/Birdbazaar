@@ -45,3 +45,4 @@
 16. **Strict "Sirf Issue Fix Karo"**: "Sirf issue fix karo" ka matlab hai: sirf wahi issue fix karo, no optimization, no refactoring, no extra features, no design changes.
 17. **Stability Is Priority #1**: Project ko har waqt stable rakhna first priority hai. Naya feature add karne ke chakkar me purani cheezon ko kabhi kharab nahi karna.
 18. **Minimal Code Delivery**: Jab tak user "complete code" na maange, sirf updated section hi dena.
+19. **Automatic GitHub Push**: Har task, bug fix ya new feature complete karne ke baad updated code ko automatically GitHub repository (`https://github.com/Rizwanarain1/Birdbazaar.git`) par commit aur push kar dena taake online repo hamesha updated rahe.
