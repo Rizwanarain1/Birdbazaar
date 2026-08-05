@@ -1,0 +1,46 @@
+# AviNest Server Security & Performance Configuration (.htaccess)
+
+# ----------------------------------------------------------------------
+# 1. Protect Sensitive Directories
+# ----------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Block direct web access to config and logs folders
+    RewriteRule ^config/ - [F,L]
+    RewriteRule ^logs/ - [F,L]
+</IfModule>
+
+# Prevent directory browsing
+Options -Indexes
+
+# ----------------------------------------------------------------------
+# 2. Security Headers
+# ----------------------------------------------------------------------
+<IfModule mod_headers.c>
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# ----------------------------------------------------------------------
+# 3. Gzip Compression for Performance
+# ----------------------------------------------------------------------
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css application/json application/javascript image/svg+xml
+</IfModule>
+
+# ----------------------------------------------------------------------
+# 4. Browser Caching
+# ----------------------------------------------------------------------
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+</IfModule>
