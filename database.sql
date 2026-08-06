@@ -104,3 +104,51 @@ ON DUPLICATE KEY UPDATE `email`=`email`;
 -- --------------------------------------------------------
 -- Seed Data: Birds (Empty by default. Populated only by registered user posts)
 -- --------------------------------------------------------
+-- --------------------------------------------------------
+-- Table structure for table `feedbacks`
+-- --------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `feedbacks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `user_name` varchar(255) NOT NULL,
+  `user_email` varchar(255) NOT NULL,
+  `rating` int(11) NOT NULL DEFAULT 5,
+  `category` varchar(100) DEFAULT 'General Experience',
+  `comment` text NOT NULL,
+  `status` enum('approved','pending') DEFAULT 'approved',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+-- Table structure for table `admin_announcements`
+-- --------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `admin_announcements` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `admin_id` int(11) DEFAULT 1,
+  `admin_name` varchar(255) DEFAULT 'AviNest Admin',
+  `title` varchar(255) NOT NULL,
+  `content` text NOT NULL,
+  `category` varchar(100) DEFAULT 'Community Notice',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+-- Table structure for table `announcement_comments`
+-- --------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `announcement_comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `announcement_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `user_name` varchar(255) NOT NULL,
+  `user_email` varchar(255) NOT NULL,
+  `comment_text` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `announcement_id` (`announcement_id`),
+  CONSTRAINT `fk_announcement_comments` FOREIGN KEY (`announcement_id`) REFERENCES `admin_announcements` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

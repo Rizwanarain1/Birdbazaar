@@ -80,6 +80,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <a href="index.php" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">home</span>Home</a>
         <a href="parrots.php" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">menu_book</span>Categories</a>
         <a href="marketplace.php" class="text-white font-semibold px-4 py-3 rounded-xl bg-emerald-700/30 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">storefront</span>Marketplace</a>
+        <a href="feedback.php" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">forum</span>Community & Feedback</a>
         <a href="user-dashboard.php" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">dashboard</span>My Dashboard</a>
     </div>
 </nav>
@@ -106,6 +107,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <a class="text-slate-600 dark:text-slate-300 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors" href="index.php">Home</a>
         <a class="text-slate-600 dark:text-slate-300 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors" href="parrots.php">Categories</a>
         <a class="text-emerald-800 dark:text-emerald-400 font-bold border-b-2 border-emerald-700 pb-1" href="marketplace.php">Marketplace</a>
+        <a class="text-slate-600 dark:text-slate-300 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors" href="feedback.php">Feedback</a>
     </nav>
     <div class="flex items-center gap-2">
         <div id="header-auth-container" class="flex items-center gap-2"></div>
