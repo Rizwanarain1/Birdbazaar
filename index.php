@@ -138,7 +138,10 @@ if (session_status() === PHP_SESSION_NONE) {
     <!-- Mobile Nav Drawer -->
     <nav id="mob-nav-drawer" class="mobile-nav-drawer flex flex-col">
         <div class="flex items-center justify-between px-6 py-5 border-b border-emerald-500/20">
-            <span class="text-xl font-bold text-white">🦜 BirdBazaar</span>
+            <div class="flex items-center gap-2.5">
+                <img src="images/logo.png" alt="BirdBazaar Logo" class="w-10 h-10 object-contain rounded-xl bg-white p-0.5 shadow-sm" />
+                <span class="text-xl font-bold text-white tracking-tight">BirdBazaar</span>
+            </div>
             <button onclick="closeMobNav()" class="text-white"><span class="material-symbols-outlined">close</span></button>
         </div>
         <div class="flex flex-col gap-1 px-4 py-6">
@@ -148,14 +151,25 @@ if (session_status() === PHP_SESSION_NONE) {
             <a href="user-dashboard.php" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">dashboard</span>My Dashboard</a>
         </div>
     </nav>
+    <script>
+        function openMobNav() {
+            document.getElementById('mob-nav-drawer').classList.add('open');
+            document.getElementById('mob-nav-overlay').classList.add('active');
+        }
+        function closeMobNav() {
+            document.getElementById('mob-nav-drawer').classList.remove('open');
+            document.getElementById('mob-nav-overlay').classList.remove('active');
+        }
+    </script>
 
-    <!-- Top Navigation Bar -->
-    <header
-        class="sticky top-0 z-50 flex justify-between items-center px-4 sm:px-6 md:px-margin-desktop py-4 w-full max-w-container-max mx-auto bg-surface/80 dark:bg-on-surface/80 backdrop-blur-md shadow-md dark:shadow-none border-b border-white/40">
-        <div class="flex items-center gap-2">
-            <span class="text-2xl">🦜</span>
-            <span class="font-display-lg text-headline-md font-bold text-primary dark:text-primary-fixed cursor-pointer"
-                onclick="window.location.href='index.php'">BirdBazaar</span>
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 flex justify-between items-center px-3 sm:px-6 md:px-margin-desktop py-3 sm:py-4 w-full max-w-container-max mx-auto bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-sm border-b border-slate-200 dark:border-slate-800">
+        <div class="flex items-center gap-2.5 sm:gap-4 min-w-0">
+            <!-- Logo -->
+            <div onclick="window.location.href='index.php'" class="flex items-center gap-2.5 cursor-pointer flex-shrink-0">
+                <img src="images/logo.png" alt="BirdBazaar Logo" class="w-11 h-11 sm:w-12 sm:h-12 object-contain rounded-xl border border-emerald-500/30 shadow-sm bg-white p-0.5" />
+                <span class="font-display-lg text-lg sm:text-2xl font-bold text-primary dark:text-primary-fixed truncate max-w-[120px] sm:max-w-none tracking-tight">BirdBazaar</span>
+            </div>
         </div>
         <nav class="hidden md:flex items-center gap-8">
             <a class="font-body-md text-body-md text-primary dark:text-primary-fixed font-bold border-b-2 border-primary dark:border-primary-fixed pb-1"
@@ -511,10 +525,9 @@ if (session_status() === PHP_SESSION_NONE) {
         <div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
             <!-- Brand Column -->
             <div class="md:col-span-1">
-                <div class="flex items-center gap-2 mb-4">
-                    <span class="text-3xl">🦜</span>
-                    <span class="font-display-lg text-2xl font-extrabold text-white tracking-tight">BirdBazaar</span>
-                </div>
+        <div class="flex items-center gap-2 mb-4 cursor-pointer" onclick="window.location.href='index.php'">
+            <img src="images/logo.png" alt="BirdBazaar Logo" class="h-12 w-auto object-contain bg-white/95 p-1.5 rounded-2xl shadow-md" />
+        </div>
                 <p class="text-xs text-emerald-100/70 leading-relaxed mb-6 font-normal">
                     Pakistan's premier digital sanctuary for bird lovers, species knowledge, health guidance, and safe
                     aviary trading.
