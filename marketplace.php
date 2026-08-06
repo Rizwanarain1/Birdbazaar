@@ -111,37 +111,48 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
 </header>
 
-<main class="max-w-container-max mx-auto px-4 md:px-margin-desktop py-8 animate-fade-in">
+<main class="max-w-container-max mx-auto px-3 sm:px-6 md:px-margin-desktop py-6 sm:py-8 animate-fade-in w-full overflow-hidden">
 
     <!-- Top Banner & Actions -->
-    <div class="bg-gradient-to-r from-emerald-900 to-teal-950 text-white rounded-3xl p-5 sm:p-8 mb-8 shadow-xl relative overflow-hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+    <div class="bg-gradient-to-r from-emerald-900 to-teal-950 text-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 mb-6 sm:mb-8 shadow-xl relative overflow-hidden flex flex-col md:flex-row justify-between items-start md:items-center gap-6 w-full">
         <div class="relative z-10 max-w-xl">
-            <span class="bg-emerald-500/30 text-emerald-300 text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider mb-3 inline-block">Facebook Style Marketplace</span>
-            <h2 class="font-display-lg text-2xl sm:text-3xl font-extrabold text-white mb-2">Buy &amp; Sell Hand-Raised Birds</h2>
+            <span class="bg-emerald-500/30 text-emerald-300 text-[10px] sm:text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider mb-2 sm:mb-3 inline-block">Facebook Style Marketplace</span>
+            <h2 class="font-display-lg text-xl sm:text-3xl font-extrabold text-white mb-2 leading-tight">Buy &amp; Sell Hand-Raised Birds</h2>
             <p class="text-emerald-100/90 text-xs sm:text-sm font-light leading-relaxed">Connect directly with verified bird owners, chat in real-time to negotiate prices, and post your own listings easily.</p>
         </div>
         <div class="relative z-10 flex flex-wrap gap-3 w-full sm:w-auto">
-            <button onclick="window.triggerListingModal ? window.triggerListingModal() : (window.openAuthModal ? window.openAuthModal() : null)" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-5 sm:px-6 py-3.5 rounded-2xl shadow-lg hover:scale-102 active:scale-98 transition-all flex items-center justify-center gap-2 text-sm cursor-pointer w-full sm:w-auto">
+            <button onclick="window.triggerListingModal ? window.triggerListingModal() : (window.openAuthModal ? window.openAuthModal() : null)" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-5 sm:px-6 py-3.5 rounded-2xl shadow-lg hover:scale-102 active:scale-98 transition-all flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer w-full sm:w-auto">
                 <span class="material-symbols-outlined text-lg">add_circle</span> Post Bird for Sale
             </button>
         </div>
     </div>
 
     <!-- Filter Pills & Search Bar -->
-    <div class="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4 mb-8">
-        <!-- Category Pills -->
-        <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none" id="category-pills">
-            <button data-cat="all" class="px-5 py-2.5 rounded-xl font-bold text-xs bg-emerald-800 text-white shadow-md transition-all whitespace-nowrap cursor-pointer">All Categories</button>
-            <button data-cat="parrots" class="px-5 py-2.5 rounded-xl font-bold text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all whitespace-nowrap cursor-pointer">Parrots</button>
-            <button data-cat="cockatiels" class="px-5 py-2.5 rounded-xl font-bold text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all whitespace-nowrap cursor-pointer">Cockatiels</button>
-            <button data-cat="budgies" class="px-5 py-2.5 rounded-xl font-bold text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all whitespace-nowrap cursor-pointer">Budgies</button>
-            <button data-cat="macaws" class="px-5 py-2.5 rounded-xl font-bold text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all whitespace-nowrap cursor-pointer">Macaws</button>
-            <button data-cat="lovebirds" class="px-5 py-2.5 rounded-xl font-bold text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all whitespace-nowrap cursor-pointer">Lovebirds</button>
-            <button data-cat="finches" class="px-5 py-2.5 rounded-xl font-bold text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all whitespace-nowrap cursor-pointer">Finches</button>
-            <button data-cat="canaries" class="px-5 py-2.5 rounded-xl font-bold text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all whitespace-nowrap cursor-pointer">Canaries</button>
+    <div class="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4 mb-6 sm:mb-8 w-full">
+        <!-- Mobile Filter Toggle Button -->
+        <button id="toggle-mobile-market-filters" onclick="const p=document.getElementById('category-pills-wrapper'); p.classList.toggle('hidden');" class="w-full md:hidden p-3 bg-emerald-800 text-white rounded-2xl font-bold text-xs flex items-center justify-between shadow-sm cursor-pointer">
+            <span class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-base">tune</span>
+                <span>Filter Categories</span>
+            </span>
+            <span class="material-symbols-outlined text-base">expand_more</span>
+        </button>
+
+        <!-- Category Pills Wrapper -->
+        <div id="category-pills-wrapper" class="hidden md:block w-full md:w-auto">
+            <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none w-full" id="category-pills">
+                <button data-cat="all" class="px-4 sm:px-5 py-2.5 rounded-xl font-bold text-xs bg-emerald-800 text-white shadow-md transition-all whitespace-nowrap cursor-pointer">All Categories</button>
+                <button data-cat="parrots" class="px-4 sm:px-5 py-2.5 rounded-xl font-bold text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all whitespace-nowrap cursor-pointer">Parrots</button>
+                <button data-cat="cockatiels" class="px-4 sm:px-5 py-2.5 rounded-xl font-bold text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all whitespace-nowrap cursor-pointer">Cockatiels</button>
+                <button data-cat="budgies" class="px-4 sm:px-5 py-2.5 rounded-xl font-bold text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all whitespace-nowrap cursor-pointer">Budgies</button>
+                <button data-cat="macaws" class="px-4 sm:px-5 py-2.5 rounded-xl font-bold text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all whitespace-nowrap cursor-pointer">Macaws</button>
+                <button data-cat="lovebirds" class="px-4 sm:px-5 py-2.5 rounded-xl font-bold text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all whitespace-nowrap cursor-pointer">Lovebirds</button>
+                <button data-cat="finches" class="px-4 sm:px-5 py-2.5 rounded-xl font-bold text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all whitespace-nowrap cursor-pointer">Finches</button>
+                <button data-cat="canaries" class="px-4 sm:px-5 py-2.5 rounded-xl font-bold text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:bg-emerald-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-all whitespace-nowrap cursor-pointer">Canaries</button>
+            </div>
         </div>
 
-        <!-- Search Input -->
+        <!-- Search Input Full Width on Mobile -->
         <div class="relative w-full md:min-w-[280px] md:w-auto">
             <span class="material-symbols-outlined absolute left-3.5 top-3 text-slate-400 text-lg">search</span>
             <input id="market-search" type="text" placeholder="Search title or location..." class="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm" />
@@ -155,8 +166,57 @@ if (session_status() === PHP_SESSION_NONE) {
 
 </main>
 
+<!-- Footer -->
+<footer class="w-full mt-16 bg-primary dark:bg-slate-900 py-10 sm:py-16 px-4 sm:px-6 md:px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-8 max-w-container-max mx-auto rounded-t-3xl border-t border-white/10 text-white">
+    <div class="md:col-span-1">
+        <div class="flex items-center gap-2 mb-6">
+            <span class="text-3xl">🦜</span>
+            <span class="font-display-lg text-xl font-bold text-white">BirdBazaar</span>
+        </div>
+        <p class="text-emerald-100/70 font-body-md mb-6 text-xs sm:text-sm font-light">The world's premier digital sanctuary for bird lovers, providing knowledge and a secure marketplace for avian life.</p>
+        <div class="flex gap-4">
+            <a class="text-white hover:text-emerald-400 transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+            <a class="text-white hover:text-emerald-400 transition-colors" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+            <a class="text-white hover:text-emerald-400 transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+        </div>
+    </div>
+    <div>
+        <h5 class="text-white font-bold mb-4 text-sm sm:text-base">Quick Links</h5>
+        <ul class="space-y-3 text-xs sm:text-sm">
+            <li><a class="text-emerald-100/70 hover:text-emerald-300 transition-colors" href="index.php">Home Sanctuary</a></li>
+            <li><a class="text-emerald-100/70 hover:text-emerald-300 transition-colors" href="parrots.php">Species Guide</a></li>
+            <li><a class="text-emerald-100/70 hover:text-emerald-300 transition-colors" href="marketplace.php">Live Marketplace</a></li>
+            <li><a class="text-emerald-100/70 hover:text-emerald-300 transition-colors" href="user-dashboard.php">User Dashboard</a></li>
+        </ul>
+    </div>
+    <div>
+        <h5 class="text-white font-bold mb-4 text-sm sm:text-base">Categories</h5>
+        <ul class="space-y-3 text-xs sm:text-sm">
+            <li><a class="text-emerald-100/70 hover:text-emerald-300 transition-colors" href="parrots.php?cat=parrots">Parrots</a></li>
+            <li><a class="text-emerald-100/70 hover:text-emerald-300 transition-colors" href="parrots.php?cat=budgies">Budgies</a></li>
+            <li><a class="text-emerald-100/70 hover:text-emerald-300 transition-colors" href="parrots.php?cat=cockatiels">Cockatiels</a></li>
+            <li><a class="text-emerald-100/70 hover:text-emerald-300 transition-colors" href="parrots.php?cat=macaws">Macaws</a></li>
+        </ul>
+    </div>
+    <div>
+        <h5 class="text-white font-bold mb-4 text-sm sm:text-base">Join the Nest</h5>
+        <p class="text-emerald-100/70 font-body-md mb-4 text-xs sm:text-sm font-light">Subscribe for the latest bird care tips and market updates.</p>
+        <div class="flex flex-col gap-2">
+            <input class="bg-emerald-950/60 border border-white/20 rounded-xl px-4 py-2 text-white placeholder:text-white/40 text-xs focus:outline-none focus:border-emerald-400 transition-colors" placeholder="Your Email" type="email"/>
+            <button class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 rounded-xl text-xs transition-colors cursor-pointer">Subscribe</button>
+        </div>
+    </div>
+    <div class="md:col-span-4 mt-8 sm:mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left text-xs text-emerald-100/60">
+        <p>© 2026 BirdBazaar. Celebrating Avian Life.</p>
+        <div class="flex flex-wrap justify-center gap-4 sm:gap-8">
+            <span>Secure Payments via Stripe</span>
+            <span>Verified Breeders Only</span>
+        </div>
+    </div>
+</footer>
+
 <!-- Live Chat Drawer Component -->
-<div id="chat-drawer" class="fixed bottom-4 right-4 z-50 w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 flex flex-col hidden animate-fade-in overflow-hidden h-[500px]">
+<div id="chat-drawer" class="fixed bottom-0 sm:bottom-4 right-0 sm:right-4 z-50 w-full sm:max-w-md bg-white dark:bg-slate-900 rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 flex flex-col hidden animate-fade-in overflow-hidden h-[85vh] sm:h-[500px]">
     <!-- Header -->
     <div class="bg-gradient-to-r from-emerald-800 to-teal-900 text-white p-4 flex items-center justify-between shadow-md">
         <div class="flex items-center gap-3">
@@ -410,20 +470,20 @@ if (session_status() === PHP_SESSION_NONE) {
             card.innerHTML = `
                 <div>
                     <!-- Post Header -->
-                    <div class="p-3.5 px-4 flex items-center justify-between border-b border-slate-100 dark:border-slate-800/80 bg-slate-50/50 dark:bg-slate-800/30">
-                        <div class="flex items-center gap-2.5">
-                            <div class="w-8 h-8 rounded-full bg-emerald-700 text-white font-bold flex items-center justify-center text-xs shadow-sm">
+                    <div class="p-3.5 px-4 flex items-center justify-between border-b border-slate-100 dark:border-slate-800/80 bg-slate-50/50 dark:bg-slate-800/30 gap-2">
+                        <div class="flex items-center gap-2.5 min-w-0">
+                            <div class="w-8 h-8 rounded-full bg-emerald-700 text-white font-bold flex items-center justify-center text-xs shadow-sm flex-shrink-0">
                                 ${(item.breeder || 'U').charAt(0).toUpperCase()}
                             </div>
-                            <div class="leading-tight">
-                                <h4 class="font-bold text-xs text-slate-900 dark:text-white truncate max-w-[140px]">${item.breeder || 'Seller'}</h4>
-                                <p class="text-[10px] text-slate-400 flex items-center gap-0.5">
-                                    <span class="material-symbols-outlined text-[11px] text-emerald-600">location_on</span> ${item.origin || 'Pakistan'}
+                            <div class="leading-tight min-w-0">
+                                <h4 class="font-bold text-xs text-slate-900 dark:text-white truncate max-w-[120px] sm:max-w-[140px]">${item.breeder || 'Seller'}</h4>
+                                <p class="text-[10px] text-slate-400 flex items-center gap-0.5 truncate">
+                                    <span class="material-symbols-outlined text-[11px] text-emerald-600 flex-shrink-0">location_on</span> <span class="truncate">${item.origin || 'Pakistan'}</span>
                                 </p>
                             </div>
                         </div>
-                        <div class="flex items-center gap-1.5">
-                            <span class="bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 text-[10px] px-2 py-0.5 rounded-full font-extrabold">
+                        <div class="flex items-center gap-1.5 flex-shrink-0">
+                            <span class="bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 text-[10px] px-2 py-0.5 rounded-full font-extrabold truncate">
                                 ${item.category || 'Parrots'}
                             </span>
                             ${isSold ? '<span class="bg-red-100 text-red-700 text-[10px] px-2 py-0.5 rounded-full font-bold">SOLD</span>' : ''}
