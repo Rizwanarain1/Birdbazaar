@@ -266,7 +266,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 </div>
             </div>
             
-            <div id="birds-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div id="birds-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 <!-- Dynamic Species Cards -->
             </div>
             
@@ -339,12 +339,12 @@ if (session_status() === PHP_SESSION_NONE) {
             </div>
 
             <!-- Modal Action Footer -->
-            <div class="flex flex-col sm:flex-row items-center gap-3 pt-2">
-                <button id="modal-find-sellers-btn" class="w-full sm:flex-1 btn-emerald-glow py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 shadow-md cursor-pointer">
+            <div class="flex items-center gap-3 pt-2">
+                <button id="modal-find-sellers-btn" class="flex-1 btn-emerald-glow py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 shadow-md cursor-pointer">
                     <span>Find Sellers on Marketplace</span>
                     <span class="material-symbols-outlined text-sm">arrow_forward</span>
                 </button>
-                <button id="modal-close-secondary-btn" onclick="closeModal()" class="w-full sm:w-auto px-5 py-3 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 transition-colors cursor-pointer">
+                <button id="modal-close-secondary-btn" onclick="closeModal()" class="px-5 py-3 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 transition-colors cursor-pointer">
                     Close
                 </button>
             </div>
