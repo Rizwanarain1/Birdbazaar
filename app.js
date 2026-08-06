@@ -950,8 +950,8 @@ window.openAuthModal = function() {
                 <button id="close-auth-modal" class="absolute top-6 right-6 text-outline hover:text-on-surface">
                     <span class="material-symbols-outlined text-2xl">close</span>
                 </button>
-                <div class="flex items-center gap-2 mb-6">
-                    <span class="text-2xl">🦜</span>
+                <div class="flex items-center gap-2.5 mb-6">
+                    <img src="images/logo.png" alt="BirdBazaar Logo" class="w-10 h-10 object-contain" />
                     <h3 class="font-display-lg text-headline-md font-bold text-primary dark:text-primary-fixed">BirdBazaar Portal</h3>
                 </div>
                 
@@ -965,7 +965,7 @@ window.openAuthModal = function() {
                 <form id="auth-login-form" class="space-y-4">
                     <div>
                         <label class="font-label-md block mb-1 text-on-surface dark:text-white">Email Address</label>
-                        <input type="email" id="login-email" required placeholder="admin@avinest.com or user@gmail.com" class="w-full rounded-lg border-outline-variant bg-surface-container-low text-body-md p-3 focus:border-primary dark:bg-on-surface/40" />
+                        <input type="email" id="login-email" required placeholder="Enter your email address" class="w-full rounded-lg border-outline-variant bg-surface-container-low text-body-md p-3 focus:border-primary dark:bg-on-surface/40" />
                     </div>
                     <div>
                         <div class="flex justify-between items-center mb-1">

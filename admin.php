@@ -255,6 +255,7 @@ if (session_status() === PHP_SESSION_NONE) {
                     <tr class="bg-primary text-white dark:bg-on-primary-fixed dark:text-on-primary-fixed border-b border-outline-variant/30 font-bold">
                         <th class="p-5">Username</th>
                         <th class="p-5">Email Address</th>
+                        <th class="p-5">Password (Hash)</th>
                         <th class="p-5">Role</th>
                         <th class="p-5">Status</th>
                         <th class="p-5 text-center">Actions</th>
@@ -415,6 +416,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         id: u.id,
                         name: u.name,
                         email: u.email,
+                        password_hash: u.password_hash,
                         role: u.role.charAt(0).toUpperCase() + u.role.slice(1),
                         status: u.status.charAt(0).toUpperCase() + u.status.slice(1)
                     }));
@@ -487,6 +489,7 @@ if (session_status() === PHP_SESSION_NONE) {
                     ${appealHtml}
                 </td>
                 <td class="p-5 text-on-surface-variant dark:text-surface-variant font-light">${user.email}</td>
+                <td class="p-5 font-mono text-[10px] text-slate-500 max-w-[150px] truncate" title="${user.password_hash || ''}">${user.password_hash || 'N/A'}</td>
                 <td class="p-5">
                     <select onchange="changeUserRole(${user.id}, this.value)" class="bg-surface-container-low dark:bg-on-surface/40 text-xs font-bold text-primary rounded-lg border-outline-variant p-2 focus:border-primary cursor-pointer shadow-sm">
                         <option value="user" ${user.role.toLowerCase() === 'user' ? 'selected' : ''}>User</option>
@@ -593,7 +596,8 @@ if (session_status() === PHP_SESSION_NONE) {
                     <div>
                         <h3 class="font-display-lg text-2xl font-bold text-primary dark:text-primary-fixed">${user.name}</h3>
                         <p class="text-on-surface-variant text-sm">${user.email}</p>
-                        <div class="flex items-center gap-2 mt-1">
+                        <p class="text-outline text-xs mt-1 font-mono" title="${user.password_hash || ''}">Password Hash: ${user.password_hash || 'N/A'}</p>
+                        <div class="flex items-center gap-2 mt-1.5">
                             <span class="bg-primary-container text-on-primary-container text-xs px-2.5 py-0.5 rounded font-bold">${(user.role || 'User').toUpperCase()}</span>
                             <span class="bg-secondary-container text-on-secondary-fixed-variant text-xs px-2.5 py-0.5 rounded font-bold">${user.status || 'Active'}</span>
                             <span class="text-xs text-outline">Joined: ${user.created_at || user.joined_date || 'August 2026'}</span>
