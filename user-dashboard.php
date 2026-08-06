@@ -101,61 +101,61 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
 </header>
 
-<main class="max-w-container-max mx-auto px-4 sm:px-6 md:px-margin-desktop py-8">
+<main class="max-w-container-max mx-auto px-3 sm:px-6 md:px-margin-desktop py-6 sm:py-8 animate-fade-in w-full overflow-hidden">
     <!-- User Overview Banner -->
-    <div class="bg-surface-container-low dark:bg-on-surface/40 rounded-3xl p-6 md:p-8 mb-8 border border-outline-variant/30 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-        <div class="flex items-center gap-4">
-            <div class="w-16 h-16 rounded-full bg-primary text-white font-bold text-2xl flex items-center justify-center shadow-md" id="user-avatar-text">
+    <div class="bg-surface-container-low dark:bg-on-surface/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 mb-6 sm:mb-8 border border-outline-variant/30 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4 sm:gap-6 w-full">
+        <div class="flex items-center gap-3 sm:gap-4 min-w-0">
+            <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-primary text-white font-bold text-xl sm:text-2xl flex items-center justify-center shadow-md flex-shrink-0" id="user-avatar-text">
                 U
             </div>
-            <div>
-                <div class="flex items-center gap-2">
-                    <h2 class="font-display-lg text-2xl font-bold text-primary dark:text-primary-fixed" id="user-display-name">Member User</h2>
-                    <span class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-0.5 rounded-full font-bold">Verified Owner</span>
+            <div class="min-w-0">
+                <div class="flex items-center gap-2 flex-wrap">
+                    <h2 class="font-display-lg text-xl sm:text-2xl font-bold text-primary dark:text-primary-fixed truncate" id="user-display-name">Member User</h2>
+                    <span class="bg-emerald-100 text-emerald-800 text-[10px] sm:text-xs px-2.5 py-0.5 rounded-full font-bold flex-shrink-0">Verified Owner</span>
                 </div>
-                <p class="text-on-surface-variant text-sm" id="user-display-email">member@birdbazaar.com</p>
-                <p class="text-outline text-xs mt-1">Verified Member • Joined August 2026</p>
+                <p class="text-on-surface-variant text-xs sm:text-sm truncate" id="user-display-email">member@birdbazaar.com</p>
+                <p class="text-outline text-[10px] sm:text-xs mt-0.5 truncate">Verified Member • Joined August 2026</p>
             </div>
         </div>
-        <div class="flex flex-wrap items-center gap-3">
-            <button onclick="window.triggerListingModal ? window.triggerListingModal() : null" class="bg-tertiary text-white px-5 py-2.5 rounded-xl font-label-md hover:bg-tertiary/90 transition-all flex items-center gap-2 shadow-md">
-                <span class="material-symbols-outlined">add_circle</span>
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full md:w-auto">
+            <button onclick="window.triggerListingModal ? window.triggerListingModal() : null" class="bg-tertiary text-white px-4 sm:px-5 py-2.5 rounded-xl font-label-md text-xs sm:text-sm hover:bg-tertiary/90 transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer w-full sm:w-auto">
+                <span class="material-symbols-outlined text-base sm:text-lg">add_circle</span>
                 Post New Bird Listing
             </button>
-            <button id="user-logout-btn" class="border border-error text-error hover:bg-error-container hover:text-on-error-container px-4 py-2.5 rounded-xl font-label-md transition-all flex items-center gap-1">
-                <span class="material-symbols-outlined">logout</span>
+            <button id="user-logout-btn" class="border border-error text-error hover:bg-error-container hover:text-on-error-container px-4 py-2.5 rounded-xl font-label-md text-xs sm:text-sm transition-all flex items-center justify-center gap-1 cursor-pointer w-full sm:w-auto">
+                <span class="material-symbols-outlined text-base sm:text-lg">logout</span>
                 Logout
             </button>
         </div>
     </div>
 
     <!-- Stats Bar -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-        <div class="p-6 rounded-2xl bg-surface-container-low dark:bg-on-surface/30 border border-outline-variant/20 shadow-sm flex items-center gap-4">
-            <div class="w-12 h-12 rounded-xl bg-primary-container text-primary flex items-center justify-center">
-                <span class="material-symbols-outlined text-2xl">pets</span>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10 w-full">
+        <div class="p-4 sm:p-6 rounded-2xl bg-surface-container-low dark:bg-on-surface/30 border border-outline-variant/20 shadow-sm flex items-center gap-3 sm:gap-4 min-w-0">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary-container text-primary flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-xl sm:text-2xl">pets</span>
             </div>
-            <div>
-                <p class="text-label-sm text-outline">My Active Listings</p>
-                <h3 class="text-headline-md font-bold text-primary dark:text-primary-fixed" id="stat-my-listings">0</h3>
-            </div>
-        </div>
-        <div class="p-6 rounded-2xl bg-surface-container-low dark:bg-on-surface/30 border border-outline-variant/20 shadow-sm flex items-center gap-4">
-            <div class="w-12 h-12 rounded-xl bg-secondary-container text-on-secondary-fixed-variant flex items-center justify-center">
-                <span class="material-symbols-outlined text-2xl">mail</span>
-            </div>
-            <div>
-                <p class="text-label-sm text-outline">Inquiries Received</p>
-                <h3 class="text-headline-md font-bold text-primary dark:text-primary-fixed" id="stat-my-inquiries">0</h3>
+            <div class="min-w-0">
+                <p class="text-[10px] sm:text-xs text-outline font-medium truncate">My Active Listings</p>
+                <h3 class="text-lg sm:text-2xl font-bold text-primary dark:text-primary-fixed truncate" id="stat-my-listings">0</h3>
             </div>
         </div>
-        <div class="p-6 rounded-2xl bg-surface-container-low dark:bg-on-surface/30 border border-outline-variant/20 shadow-sm flex items-center gap-4">
-            <div class="w-12 h-12 rounded-xl bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center">
-                <span class="material-symbols-outlined text-2xl">verified</span>
+        <div class="p-4 sm:p-6 rounded-2xl bg-surface-container-low dark:bg-on-surface/30 border border-outline-variant/20 shadow-sm flex items-center gap-3 sm:gap-4 min-w-0">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-secondary-container text-on-secondary-fixed-variant flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-xl sm:text-2xl">mail</span>
             </div>
-            <div>
-                <p class="text-label-sm text-outline">Account Trust Rating</p>
-                <h3 class="text-headline-md font-bold text-primary dark:text-primary-fixed">4.9 ★</h3>
+            <div class="min-w-0">
+                <p class="text-[10px] sm:text-xs text-outline font-medium truncate">Inquiries Received</p>
+                <h3 class="text-lg sm:text-2xl font-bold text-primary dark:text-primary-fixed truncate" id="stat-my-inquiries">0</h3>
+            </div>
+        </div>
+        <div class="p-4 sm:p-6 rounded-2xl bg-surface-container-low dark:bg-on-surface/30 border border-outline-variant/20 shadow-sm flex items-center gap-3 sm:gap-4 min-w-0">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-xl sm:text-2xl">verified</span>
+            </div>
+            <div class="min-w-0">
+                <p class="text-[10px] sm:text-xs text-outline font-medium truncate">Account Trust Rating</p>
+                <h3 class="text-lg sm:text-2xl font-bold text-primary dark:text-primary-fixed truncate">4.9 ★</h3>
             </div>
         </div>
     </div>
@@ -196,6 +196,55 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
     </div>
 </main>
+
+<!-- Footer -->
+<footer class="w-full mt-16 bg-primary dark:bg-slate-900 py-10 sm:py-16 px-4 sm:px-6 md:px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-8 max-w-container-max mx-auto rounded-t-3xl border-t border-white/10 text-white">
+    <div class="md:col-span-1">
+        <div class="flex items-center gap-2 mb-6">
+            <span class="text-3xl">🦜</span>
+            <span class="font-display-lg text-xl font-bold text-white">BirdBazaar</span>
+        </div>
+        <p class="text-emerald-100/70 font-body-md mb-6 text-xs sm:text-sm font-light">The world's premier digital sanctuary for bird lovers, providing knowledge and a secure marketplace for avian life.</p>
+        <div class="flex gap-4">
+            <a class="text-white hover:text-emerald-400 transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+            <a class="text-white hover:text-emerald-400 transition-colors" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+            <a class="text-white hover:text-emerald-400 transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+        </div>
+    </div>
+    <div>
+        <h5 class="text-white font-bold mb-4 text-sm sm:text-base">Quick Links</h5>
+        <ul class="space-y-3 text-xs sm:text-sm">
+            <li><a class="text-emerald-100/70 hover:text-emerald-300 transition-colors" href="index.php">Home Sanctuary</a></li>
+            <li><a class="text-emerald-100/70 hover:text-emerald-300 transition-colors" href="parrots.php">Species Guide</a></li>
+            <li><a class="text-emerald-100/70 hover:text-emerald-300 transition-colors" href="marketplace.php">Live Marketplace</a></li>
+            <li><a class="text-emerald-100/70 hover:text-emerald-300 transition-colors" href="user-dashboard.php">User Dashboard</a></li>
+        </ul>
+    </div>
+    <div>
+        <h5 class="text-white font-bold mb-4 text-sm sm:text-base">Categories</h5>
+        <ul class="space-y-3 text-xs sm:text-sm">
+            <li><a class="text-emerald-100/70 hover:text-emerald-300 transition-colors" href="parrots.php?cat=parrots">Parrots</a></li>
+            <li><a class="text-emerald-100/70 hover:text-emerald-300 transition-colors" href="parrots.php?cat=budgies">Budgies</a></li>
+            <li><a class="text-emerald-100/70 hover:text-emerald-300 transition-colors" href="parrots.php?cat=cockatiels">Cockatiels</a></li>
+            <li><a class="text-emerald-100/70 hover:text-emerald-300 transition-colors" href="parrots.php?cat=macaws">Macaws</a></li>
+        </ul>
+    </div>
+    <div>
+        <h5 class="text-white font-bold mb-4 text-sm sm:text-base">Join the Nest</h5>
+        <p class="text-emerald-100/70 font-body-md mb-4 text-xs sm:text-sm font-light">Subscribe for the latest bird care tips and market updates.</p>
+        <div class="flex flex-col gap-2">
+            <input class="bg-emerald-950/60 border border-white/20 rounded-xl px-4 py-2 text-white placeholder:text-white/40 text-xs focus:outline-none focus:border-emerald-400 transition-colors" placeholder="Your Email" type="email"/>
+            <button class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 rounded-xl text-xs transition-colors cursor-pointer">Subscribe</button>
+        </div>
+    </div>
+    <div class="md:col-span-4 mt-8 sm:mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left text-xs text-emerald-100/60">
+        <p>© 2026 BirdBazaar. Celebrating Avian Life.</p>
+        <div class="flex flex-wrap justify-center gap-4 sm:gap-8">
+            <span>Secure Payments via Stripe</span>
+            <span>Verified Breeders Only</span>
+        </div>
+    </div>
+</footer>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -563,9 +612,9 @@ if (session_status() === PHP_SESSION_NONE) {
 
         modal = document.createElement('div');
         modal.id = 'dash-chat-modal';
-        modal.className = 'fixed inset-0 bg-black/75 backdrop-blur-sm z-[160] flex items-center justify-center p-4 animate-fade-in';
+        modal.className = 'fixed inset-0 bg-black/75 backdrop-blur-sm z-[160] flex items-center justify-center p-2 sm:p-4 animate-fade-in';
         modal.innerHTML = `
-            <div class="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-lg shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col h-[560px]">
+            <div class="bg-white dark:bg-slate-900 rounded-2xl sm:rounded-3xl w-full max-w-lg shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col h-[85vh] max-h-[560px]">
                 <!-- Header -->
                 <div class="bg-gradient-to-r from-emerald-800 to-teal-900 text-white p-4 flex items-center justify-between shadow-md">
                     <div class="flex items-center gap-3">
