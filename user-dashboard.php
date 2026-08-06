@@ -89,7 +89,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <div onclick="window.location.href='index.php'" class="flex items-center gap-2.5 cursor-pointer flex-shrink-0">
             <img src="images/logo.png" alt="BirdBazaar Logo" class="w-14 h-14 sm:w-16 sm:h-16 object-contain rounded-full border border-emerald-500/30 shadow-sm bg-white p-0.5" />
             <span class="font-display-lg text-lg sm:text-2xl font-bold text-primary dark:text-primary-fixed truncate max-w-[120px] sm:max-w-none tracking-tight">BirdBazaar</span>
-            <span class="bg-primary-container text-primary font-bold text-xs px-2.5 py-0.5 rounded-full ml-2 hidden sm:inline">User Portal</span>
+            <span class="bg-primary-fixed text-primary font-bold text-xs px-2.5 py-0.5 rounded-full ml-2 hidden sm:inline">User Portal</span>
         </div>
     </div>
     <nav class="hidden md:flex items-center gap-8 font-label-md">
@@ -110,8 +110,15 @@ if (session_status() === PHP_SESSION_NONE) {
     <!-- User Overview Banner -->
     <div class="bg-surface-container-low dark:bg-on-surface/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 mb-6 sm:mb-8 border border-outline-variant/30 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4 sm:gap-6 w-full">
         <div class="flex items-center gap-3 sm:gap-4 min-w-0">
-            <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-primary text-white font-bold text-xl sm:text-2xl flex items-center justify-center shadow-md flex-shrink-0" id="user-avatar-text">
-                U
+            <div class="relative group cursor-pointer flex-shrink-0" title="Click to change profile picture">
+                <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-primary text-white font-bold text-xl sm:text-2xl flex items-center justify-center shadow-md overflow-hidden relative" id="user-avatar-container" onclick="document.getElementById('avatar-upload-input').click()">
+                    <img id="user-avatar-img" class="w-full h-full object-cover hidden" src="" alt="Avatar" />
+                    <span id="user-avatar-text">U</span>
+                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span class="material-symbols-outlined text-white text-sm sm:text-base">photo_camera</span>
+                    </div>
+                </div>
+                <input type="file" id="avatar-upload-input" accept="image/*" class="hidden" onchange="uploadAvatarImage(this)" />
             </div>
             <div class="min-w-0">
                 <div class="flex items-center gap-2 flex-wrap">
@@ -252,29 +259,93 @@ if (session_status() === PHP_SESSION_NONE) {
 </footer>
 
 <script>
+    function updateAvatarUI(user) {
+        const avatarImg = document.getElementById('user-avatar-img');
+        const avatarText = document.getElementById('user-avatar-text');
+        if (!avatarImg || !avatarText) return;
+        
+        if (user && user.avatar && user.avatar !== 'images/african_grey.png' && user.avatar.trim() !== '') {
+            avatarImg.src = user.avatar;
+            avatarImg.classList.remove('hidden');
+            avatarText.classList.add('hidden');
+        } else {
+            avatarImg.classList.add('hidden');
+            avatarText.classList.remove('hidden');
+            avatarText.textContent = (user && user.name ? user.name : 'U').charAt(0).toUpperCase();
+        }
+    }
+
+    window.uploadAvatarImage = function(input) {
+        if (!input.files || !input.files[0]) return;
+        const file = input.files[0];
+        const formData = new FormData();
+        formData.append('image', file);
+        
+        if (window.showToast) window.showToast("Uploading profile picture...", false);
+        
+        fetch('api/upload.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success && data.image_url) {
+                return fetch('api/auth.php?action=update_avatar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ avatar_url: data.image_url })
+                })
+                .then(res => res.json())
+                .then(authData => {
+                    if (authData.success) {
+                        const currentUser = JSON.parse(sessionStorage.getItem('avinest_current_user') || '{}');
+                        currentUser.avatar = data.image_url;
+                        sessionStorage.setItem('avinest_current_user', JSON.stringify(currentUser));
+                        updateAvatarUI(currentUser);
+                        if (window.showToast) window.showToast("🎉 Profile picture updated successfully!", false);
+                    } else {
+                        if (window.showToast) window.showToast("❌ " + authData.message, true);
+                    }
+                });
+            } else {
+                if (window.showToast) window.showToast("❌ " + data.message, true);
+            }
+        })
+        .catch(err => {
+            console.error("Error uploading avatar:", err);
+            if (window.showToast) window.showToast("❌ Error uploading profile picture.", true);
+        });
+    };
+
     document.addEventListener('DOMContentLoaded', () => {
         // Load User Profile Data from Session
         const currentData = JSON.parse(sessionStorage.getItem('avinest_current_user') || 'null');
         
         if (currentData) {
-            document.getElementById('user-display-name').textContent = currentData.name || 'Avian Breeder';
-            document.getElementById('user-display-email').textContent = currentData.email || 'user@avinest.com';
-            document.getElementById('user-display-role').textContent = (currentData.role || 'user').toUpperCase();
-            document.getElementById('user-avatar-box').textContent = (currentData.name || 'U').charAt(0).toUpperCase();
+            if (document.getElementById('user-display-name')) {
+                document.getElementById('user-display-name').textContent = currentData.name || 'Avian Breeder';
+            }
+            if (document.getElementById('user-display-email')) {
+                document.getElementById('user-display-email').textContent = currentData.email || 'user@avinest.com';
+            }
+            updateAvatarUI(currentData);
         }
 
         loadUserNotifications();
         fetchMyListings();
         fetchMyInquiries();
 
-        document.getElementById('user-logout-btn').addEventListener('click', () => {
-            if (window.logoutCurrentUser) {
-                window.logoutCurrentUser();
-            } else {
-                sessionStorage.removeItem('avinest_current_user');
-                window.location.href = 'index.php';
-            }
-        });
+        const logoutBtn = document.getElementById('user-logout-btn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => {
+                if (window.logoutCurrentUser) {
+                    window.logoutCurrentUser();
+                } else {
+                    sessionStorage.removeItem('avinest_current_user');
+                    window.location.href = 'index.php';
+                }
+            });
+        }
     });
 
     function loadUserNotifications() {

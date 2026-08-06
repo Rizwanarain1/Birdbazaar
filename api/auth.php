@@ -39,6 +39,9 @@ switch ($action) {
     case 'check':
         handleCheck($db);
         break;
+    case 'update_avatar':
+        handleUpdateAvatar($db, $input);
+        break;
     default:
         echo json_encode(["success" => false, "message" => "Invalid authentication action."]);
         break;
@@ -271,3 +274,37 @@ function handleCheck($db) {
         "user" => null
     ]);
 }
+
+/**
+ * Update user profile picture (avatar) in database
+ */
+function handleUpdateAvatar($db, $data) {
+    if (!isset($_SESSION['user_id'])) {
+        echo json_encode(["success" => false, "message" => "Unauthorized. Please log in first."]);
+        return;
+    }
+    if (!$data || empty($data['avatar_url'])) {
+        echo json_encode(["success" => false, "message" => "Avatar URL is required."]);
+        return;
+    }
+
+    $avatarUrl = trim($data['avatar_url']);
+    $userId = $_SESSION['user_id'];
+
+    $stmt = $db->prepare("UPDATE users SET avatar = :avatar WHERE id = :id");
+    $result = $stmt->execute([
+        ':avatar' => $avatarUrl,
+        ':id' => $userId
+    ]);
+
+    if ($result) {
+        echo json_encode([
+            "success" => true,
+            "message" => "Profile picture updated successfully!",
+            "avatar" => $avatarUrl
+        ]);
+    } else {
+        echo json_encode(["success" => false, "message" => "Failed to update profile picture."]);
+    }
+}
+
