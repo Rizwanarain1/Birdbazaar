@@ -132,7 +132,10 @@ if (session_status() === PHP_SESSION_NONE) {
 <!-- Mobile Nav Drawer -->
 <nav id="mob-nav-drawer" class="mobile-nav-drawer flex flex-col">
     <div class="flex items-center justify-between px-6 py-5 border-b border-emerald-500/20">
-        <span class="text-xl font-bold text-white">🦜 BirdBazaar</span>
+        <div class="flex items-center gap-2.5">
+            <img src="images/logo.png" alt="BirdBazaar Logo" class="w-12 h-12 object-contain rounded-full bg-white p-0.5 shadow-sm" />
+            <span class="text-xl font-bold text-white tracking-tight">BirdBazaar</span>
+        </div>
         <button onclick="closeMobNav()" class="text-white"><span class="material-symbols-outlined">close</span></button>
     </div>
     <div class="flex flex-col gap-1 px-4 py-6">
@@ -156,9 +159,9 @@ if (session_status() === PHP_SESSION_NONE) {
 <!-- TopNavBar -->
 <header class="sticky top-0 z-50 flex justify-between items-center px-4 sm:px-6 md:px-margin-desktop py-4 w-full max-w-container-max mx-auto bg-surface/80 dark:bg-on-surface/80 backdrop-blur-md shadow-md border-b border-white/40">
     <div class="flex items-center gap-3">
-        <div onclick="window.location.href='index.php'" class="flex items-center gap-2 cursor-pointer">
-            <span class="text-2xl">🦜</span>
-            <h1 class="font-display-lg text-headline-md font-bold text-primary dark:text-primary-fixed">BirdBazaar</h1>
+        <div onclick="window.location.href='index.php'" class="flex items-center gap-2.5 cursor-pointer flex-shrink-0">
+            <img src="images/logo.png" alt="BirdBazaar Logo" class="w-14 h-14 sm:w-16 sm:h-16 object-contain rounded-full border border-emerald-500/30 shadow-sm bg-white p-0.5" />
+            <span class="font-display-lg text-lg sm:text-2xl font-bold text-primary dark:text-primary-fixed truncate max-w-[120px] sm:max-w-none tracking-tight">BirdBazaar</span>
         </div>
         <nav class="hidden md:flex items-center gap-8">
             <a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md" href="index.php">Home</a>

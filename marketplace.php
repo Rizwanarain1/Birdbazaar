@@ -71,7 +71,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <nav id="mob-nav-drawer" class="mobile-nav-drawer flex flex-col">
     <div class="flex items-center justify-between px-6 py-5 border-b border-emerald-500/20">
         <div class="flex items-center gap-2.5">
-            <img src="images/logo.png" alt="BirdBazaar Logo" class="w-10 h-10 object-contain rounded-xl bg-white p-0.5 shadow-sm" />
+            <img src="images/logo.png" alt="BirdBazaar Logo" class="w-12 h-12 object-contain rounded-full bg-white p-0.5 shadow-sm" />
             <span class="text-xl font-bold text-white tracking-tight">BirdBazaar</span>
         </div>
         <button onclick="closeMobNav()" class="text-white"><span class="material-symbols-outlined">close</span></button>
@@ -98,8 +98,8 @@ if (session_status() === PHP_SESSION_NONE) {
 <header class="sticky top-0 z-40 flex justify-between items-center px-4 sm:px-6 md:px-margin-desktop py-4 w-full max-w-container-max mx-auto bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-sm border-b border-slate-200 dark:border-slate-800">
     <div class="flex items-center gap-2.5 sm:gap-4 min-w-0">
         <div onclick="window.location.href='index.php'" class="flex items-center gap-2.5 cursor-pointer flex-shrink-0">
-            <img src="images/logo.png" alt="BirdBazaar Logo" class="w-11 h-11 sm:w-12 sm:h-12 object-contain rounded-xl border border-emerald-500/30 shadow-sm bg-white p-0.5" />
-            <h1 class="font-display-lg text-lg sm:text-2xl font-bold text-emerald-950 dark:text-emerald-400 cursor-pointer tracking-tight">BirdBazaar<span class="text-xs bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300 px-2 py-0.5 rounded-full font-bold uppercase ml-2 hidden sm:inline">Marketplace</span></h1>
+            <img src="images/logo.png" alt="BirdBazaar Logo" class="w-14 h-14 sm:w-16 sm:h-16 object-contain rounded-full border border-emerald-500/30 shadow-sm bg-white p-0.5" />
+            <h1 class="font-display-lg text-lg sm:text-2xl font-bold text-emerald-950 dark:text-emerald-400 cursor-pointer tracking-tight">BirdBazaar <span class="text-xs bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300 px-2 py-0.5 rounded-full font-bold uppercase ml-1 hidden sm:inline">Marketplace</span></h1>
         </div>
     </div>
     <nav class="hidden md:flex items-center gap-8 font-semibold text-sm">
