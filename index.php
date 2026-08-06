@@ -254,7 +254,9 @@ if (session_status() === PHP_SESSION_NONE) {
                     BirdBazaar Portals</h2>
                 <p class="font-body-md text-sm text-on-surface-variant dark:text-surface-variant mt-2">Dedicated portals
                     designed for avian care knowledge and safe trading.</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
                 <!-- Hub Card 1: Categories / Species Knowledge -->
                 <div onclick="window.location.href='parrots.php'"
                     class="bg-gradient-to-br from-emerald-900 to-teal-950 text-white p-6 sm:p-8 md:p-10 rounded-3xl border border-emerald-500/30 shadow-xl hover:shadow-2xl transition-all cursor-pointer group hover:-translate-y-1 relative overflow-hidden flex flex-col justify-between">
