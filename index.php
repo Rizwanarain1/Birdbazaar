@@ -190,14 +190,14 @@ if (session_status() === PHP_SESSION_NONE) {
     </script>
     <main class="animate-fade-in">
         <!-- Hero Section (Pure Brand Showcase) -->
-        <section class="relative w-full h-[500px] sm:h-[580px] md:h-[720px] overflow-hidden flex items-center">
+        <section class="relative w-full min-h-[500px] sm:min-h-[580px] md:min-h-[700px] py-10 sm:py-16 md:py-20 overflow-hidden flex items-center">
             <div class="absolute inset-0 z-0">
                 <img class="w-full h-full object-cover" alt="Vibrant tropical parrots on branch"
                     src="images/hero_bg.png" />
                 <div class="absolute inset-0 bg-gradient-to-r from-on-surface/90 via-on-surface/70 to-on-surface/40">
                 </div>
             </div>
-            <div class="relative z-10 px-4 sm:px-6 md:px-margin-desktop w-full max-w-4xl mx-auto md:mx-0">
+            <div class="relative z-10 px-4 sm:px-6 md:px-margin-desktop w-full max-w-container-max mx-auto">
                 <div
                     class="glass-card-dark p-5 sm:p-8 md:p-12 rounded-3xl w-full max-w-2xl transform transition-all duration-500 hover:translate-y-[-2px] border border-white/10 shadow-2xl">
                     <span
@@ -231,12 +231,12 @@ if (session_status() === PHP_SESSION_NONE) {
                     <!-- Dual Action CTAs -->
                     <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
                         <button onclick="window.location.href='parrots.php'"
-                            class="btn-emerald-glow font-label-md px-5 sm:px-7 py-3 sm:py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-lg text-sm cursor-pointer">
+                            class="btn-emerald-glow font-label-md px-5 sm:px-7 py-3 sm:py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-lg text-sm cursor-pointer w-full sm:w-auto">
                             <span class="material-symbols-outlined text-lg">menu_book</span>
                             <span>Explore Species Guide</span>
                         </button>
                         <button onclick="window.location.href='marketplace.php'"
-                            class="bg-white/10 hover:bg-white/20 text-white font-label-md px-5 sm:px-7 py-3 sm:py-3.5 rounded-xl transition-all border border-white/20 hover:border-emerald-400/50 text-sm flex items-center justify-center gap-2 cursor-pointer">
+                            class="bg-white/10 hover:bg-white/20 text-white font-label-md px-5 sm:px-7 py-3 sm:py-3.5 rounded-xl transition-all border border-white/20 hover:border-emerald-400/50 text-sm flex items-center justify-center gap-2 cursor-pointer w-full sm:w-auto">
                             <span class="material-symbols-outlined text-lg text-emerald-400">storefront</span>
                             <span>Visit Live Marketplace</span>
                         </button>
@@ -254,12 +254,10 @@ if (session_status() === PHP_SESSION_NONE) {
                     BirdBazaar Portals</h2>
                 <p class="font-body-md text-sm text-on-surface-variant dark:text-surface-variant mt-2">Dedicated portals
                     designed for avian care knowledge and safe trading.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Hub Card 1: Categories / Species Knowledge -->
                 <div onclick="window.location.href='parrots.php'"
-                    class="bg-gradient-to-br from-emerald-900 to-teal-950 text-white p-8 md:p-10 rounded-3xl border border-emerald-500/30 shadow-xl hover:shadow-2xl transition-all cursor-pointer group hover:-translate-y-1 relative overflow-hidden flex flex-col justify-between">
+                    class="bg-gradient-to-br from-emerald-900 to-teal-950 text-white p-6 sm:p-8 md:p-10 rounded-3xl border border-emerald-500/30 shadow-xl hover:shadow-2xl transition-all cursor-pointer group hover:-translate-y-1 relative overflow-hidden flex flex-col justify-between">
                     <div
                         class="absolute -right-8 -bottom-8 opacity-10 text-emerald-300 pointer-events-none group-hover:scale-110 transition-transform duration-500">
                         <span class="material-symbols-outlined text-[200px]">menu_book</span>
@@ -290,7 +288,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
                 <!-- Hub Card 2: Live Marketplace -->
                 <div onclick="window.location.href='marketplace.php'"
-                    class="bg-gradient-to-br from-slate-900 to-emerald-950 text-white p-8 md:p-10 rounded-3xl border border-teal-500/30 shadow-xl hover:shadow-2xl transition-all cursor-pointer group hover:-translate-y-1 relative overflow-hidden flex flex-col justify-between">
+                    class="bg-gradient-to-br from-slate-900 to-emerald-950 text-white p-6 sm:p-8 md:p-10 rounded-3xl border border-teal-500/30 shadow-xl hover:shadow-2xl transition-all cursor-pointer group hover:-translate-y-1 relative overflow-hidden flex flex-col justify-between">
                     <div
                         class="absolute -right-8 -bottom-8 opacity-10 text-teal-300 pointer-events-none group-hover:scale-110 transition-transform duration-500">
                         <span class="material-symbols-outlined text-[200px]">storefront</span>
@@ -490,13 +488,13 @@ if (session_status() === PHP_SESSION_NONE) {
                 <p class="text-sm md:text-base text-emerald-100 font-light max-w-xl mx-auto">
                     Join thousands of verified breeders and bird enthusiasts on Pakistan's #1 digital avian platform.
                 </p>
-                <div class="flex flex-wrap justify-center gap-4 pt-2">
+                <div class="flex flex-col sm:flex-row justify-center gap-4 pt-2">
                     <button onclick="window.location.href='parrots.php'"
-                        class="bg-white text-emerald-950 font-bold text-sm px-8 py-3.5 rounded-xl hover:bg-emerald-100 transition-colors shadow-lg cursor-pointer">
+                        class="bg-white text-emerald-950 font-bold text-sm px-8 py-3.5 rounded-xl hover:bg-emerald-100 transition-colors shadow-lg cursor-pointer w-full sm:w-auto">
                         Explore Species Guide
                     </button>
                     <button onclick="window.location.href='marketplace.php'"
-                        class="border border-white/40 bg-white/10 text-white font-bold text-sm px-8 py-3.5 rounded-xl hover:bg-white/20 transition-colors cursor-pointer">
+                        class="border border-white/40 bg-white/10 text-white font-bold text-sm px-8 py-3.5 rounded-xl hover:bg-white/20 transition-colors cursor-pointer w-full sm:w-auto">
                         Visit Marketplace
                     </button>
                 </div>
@@ -602,7 +600,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
     <!-- FAB for Listing Action -->
     <button
-        class="fixed bottom-8 right-8 bg-tertiary text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 animate-float"
+        class="fixed bottom-5 right-5 sm:bottom-8 sm:right-8 bg-tertiary text-white w-14 h-14 sm:w-16 sm:h-16 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 animate-float"
         aria-label="Add listing">
         <span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
     </button>
