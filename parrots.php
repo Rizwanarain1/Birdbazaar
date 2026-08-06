@@ -106,20 +106,20 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
 </header>
 
-<main class="max-w-container-max mx-auto px-4 sm:px-6 md:px-margin-desktop py-8 animate-fade-in">
+<main class="max-w-container-max mx-auto px-3 sm:px-6 md:px-margin-desktop py-6 sm:py-8 animate-fade-in w-full overflow-hidden">
     
     <!-- Hero Glassmorphic Header -->
-    <div class="mb-10 relative rounded-3xl p-5 sm:p-8 md:p-12 glass-card-dark text-white shadow-2xl overflow-hidden">
+    <div class="mb-8 sm:mb-10 relative rounded-2xl sm:rounded-3xl p-4 sm:p-8 md:p-12 glass-card-dark text-white shadow-2xl overflow-hidden w-full max-w-full">
         <div class="relative z-10">
-            <span class="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-300 font-bold text-xs px-3 py-1.5 rounded-full mb-4 border border-emerald-400/40 backdrop-blur-md max-w-full">
+            <span class="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-300 font-bold text-xs px-3 py-1.5 rounded-full mb-3 sm:mb-4 border border-emerald-400/40 backdrop-blur-md max-w-full">
                 <span class="pulse-dot flex-shrink-0"></span>
                 <span class="material-symbols-outlined text-sm text-emerald-400 flex-shrink-0">menu_book</span>
                 <span class="truncate">Verified Avian Species &amp; Care Encyclopedia</span>
             </span>
-            <h2 id="category-page-title" class="font-display-lg text-2xl sm:text-3xl md:text-5xl font-extrabold mb-4 text-white tracking-tight leading-tight">
+            <h2 id="category-page-title" class="font-display-lg text-xl sm:text-3xl md:text-5xl font-extrabold mb-3 sm:mb-4 text-white tracking-tight leading-tight">
                 Avian Species Directory
             </h2>
-            <p id="category-page-desc" class="font-body-lg text-xs sm:text-sm md:text-base text-emerald-100/90 leading-relaxed font-normal mb-6">
+            <p id="category-page-desc" class="font-body-lg text-xs sm:text-sm md:text-base text-emerald-100/90 leading-relaxed font-normal mb-5 sm:mb-6 break-words">
                 Explore Pakistan's most comprehensive bird encyclopedia. Filter by species, intelligence rating, noise level, and learn about care &amp; diet requirements before connecting with verified breeders.
             </p>
             
@@ -157,8 +157,8 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
 
     <!-- Category Tabs Navigation Bar -->
-    <div class="mb-10 overflow-x-auto pb-2 scrollbar-none">
-        <div class="flex items-center gap-3 min-w-max" id="category-tabs-container">
+    <div class="mb-8 sm:mb-10 w-full max-w-full overflow-x-auto pb-2 scrollbar-none">
+        <div class="flex items-center gap-2 sm:gap-3 min-w-max px-1" id="category-tabs-container">
             <button data-cat="all" class="cat-tab-btn active">
                 <span class="material-symbols-outlined text-lg">apps</span> All Species
             </button>
@@ -811,40 +811,40 @@ if (session_status() === PHP_SESSION_NONE) {
                         </div>
                     </div>
 
-                    <div class="p-5">
-                        <h4 class="font-bold text-lg text-slate-900 dark:text-white mb-0.5 leading-snug">${bird.name}</h4>
-                        <p class="text-xs italic text-slate-400 mb-4 font-mono">${bird.sci}</p>
+                    <div class="p-4 sm:p-5">
+                        <h4 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white mb-0.5 leading-snug truncate">${bird.name}</h4>
+                        <p class="text-xs italic text-slate-400 mb-3 sm:mb-4 font-mono truncate">${bird.sci}</p>
                         
-                        <div class="grid grid-cols-2 gap-3 mb-4 bg-slate-50 dark:bg-slate-700/40 p-3 rounded-xl border border-slate-100 dark:border-slate-700 text-xs">
-                            <div class="flex items-center gap-2">
-                                <span class="material-symbols-outlined text-emerald-600 text-base">public</span>
-                                <div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-3 sm:mb-4 bg-slate-50 dark:bg-slate-700/40 p-2.5 sm:p-3 rounded-xl border border-slate-100 dark:border-slate-700 text-xs">
+                            <div class="flex items-center gap-2 min-w-0">
+                                <span class="material-symbols-outlined text-emerald-600 text-base flex-shrink-0">public</span>
+                                <div class="min-w-0">
                                     <span class="text-[9px] block uppercase text-slate-400 font-bold">Origin</span>
-                                    <span class="font-semibold text-slate-700 dark:text-slate-200 text-[11px]">${bird.origin}</span>
+                                    <span class="font-semibold text-slate-700 dark:text-slate-200 text-[11px] truncate block">${bird.origin}</span>
                                 </div>
                             </div>
-                            <div class="flex items-center gap-2">
-                                <span class="material-symbols-outlined text-emerald-600 text-base">timelapse</span>
-                                <div>
+                            <div class="flex items-center gap-2 min-w-0">
+                                <span class="material-symbols-outlined text-emerald-600 text-base flex-shrink-0">timelapse</span>
+                                <div class="min-w-0">
                                     <span class="text-[9px] block uppercase text-slate-400 font-bold">Lifespan</span>
-                                    <span class="font-semibold text-slate-700 dark:text-slate-200 text-[11px]">${bird.life}</span>
+                                    <span class="font-semibold text-slate-700 dark:text-slate-200 text-[11px] truncate block">${bird.life}</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="flex items-center justify-between text-xs text-slate-500 mb-2">
-                            <span>Intelligence: <strong class="text-emerald-600 dark:text-emerald-400 font-semibold">${bird.intel}</strong></span>
-                            <span>Noise: <strong class="text-slate-700 dark:text-slate-300">${bird.volume}</strong></span>
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between text-xs text-slate-500 gap-1 mb-2">
+                            <span class="truncate">Intel: <strong class="text-emerald-600 dark:text-emerald-400 font-semibold">${bird.intel}</strong></span>
+                            <span class="truncate">Noise: <strong class="text-slate-700 dark:text-slate-300">${bird.volume}</strong></span>
                         </div>
                     </div>
                 </div>
 
-                <div class="p-4 sm:p-5 pt-0 grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    <button class="quick-care-btn py-2.5 rounded-xl border border-emerald-600 text-emerald-700 dark:border-emerald-400 dark:text-emerald-300 font-bold text-xs hover:bg-emerald-50 dark:hover:bg-emerald-950 transition-colors flex items-center justify-center gap-1 cursor-pointer w-full">
+                <div class="p-4 sm:p-5 pt-0 flex flex-col sm:flex-row gap-2 w-full">
+                    <button class="quick-care-btn py-2.5 px-3 rounded-xl border border-emerald-600 text-emerald-700 dark:border-emerald-400 dark:text-emerald-300 font-bold text-xs hover:bg-emerald-50 dark:hover:bg-emerald-950 transition-colors flex items-center justify-center gap-1.5 cursor-pointer w-full flex-1">
                         <span class="material-symbols-outlined text-sm">menu_book</span>
                         <span>Care Guide</span>
                     </button>
-                    <button onclick="window.location.href='marketplace.php?q=${encodeURIComponent(bird.name)}'" class="py-2.5 rounded-xl btn-emerald-glow text-white font-bold text-xs flex items-center justify-center gap-1 cursor-pointer w-full">
+                    <button onclick="window.location.href='marketplace.php?q=${encodeURIComponent(bird.name)}'" class="py-2.5 px-3 rounded-xl btn-emerald-glow text-white font-bold text-xs flex items-center justify-center gap-1.5 cursor-pointer w-full flex-1">
                         <span>Find Sellers</span>
                         <span class="material-symbols-outlined text-sm">storefront</span>
                     </button>
