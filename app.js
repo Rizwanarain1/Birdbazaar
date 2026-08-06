@@ -835,6 +835,18 @@ function renderHeaderAuth() {
         `;
     }
 
+    // Synchronize Mobile Navigation Drawer Dashboard Link
+    const mobDashboardLink = document.querySelector('#mob-nav-drawer a[href*="dashboard"]');
+    if (mobDashboardLink) {
+        if (currentUser) {
+            mobDashboardLink.style.setProperty('display', 'flex', 'important');
+            const isAdmin = currentUser.role === 'admin' || currentUser.email === 'admin@avinest.com';
+            mobDashboardLink.setAttribute('href', isAdmin ? 'admin.php' : 'user-dashboard.php');
+        } else {
+            mobDashboardLink.style.setProperty('display', 'none', 'important');
+        }
+    }
+
     // Attach Mobile Navigation Drawer Listener
     const mobileBtn = document.getElementById('mobile-hamburger-btn');
     if (mobileBtn) {
@@ -939,6 +951,18 @@ window.logoutCurrentUser = function() {
     });
 };
 
+window.togglePasswordVisibility = function(inputId, button) {
+    const input = document.getElementById(inputId);
+    const icon = button.querySelector('.material-symbols-outlined');
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.textContent = 'visibility_off';
+    } else {
+        input.type = 'password';
+        icon.textContent = 'visibility';
+    }
+};
+
 window.openAuthModal = function() {
     let authModal = document.getElementById('auth-modal-overlay');
     if (!authModal) {
@@ -972,7 +996,12 @@ window.openAuthModal = function() {
                             <label class="font-label-md text-on-surface dark:text-white">Password</label>
                             <button type="button" id="btn-show-forgot" class="text-xs text-primary font-bold hover:underline">Forgot Password?</button>
                         </div>
-                        <input type="password" id="login-password" required placeholder="••••••••" class="w-full rounded-lg border-outline-variant bg-surface-container-low text-body-md p-3 focus:border-primary dark:bg-on-surface/40 transition-colors" />
+                        <div class="relative">
+                            <input type="password" id="login-password" required placeholder="••••••••" class="w-full rounded-lg border-outline-variant bg-surface-container-low text-body-md p-3 pr-10 focus:border-primary dark:bg-on-surface/40 transition-colors" />
+                            <button type="button" onclick="togglePasswordVisibility('login-password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors flex items-center justify-center cursor-pointer">
+                                <span class="material-symbols-outlined text-[20px]">visibility</span>
+                            </button>
+                        </div>
                         <p id="login-password-error" class="text-xs text-red-500 font-bold mt-1.5 hidden flex items-center gap-1">❌ Ghalat password darj kiya gaya hai. Baraye meherbani sahi password dobara try karein.</p>
                     </div>
                     <button type="submit" class="w-full bg-primary text-white font-label-md py-3 rounded-lg hover:scale-101 transition-transform flex items-center justify-center gap-2 shadow-md">
@@ -992,7 +1021,21 @@ window.openAuthModal = function() {
                     </div>
                     <div>
                         <label class="font-label-md block mb-1 text-on-surface dark:text-white">Password</label>
-                        <input type="password" id="signup-password" required placeholder="••••••••" class="w-full rounded-lg border-outline-variant bg-surface-container-low text-body-md p-3 focus:border-primary dark:bg-on-surface/40" />
+                        <div class="relative">
+                            <input type="password" id="signup-password" required placeholder="••••••••" class="w-full rounded-lg border-outline-variant bg-surface-container-low text-body-md p-3 pr-10 focus:border-primary dark:bg-on-surface/40" />
+                            <button type="button" onclick="togglePasswordVisibility('signup-password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors flex items-center justify-center cursor-pointer">
+                                <span class="material-symbols-outlined text-[20px]">visibility</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="font-label-md block mb-1 text-on-surface dark:text-white">Confirm Password</label>
+                        <div class="relative">
+                            <input type="password" id="signup-confirm-password" required placeholder="••••••••" class="w-full rounded-lg border-outline-variant bg-surface-container-low text-body-md p-3 pr-10 focus:border-primary dark:bg-on-surface/40" />
+                            <button type="button" onclick="togglePasswordVisibility('signup-confirm-password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors flex items-center justify-center cursor-pointer">
+                                <span class="material-symbols-outlined text-[20px]">visibility</span>
+                            </button>
+                        </div>
                     </div>
                     <button type="submit" class="w-full bg-primary text-white font-label-md py-3 rounded-lg hover:scale-101 transition-transform flex items-center justify-center gap-2 shadow-md">
                         Create Account <span class="material-symbols-outlined">person_add</span>
@@ -1151,6 +1194,18 @@ window.openAuthModal = function() {
             const name = capitalizeTitleCase(rawName);
             const email = authModal.querySelector('#signup-email').value.trim();
             const password = authModal.querySelector('#signup-password').value;
+            const confirmPassword = authModal.querySelector('#signup-confirm-password').value;
+
+            if (password !== confirmPassword) {
+                window.showCustomModal({
+                    title: "❌ Passwords Do Not Match",
+                    message: "Baraye meherbani dono password field me ek jaisa password likhein.",
+                    icon: "error",
+                    type: "error",
+                    buttonText: "OK"
+                });
+                return;
+            }
 
             fetch('api/auth.php?action=register', {
                 method: 'POST',

@@ -364,6 +364,9 @@ if (session_status() === PHP_SESSION_NONE) {
             return;
         }
 
+        // Clear stale local cached users to force fetch fresh data from database
+        sessionStorage.removeItem(USERS_STORAGE_KEY);
+
         setupAdminDashboard();
         fetchAdminStats();
         renderTable();
