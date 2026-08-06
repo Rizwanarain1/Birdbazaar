@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /config/
+Disallow: /logs/
+
+Sitemap: https://birdbazaar.com/sitemap.xml
