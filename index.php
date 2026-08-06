@@ -139,7 +139,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <nav id="mob-nav-drawer" class="mobile-nav-drawer flex flex-col">
         <div class="flex items-center justify-between px-6 py-5 border-b border-emerald-500/20">
             <div class="flex items-center gap-2.5">
-                <img src="images/logo.png" alt="BirdBazaar Logo" class="w-12 h-12 object-contain rounded-full bg-white p-0.5 shadow-sm" />
+                <img src="images/logo.png" alt="BirdBazaar Logo" class="w-16 h-16 object-contain" />
                 <span class="text-xl font-bold text-white tracking-tight">BirdBazaar</span>
             </div>
             <button onclick="closeMobNav()" class="text-white"><span class="material-symbols-outlined">close</span></button>
@@ -167,7 +167,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <div class="flex items-center gap-2.5 sm:gap-4 min-w-0">
             <!-- Logo -->
             <div onclick="window.location.href='index.php'" class="flex items-center gap-2.5 cursor-pointer flex-shrink-0">
-                <img src="images/logo.png" alt="BirdBazaar Logo" class="w-14 h-14 sm:w-16 sm:h-16 object-contain rounded-full border border-emerald-500/30 shadow-sm bg-white p-0.5" />
+                <img src="images/logo.png" alt="BirdBazaar Logo" class="w-16 h-16 sm:w-20 sm:h-20 object-contain" />
                 <span class="font-display-lg text-lg sm:text-2xl font-bold text-primary dark:text-primary-fixed truncate max-w-[120px] sm:max-w-none tracking-tight">BirdBazaar</span>
             </div>
         </div>
@@ -526,7 +526,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <!-- Brand Column -->
             <div class="md:col-span-1">
         <div class="flex items-center gap-2 mb-4 cursor-pointer" onclick="window.location.href='index.php'">
-            <img src="images/logo.png" alt="BirdBazaar Logo" class="h-20 w-auto object-contain bg-white/95 p-2 rounded-2xl shadow-md" />
+            <img src="images/logo.png" alt="BirdBazaar Logo" class="h-24 w-auto object-contain" />
         </div>
                 <p class="text-xs text-emerald-100/70 leading-relaxed mb-6 font-normal">
                     Pakistan's premier digital sanctuary for bird lovers, species knowledge, health guidance, and safe

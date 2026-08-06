@@ -58,7 +58,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <!-- Mobile Nav Drawer -->
 <nav id="mob-nav-drawer" class="mobile-nav-drawer flex flex-col">
     <div class="flex items-center justify-between px-6 py-5 border-b border-emerald-500/20">
-        <img src="images/logo.png" alt="BirdBazaar Logo" class="h-14 w-auto object-contain cursor-pointer" onclick="window.location.href='index.php'" />
+        <img src="images/logo.png" alt="BirdBazaar Logo" class="h-16 w-auto object-contain cursor-pointer" onclick="window.location.href='index.php'" />
         <button onclick="closeMobNav()" class="text-white"><span class="material-symbols-outlined">close</span></button>
     </div>
     <div class="flex flex-col gap-1 px-4 py-6">
@@ -82,7 +82,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <!-- Top Navigation Bar -->
 <header class="sticky top-0 z-50 flex justify-between items-center px-4 sm:px-6 md:px-margin-desktop py-4 w-full max-w-container-max mx-auto bg-surface/80 dark:bg-on-surface/80 backdrop-blur-md shadow-md border-b border-white/40">
     <div class="flex items-center gap-3">
-        <img src="images/logo.png" alt="BirdBazaar Logo" class="h-14 sm:h-16 w-auto object-contain cursor-pointer" onclick="window.location.href='index.php'" />
+        <img src="images/logo.png" alt="BirdBazaar Logo" class="w-16 h-16 sm:w-20 sm:h-20 object-contain cursor-pointer" onclick="window.location.href='index.php'" />
         <nav class="hidden md:flex items-center gap-8 font-label-md">
             <a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md" href="index.php">Home</a>
             <a class="text-primary dark:text-primary-fixed font-bold border-b-2 border-primary dark:border-primary-fixed pb-1 font-body-md text-body-md" href="parrots.php">Categories</a>
@@ -358,7 +358,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <!-- Brand Column -->
         <div class="md:col-span-1">
             <div class="flex items-center gap-2 mb-6">
-                <img src="images/logo.png" alt="BirdBazaar Logo" class="h-16 sm:h-20 w-auto object-contain bg-white/95 p-2 rounded-2xl shadow-md cursor-pointer" onclick="window.location.href='index.php'" />
+                <img src="images/logo.png" alt="BirdBazaar Logo" class="h-24 w-auto object-contain cursor-pointer" onclick="window.location.href='index.php'" />
             </div>
             <p class="text-xs text-emerald-100/70 leading-relaxed mb-6 font-normal">
                 Pakistan's premier digital sanctuary for bird lovers, species knowledge, health guidance, and safe aviary trading.
