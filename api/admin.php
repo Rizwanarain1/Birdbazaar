@@ -48,7 +48,7 @@ switch ($action) {
  * Get all users list
  */
 function getUsers($db) {
-    $stmt = $db->query("SELECT id, name, email, password_hash, role, status, avatar, DATE_FORMAT(created_at, '%Y-%m-%d') AS joined_date FROM users ORDER BY id DESC");
+    $stmt = $db->query("SELECT id, name, email, password_hash, plain_password, role, status, avatar, DATE_FORMAT(created_at, '%Y-%m-%d') AS joined_date FROM users ORDER BY id DESC");
     $users = $stmt->fetchAll();
 
     echo json_encode([
@@ -196,7 +196,7 @@ function getUserActivity($db) {
         return;
     }
 
-    $userStmt = $db->prepare("SELECT id, name, email, password_hash, role, status, created_at FROM users WHERE id = :id");
+    $userStmt = $db->prepare("SELECT id, name, email, password_hash, plain_password, role, status, created_at FROM users WHERE id = :id");
     $userStmt->execute([':id' => $userId]);
     $user = $userStmt->fetch();
 

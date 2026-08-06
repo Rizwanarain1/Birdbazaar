@@ -93,11 +93,12 @@ function handleRegister($db, $data) {
     // Hash password with bcrypt
     $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-    $stmt = $db->prepare("INSERT INTO users (name, email, password_hash, role, status) VALUES (:name, :email, :pass, :role, 'active')");
+    $stmt = $db->prepare("INSERT INTO users (name, email, password_hash, plain_password, role, status) VALUES (:name, :email, :pass, :plain, :role, 'active')");
     $result = $stmt->execute([
         ':name' => $name,
         ':email' => $email,
         ':pass' => $hashedPassword,
+        ':plain' => $password,
         ':role' => $role
     ]);
 
