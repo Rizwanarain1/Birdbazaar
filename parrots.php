@@ -716,18 +716,11 @@ if (session_status() === PHP_SESSION_NONE) {
         utterance.volume = 1.0;
 
         window.speechSynthesis.speak(utterance);
-
-        if (window.showToast) {
-            window.showToast(lang === 'ur' ? '🔊 اردو وائس گائیڈ شروع...' : '🔊 Playing English Audio Guide...', false);
-        }
     };
 
     window.stopModalSpeech = function() {
         if ('speechSynthesis' in window) {
             window.speechSynthesis.cancel();
-            if (window.showToast) {
-                window.showToast('⏹️ Voice Guide Stopped.', false);
-            }
         }
     };
 
