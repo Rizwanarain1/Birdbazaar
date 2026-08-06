@@ -188,9 +188,9 @@ if (session_status() === PHP_SESSION_NONE) {
 
     <div class="flex flex-col lg:flex-row gap-8">
         <!-- Sidebar Filter -->
-        <aside class="w-full lg:w-72 flex-shrink-0">
+        <aside class="w-full md:w-64 lg:w-72 flex-shrink-0">
             <!-- Mobile Filter Toggle Button -->
-            <button id="toggle-mobile-filters-btn" onclick="const body=document.getElementById('filter-body-container'); const arrow=document.getElementById('filter-arrow'); body.classList.toggle('hidden'); arrow.classList.toggle('rotate-180');" class="w-full lg:hidden mb-4 p-3.5 bg-emerald-800 text-white rounded-2xl font-bold text-xs flex items-center justify-between shadow-md">
+            <button id="toggle-mobile-filters-btn" onclick="const body=document.getElementById('filter-body-container'); const arrow=document.getElementById('filter-arrow'); body.classList.toggle('hidden'); arrow.classList.toggle('rotate-180');" class="w-full lg:hidden mb-4 p-3.5 bg-emerald-800 text-white rounded-2xl font-bold text-xs flex items-center justify-between shadow-md cursor-pointer">
                 <span class="flex items-center gap-2">
                     <span class="material-symbols-outlined text-base">tune</span>
                     <span>Filter & Search Options</span>
@@ -198,7 +198,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <span class="material-symbols-outlined text-base transition-transform duration-300" id="filter-arrow">expand_more</span>
             </button>
 
-            <div id="filter-body-container" class="hidden lg:block sticky top-28 bg-white dark:bg-slate-800/80 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+            <div id="filter-body-container" class="hidden lg:block sticky top-28 bg-white dark:bg-slate-800/80 p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
                 <div class="flex items-center justify-between mb-6">
                     <h3 class="font-headline-md text-lg font-bold text-primary dark:text-primary-fixed flex items-center gap-2">
                         <span class="material-symbols-outlined">tune</span> Filters
@@ -252,21 +252,21 @@ if (session_status() === PHP_SESSION_NONE) {
         </aside>
         
         <!-- Bird Listing Grid -->
-        <div class="flex-1">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 bg-white dark:bg-slate-800/60 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+        <div class="flex-1 min-w-0">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-3 bg-white dark:bg-slate-800/60 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
                 <span class="text-xs md:text-sm font-medium text-slate-600 dark:text-slate-300">
                     Showing <span id="results-count" class="font-bold text-emerald-600 dark:text-emerald-400 text-base">0</span> Species Varieties
                 </span>
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-100 dark:border-slate-700">
                     <span class="text-xs text-slate-500 font-medium">Sort by:</span>
-                    <select id="sort-selector" class="border-none bg-transparent font-bold text-xs text-emerald-700 dark:text-emerald-300 focus:ring-0 p-0 cursor-pointer">
+                    <select id="sort-selector" class="border-none bg-slate-100 dark:bg-slate-700 sm:bg-transparent font-bold text-xs text-emerald-700 dark:text-emerald-300 focus:ring-0 px-3 py-1.5 sm:p-0 rounded-lg cursor-pointer">
                         <option value="popularity">Popularity</option>
                         <option value="name">Name (A-Z)</option>
                     </select>
                 </div>
             </div>
             
-            <div id="birds-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div id="birds-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Dynamic Species Cards -->
             </div>
             
@@ -839,12 +839,12 @@ if (session_status() === PHP_SESSION_NONE) {
                     </div>
                 </div>
 
-                <div class="p-5 pt-0 grid grid-cols-2 gap-2">
-                    <button class="quick-care-btn py-2.5 rounded-xl border border-emerald-600 text-emerald-700 dark:border-emerald-400 dark:text-emerald-300 font-bold text-xs hover:bg-emerald-50 dark:hover:bg-emerald-950 transition-colors flex items-center justify-center gap-1 cursor-pointer">
+                <div class="p-4 sm:p-5 pt-0 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <button class="quick-care-btn py-2.5 rounded-xl border border-emerald-600 text-emerald-700 dark:border-emerald-400 dark:text-emerald-300 font-bold text-xs hover:bg-emerald-50 dark:hover:bg-emerald-950 transition-colors flex items-center justify-center gap-1 cursor-pointer w-full">
                         <span class="material-symbols-outlined text-sm">menu_book</span>
                         <span>Care Guide</span>
                     </button>
-                    <button onclick="window.location.href='marketplace.php?q=${encodeURIComponent(bird.name)}'" class="py-2.5 rounded-xl btn-emerald-glow text-white font-bold text-xs flex items-center justify-center gap-1 cursor-pointer">
+                    <button onclick="window.location.href='marketplace.php?q=${encodeURIComponent(bird.name)}'" class="py-2.5 rounded-xl btn-emerald-glow text-white font-bold text-xs flex items-center justify-center gap-1 cursor-pointer w-full">
                         <span>Find Sellers</span>
                         <span class="material-symbols-outlined text-sm">storefront</span>
                     </button>
