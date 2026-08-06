@@ -60,7 +60,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <nav id="mob-nav-drawer" class="mobile-nav-drawer flex flex-col">
     <div class="flex items-center justify-between px-6 py-5 border-b border-emerald-500/20">
         <div class="flex items-center gap-2.5">
-            <img src="images/logo.png" alt="BirdBazaar Logo" class="w-16 h-16 object-contain" />
+            <img src="images/logo.png" alt="BirdBazaar Logo" class="w-14 h-14 object-contain" />
             <span class="text-xl font-bold text-white tracking-tight">BirdBazaar</span>
         </div>
         <button onclick="closeMobNav()" class="text-white"><span class="material-symbols-outlined">close</span></button>
@@ -213,8 +213,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <footer class="w-full mt-16 bg-primary dark:bg-slate-900 py-10 sm:py-16 px-4 sm:px-6 md:px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-8 max-w-container-max mx-auto rounded-t-3xl border-t border-white/10 text-white">
     <div class="md:col-span-1">
         <div class="flex items-center gap-2 mb-6">
-            <span class="text-3xl">🦜</span>
-            <span class="font-display-lg text-xl font-bold text-white">BirdBazaar</span>
+            <img src="images/logo.png" alt="BirdBazaar Logo" class="h-20 sm:h-24 w-auto object-contain cursor-pointer" onclick="window.location.href='index.php'" />
         </div>
         <p class="text-emerald-100/70 font-body-md mb-6 text-xs sm:text-sm font-light">The world's premier digital sanctuary for bird lovers, providing knowledge and a secure marketplace for avian life.</p>
         <div class="flex gap-4">

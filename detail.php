@@ -133,7 +133,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <nav id="mob-nav-drawer" class="mobile-nav-drawer flex flex-col">
     <div class="flex items-center justify-between px-6 py-5 border-b border-emerald-500/20">
         <div class="flex items-center gap-2.5">
-            <img src="images/logo.png" alt="BirdBazaar Logo" class="w-16 h-16 object-contain" />
+            <img src="images/logo.png" alt="BirdBazaar Logo" class="w-14 h-14 object-contain" />
             <span class="text-xl font-bold text-white tracking-tight">BirdBazaar</span>
         </div>
         <button onclick="closeMobNav()" class="text-white"><span class="material-symbols-outlined">close</span></button>
