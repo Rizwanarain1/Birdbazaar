@@ -180,57 +180,57 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
 </header>
 
-<main class="max-w-container-max mx-auto px-4 sm:px-6 md:px-margin-desktop py-12 animate-fade-in">
+<main class="max-w-container-max mx-auto px-3 sm:px-6 md:px-margin-desktop py-6 sm:py-8 md:py-12 animate-fade-in w-full overflow-hidden">
     <!-- Breadcrumb -->
-    <nav class="flex items-center gap-2 mb-8 text-label-md text-on-surface-variant dark:text-surface-variant">
+    <nav class="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-6 sm:mb-8 text-label-md text-on-surface-variant dark:text-surface-variant text-xs sm:text-sm">
         <a href="index.php" class="hover:text-primary">Home</a>
-        <span class="material-symbols-outlined text-[16px]">chevron_right</span>
-        <span class="font-bold text-primary dark:text-primary-fixed text-headline-md">Admin Dashboard</span>
+        <span class="material-symbols-outlined text-[14px] sm:text-[16px]">chevron_right</span>
+        <span class="font-bold text-primary dark:text-primary-fixed">Admin Dashboard</span>
     </nav>
 
     <!-- Page Title -->
-    <div class="mb-10">
-        <h2 class="font-display-lg text-display-lg text-primary dark:text-primary-fixed">Admin Dashboard</h2>
-        <p class="text-body-lg text-on-surface-variant dark:text-surface-variant mt-2">Manage registered members, breeders, and track their verification states.</p>
+    <div class="mb-6 sm:mb-10">
+        <h2 class="font-display-lg text-2xl sm:text-4xl md:text-5xl font-extrabold text-primary dark:text-primary-fixed leading-tight">Admin Dashboard</h2>
+        <p class="text-xs sm:text-base text-on-surface-variant dark:text-surface-variant mt-1.5 sm:mt-2">Manage registered members, breeders, and track their verification states.</p>
     </div>
 
     <!-- Stats Panel -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-10 text-on-surface dark:text-inverse-on-surface">
-        <div class="p-6 rounded-2xl bg-white dark:bg-on-surface/40 border border-outline-variant/30 shadow-sm flex items-center gap-4">
-            <div class="p-4 rounded-xl bg-primary-container text-on-primary-container">
-                <span class="material-symbols-outlined text-3xl">group</span>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10 text-on-surface dark:text-inverse-on-surface w-full">
+        <div class="p-4 sm:p-6 rounded-2xl bg-white dark:bg-on-surface/40 border border-outline-variant/30 shadow-sm flex items-center gap-3 sm:gap-4 min-w-0">
+            <div class="p-3 sm:p-4 rounded-xl bg-primary-container text-on-primary-container flex-shrink-0">
+                <span class="material-symbols-outlined text-2xl sm:text-3xl">group</span>
             </div>
-            <div>
-                <span class="text-label-sm text-outline block">Total Registered Users</span>
-                <span id="stat-total" class="font-display-lg text-headline-lg font-bold text-primary dark:text-primary-fixed">0</span>
-            </div>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-white dark:bg-on-surface/40 border border-outline-variant/30 shadow-sm flex items-center gap-4">
-            <div class="p-4 rounded-xl bg-primary-fixed text-on-primary-fixed-variant">
-                <span class="material-symbols-outlined text-3xl">verified_user</span>
-            </div>
-            <div>
-                <span class="text-label-sm text-outline block">Active Accounts</span>
-                <span id="stat-active" class="font-display-lg text-headline-lg font-bold text-primary dark:text-primary-fixed">0</span>
+            <div class="min-w-0">
+                <span class="text-[10px] sm:text-xs text-outline block font-medium truncate">Total Registered Users</span>
+                <span id="stat-total" class="font-display-lg text-xl sm:text-3xl font-bold text-primary dark:text-primary-fixed truncate block">0</span>
             </div>
         </div>
 
-        <div class="p-6 rounded-2xl bg-white dark:bg-on-surface/40 border border-outline-variant/30 shadow-sm flex items-center gap-4">
-            <div class="p-4 rounded-xl bg-error-container text-on-error-container">
-                <span class="material-symbols-outlined text-3xl">gpp_maybe</span>
+        <div class="p-4 sm:p-6 rounded-2xl bg-white dark:bg-on-surface/40 border border-outline-variant/30 shadow-sm flex items-center gap-3 sm:gap-4 min-w-0">
+            <div class="p-3 sm:p-4 rounded-xl bg-primary-fixed text-on-primary-fixed-variant flex-shrink-0">
+                <span class="material-symbols-outlined text-2xl sm:text-3xl">verified_user</span>
             </div>
-            <div>
-                <span class="text-label-sm text-outline block">Pending Verification</span>
-                <span id="stat-inactive" class="font-display-lg text-headline-lg font-bold text-primary dark:text-primary-fixed">0</span>
+            <div class="min-w-0">
+                <span class="text-[10px] sm:text-xs text-outline block font-medium truncate">Active Accounts</span>
+                <span id="stat-active" class="font-display-lg text-xl sm:text-3xl font-bold text-primary dark:text-primary-fixed truncate block">0</span>
+            </div>
+        </div>
+
+        <div class="p-4 sm:p-6 rounded-2xl bg-white dark:bg-on-surface/40 border border-outline-variant/30 shadow-sm flex items-center gap-3 sm:gap-4 min-w-0">
+            <div class="p-3 sm:p-4 rounded-xl bg-error-container text-on-error-container flex-shrink-0">
+                <span class="material-symbols-outlined text-2xl sm:text-3xl">gpp_maybe</span>
+            </div>
+            <div class="min-w-0">
+                <span class="text-[10px] sm:text-xs text-outline block font-medium truncate">Pending Verification</span>
+                <span id="stat-inactive" class="font-display-lg text-xl sm:text-3xl font-bold text-primary dark:text-primary-fixed truncate block">0</span>
             </div>
         </div>
     </div>
 
     <!-- Table Filter Controls -->
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
+    <div class="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4 mb-6 sm:mb-8 w-full">
         <div class="flex items-center gap-4 w-full md:w-auto">
-            <select id="status-filter" class="rounded-lg border-outline-variant bg-surface-container-low text-body-md p-2.5 dark:bg-on-surface/50">
+            <select id="status-filter" class="w-full md:w-auto rounded-lg border-outline-variant bg-surface-container-low text-xs sm:text-sm p-2.5 dark:bg-on-surface/50 font-semibold cursor-pointer">
                 <option value="all">All Statuses</option>
                 <option value="Active">Active</option>
                 <option value="Inactive">Inactive</option>
@@ -238,16 +238,16 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
 
         <!-- Search users -->
-        <div class="w-full md:w-80 flex items-center bg-white dark:bg-on-surface/40 px-4 py-3 rounded-full border border-outline-variant/30 shadow-sm">
-            <span class="material-symbols-outlined text-on-surface-variant mr-2">search</span>
-            <input id="user-search" class="w-full bg-transparent border-none focus:ring-0 text-label-md" placeholder="Search users by name or email..." type="text"/>
+        <div class="w-full md:w-80 flex items-center bg-white dark:bg-on-surface/40 px-4 py-2.5 rounded-full border border-outline-variant/30 shadow-sm">
+            <span class="material-symbols-outlined text-on-surface-variant mr-2 text-lg">search</span>
+            <input id="user-search" class="w-full bg-transparent border-none focus:ring-0 text-xs sm:text-sm" placeholder="Search users by name or email..." type="text"/>
         </div>
     </div>
 
     <!-- Users Table Dashboard -->
-    <div class="bg-white dark:bg-on-surface/30 rounded-2xl border border-outline-variant/20 shadow-md overflow-hidden animate-fade-in">
-        <div class="table-responsive-container">
-            <table class="w-full text-left border-collapse text-body-md min-w-[650px]">
+    <div class="bg-white dark:bg-on-surface/30 rounded-2xl border border-outline-variant/20 shadow-md overflow-hidden animate-fade-in w-full">
+        <div class="table-responsive-container overflow-x-auto custom-scrollbar">
+            <table class="w-full text-left border-collapse text-xs sm:text-sm min-w-[650px]">
                 <thead>
                     <tr class="bg-primary text-white dark:bg-on-primary-fixed dark:text-on-primary-fixed border-b border-outline-variant/30 font-bold">
                         <th class="p-5">Username</th>
@@ -271,13 +271,13 @@ if (session_status() === PHP_SESSION_NONE) {
 </main>
 
 <!-- Footer -->
-<footer class="w-full mt-section-gap bg-primary dark:bg-on-primary-fixed py-16 px-4 sm:px-6 md:px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto rounded-t-3xl">
+<footer class="w-full mt-16 bg-primary dark:bg-on-primary-fixed py-10 sm:py-16 px-4 sm:px-6 md:px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-8 max-w-container-max mx-auto rounded-t-3xl">
     <div class="md:col-span-1">
         <div class="flex items-center gap-2 mb-6">
             <span class="text-3xl">🦜</span>
             <span class="font-display-lg text-headline-lg text-on-primary font-bold">BirdBazaar</span>
         </div>
-        <p class="text-primary-fixed-dim/80 font-body-md mb-6 font-light">The world's premier digital sanctuary for bird lovers, providing knowledge and a secure marketplace for avian life.</p>
+        <p class="text-primary-fixed-dim/80 font-body-md mb-6 font-light text-xs sm:text-sm">The world's premier digital sanctuary for bird lovers, providing knowledge and a secure marketplace for avian life.</p>
         <div class="flex gap-4">
             <a class="text-on-primary hover:text-tertiary-fixed transition-colors" href="#"><span class="material-symbols-outlined" data-icon="public">public</span></a>
             <a class="text-on-primary hover:text-tertiary-fixed transition-colors" href="#"><span class="material-symbols-outlined" data-icon="alternate_email">alternate_email</span></a>
@@ -285,8 +285,8 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
     </div>
     <div>
-        <h5 class="text-white font-headline-md mb-6">Quick Links</h5>
-        <ul class="space-y-4">
+        <h5 class="text-white font-bold mb-4 text-sm sm:text-base">Quick Links</h5>
+        <ul class="space-y-3 text-xs sm:text-sm">
             <li><a class="text-primary-fixed-dim/80 hover:text-tertiary-fixed transition-colors" href="index.php">Home Sanctuary</a></li>
             <li><a class="text-primary-fixed-dim/80 hover:text-tertiary-fixed transition-colors" href="parrots.php">Species Guide</a></li>
             <li><a class="text-primary-fixed-dim/80 hover:text-tertiary-fixed transition-colors" href="marketplace.php">Live Marketplace</a></li>
@@ -294,8 +294,8 @@ if (session_status() === PHP_SESSION_NONE) {
         </ul>
     </div>
     <div>
-        <h5 class="text-white font-headline-md mb-6">Categories</h5>
-        <ul class="space-y-4">
+        <h5 class="text-white font-bold mb-4 text-sm sm:text-base">Categories</h5>
+        <ul class="space-y-3 text-xs sm:text-sm">
             <li><a class="text-primary-fixed-dim/80 hover:text-tertiary-fixed transition-colors" href="parrots.php?cat=parrots">Parrots</a></li>
             <li><a class="text-primary-fixed-dim/80 hover:text-tertiary-fixed transition-colors" href="parrots.php?cat=budgies">Budgies</a></li>
             <li><a class="text-primary-fixed-dim/80 hover:text-tertiary-fixed transition-colors" href="parrots.php?cat=cockatiels">Cockatiels</a></li>
@@ -303,25 +303,25 @@ if (session_status() === PHP_SESSION_NONE) {
         </ul>
     </div>
     <div>
-        <h5 class="text-white font-headline-md mb-6">Join the Nest</h5>
-        <p class="text-primary-fixed-dim/80 font-body-md mb-4 font-light">Subscribe for the latest bird care tips and market updates.</p>
+        <h5 class="text-white font-bold mb-4 text-sm sm:text-base">Join the Nest</h5>
+        <p class="text-primary-fixed-dim/80 font-body-md mb-4 text-xs sm:text-sm font-light">Subscribe for the latest bird care tips and market updates.</p>
         <div class="flex flex-col gap-2">
-            <input class="bg-primary-container border border-white/20 rounded-lg px-4 py-2 text-white placeholder:text-white/40 focus:outline-none focus:border-tertiary-fixed transition-colors dark:bg-on-surface/50" placeholder="Your Email" type="email"/>
-            <button class="bg-tertiary text-on-tertiary font-label-md py-2 rounded-lg hover:bg-tertiary-container transition-colors">Subscribe</button>
+            <input class="bg-primary-container border border-white/20 rounded-lg px-4 py-2 text-white placeholder:text-white/40 text-xs focus:outline-none focus:border-tertiary-fixed transition-colors dark:bg-on-surface/50" placeholder="Your Email" type="email"/>
+            <button class="bg-tertiary text-on-tertiary font-label-md py-2 rounded-lg hover:bg-tertiary-container transition-colors text-xs cursor-pointer">Subscribe</button>
         </div>
     </div>
-    <div class="md:col-span-4 mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="text-primary-fixed-dim/60 font-label-md">© 2026 BirdBazaar. Celebrating Avian Life.</p>
-        <div class="flex gap-8">
-            <span class="text-primary-fixed-dim/60 font-label-md">Secure Payments via Stripe</span>
-            <span class="text-primary-fixed-dim/60 font-label-md">Verified Breeders Only</span>
+    <div class="md:col-span-4 mt-8 sm:mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left text-xs text-primary-fixed-dim/60">
+        <p>© 2026 BirdBazaar. Celebrating Avian Life.</p>
+        <div class="flex flex-wrap justify-center gap-4 sm:gap-8">
+            <span>Secure Payments via Stripe</span>
+            <span>Verified Breeders Only</span>
         </div>
     </div>
 </footer>
 
 <!-- FAB for Listing Action -->
-<button class="fixed bottom-8 right-8 bg-tertiary text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 animate-float" aria-label="Add listing">
-    <span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+<button onclick="window.location.href='marketplace.php'" class="fixed bottom-5 right-5 sm:bottom-8 sm:right-8 bg-tertiary text-white w-14 h-14 sm:w-16 sm:h-16 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 animate-float" aria-label="Add listing">
+    <span class="material-symbols-outlined text-2xl sm:text-3xl" data-icon="add">add</span>
 </button>
 
 <script>
@@ -578,9 +578,9 @@ if (session_status() === PHP_SESSION_NONE) {
 
         modal = document.createElement('div');
         modal.id = 'user-activity-modal';
-        modal.className = 'fixed inset-0 bg-black/70 backdrop-blur-sm z-[150] flex items-center justify-center p-4';
+        modal.className = 'fixed inset-0 bg-black/70 backdrop-blur-sm z-[150] flex items-center justify-center p-2 sm:p-4 animate-fade-in';
         modal.innerHTML = `
-            <div class="bg-surface dark:bg-on-surface p-8 rounded-3xl max-w-2xl w-full shadow-2xl relative border border-outline-variant/30 max-h-[90vh] overflow-y-auto">
+            <div class="bg-surface dark:bg-on-surface p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl max-w-2xl w-full shadow-2xl relative border border-outline-variant/30 max-h-[90vh] overflow-y-auto mx-2">
                 <button id="close-user-activity" class="absolute top-6 right-6 text-outline hover:text-on-surface">
                     <span class="material-symbols-outlined text-2xl">close</span>
                 </button>
