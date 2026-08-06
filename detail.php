@@ -175,26 +175,26 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
 </header>
 
-<main class="max-w-container-max mx-auto px-4 sm:px-6 md:px-margin-desktop py-8 md:py-12 animate-fade-in">
+<main class="max-w-container-max mx-auto px-3 sm:px-6 md:px-margin-desktop py-6 sm:py-8 md:py-12 animate-fade-in w-full overflow-hidden">
     <!-- Breadcrumb -->
-    <nav class="flex items-center gap-2 mb-8 text-label-md text-on-surface-variant dark:text-surface-variant">
+    <nav class="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-6 sm:mb-8 text-label-md text-on-surface-variant dark:text-surface-variant text-xs sm:text-sm">
         <a href="index.php" class="hover:text-primary dark:hover:text-primary-fixed">Home</a>
-        <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+        <span class="material-symbols-outlined text-[14px] sm:text-[16px]">chevron_right</span>
         <a href="parrots.php" class="hover:text-primary dark:hover:text-primary-fixed">Directory</a>
-        <span class="material-symbols-outlined text-[16px]">chevron_right</span>
-        <span id="breadcrumb-species" class="font-bold text-primary dark:text-primary-fixed">African Grey</span>
+        <span class="material-symbols-outlined text-[14px] sm:text-[16px]">chevron_right</span>
+        <span id="breadcrumb-species" class="font-bold text-primary dark:text-primary-fixed truncate max-w-[150px] sm:max-w-none">African Grey</span>
     </nav>
 
     <!-- Main Avian Dashboard -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 mb-16">
         <!-- Photo Gallery Component -->
         <div>
-            <div class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant/30 h-[250px] sm:h-[350px] md:h-[500px] bg-surface-variant mb-4 relative">
+            <div class="rounded-2xl overflow-hidden shadow-lg border border-outline-variant/30 h-[220px] sm:h-[350px] md:h-[500px] bg-surface-variant mb-3 sm:mb-4 relative">
                 <img id="main-profile-img" class="w-full h-full object-cover" src="" alt="Avian Profile" />
-                <span id="detail-tag" class="absolute top-6 left-6 bg-tertiary text-white font-label-md px-4 py-1.5 rounded-full shadow-lg">Rare Genus</span>
+                <span id="detail-tag" class="absolute top-3 left-3 sm:top-6 sm:left-6 bg-tertiary text-white font-label-md text-xs sm:text-sm px-3 sm:px-4 py-1 sm:py-1.5 rounded-full shadow-lg">Rare Genus</span>
             </div>
             <!-- Thumbnails -->
-            <div class="grid grid-cols-3 gap-4" id="gallery-thumbnails">
+            <div class="grid grid-cols-3 gap-2 sm:gap-4" id="gallery-thumbnails">
                 <!-- Swappers generated in JS -->
             </div>
         </div>
@@ -205,11 +205,11 @@ if (session_status() === PHP_SESSION_NONE) {
                 <span id="profile-category" class="font-label-md uppercase tracking-wider text-tertiary dark:text-tertiary-fixed-dim">Category: Parrots</span>
                 
                 <!-- Title & Voice Listener Widgets -->
-                <div class="flex flex-col sm:flex-row items-start justify-between gap-3 mt-2 mb-1">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mt-2 mb-1">
                     <h2 id="profile-title" class="font-display-lg text-2xl sm:text-4xl font-extrabold text-primary dark:text-primary-fixed leading-tight">African Grey</h2>
                     
                     <!-- Voice Listener Button -->
-                    <button id="tts-toggle-btn" class="flex-shrink-0 flex items-center gap-1.5 bg-primary-container text-on-primary-container hover:bg-primary-fixed hover:text-on-primary-fixed px-3.5 py-2 rounded-full font-label-md transition-all active:scale-95 shadow-sm text-xs sm:text-sm">
+                    <button id="tts-toggle-btn" class="w-full sm:w-auto justify-center flex-shrink-0 flex items-center gap-1.5 bg-primary-container text-on-primary-container hover:bg-primary-fixed hover:text-on-primary-fixed px-3.5 py-2 rounded-full font-label-md transition-all active:scale-95 shadow-sm text-xs sm:text-sm">
                         <span class="material-symbols-outlined text-[18px] sm:text-[20px]" id="tts-icon">volume_up</span>
                         <span id="tts-text">Listen Profile</span>
                     </button>
@@ -222,43 +222,43 @@ if (session_status() === PHP_SESSION_NONE) {
                 </p>
 
                 <!-- Attribute Badges -->
-                <div class="grid grid-cols-2 gap-6 p-6 rounded-2xl bg-surface-container-low dark:bg-on-surface/30 border border-outline-variant/20 mb-8">
-                    <div class="flex items-center gap-3">
-                        <span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim text-3xl">public</span>
-                        <div>
-                            <span class="text-[10px] uppercase tracking-wider text-outline block">Origin</span>
-                            <span id="fact-origin" class="font-bold text-label-md">Central Africa</span>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6 p-4 sm:p-6 rounded-2xl bg-surface-container-low dark:bg-on-surface/30 border border-outline-variant/20 mb-6 sm:mb-8">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim text-2xl sm:text-3xl flex-shrink-0">public</span>
+                        <div class="min-w-0">
+                            <span class="text-[9px] sm:text-[10px] uppercase tracking-wider text-outline block font-bold">Origin</span>
+                            <span id="fact-origin" class="font-bold text-xs sm:text-sm text-on-surface dark:text-white truncate block">Central Africa</span>
                         </div>
                     </div>
-                    <div class="flex items-center gap-3">
-                        <span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim text-3xl">hourglass_empty</span>
-                        <div>
-                            <span class="text-[10px] uppercase tracking-wider text-outline block">Lifespan</span>
-                            <span id="fact-life" class="font-bold text-label-md">40-60 Years</span>
+                    <div class="flex items-center gap-3 min-w-0">
+                        <span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim text-2xl sm:text-3xl flex-shrink-0">hourglass_empty</span>
+                        <div class="min-w-0">
+                            <span class="text-[9px] sm:text-[10px] uppercase tracking-wider text-outline block font-bold">Lifespan</span>
+                            <span id="fact-life" class="font-bold text-xs sm:text-sm text-on-surface dark:text-white truncate block">40-60 Years</span>
                         </div>
                     </div>
-                    <div class="flex items-center gap-3">
-                        <span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim text-3xl">psychology</span>
-                        <div>
-                            <span class="text-[10px] uppercase tracking-wider text-outline block">Intelligence</span>
-                            <span id="fact-intel" class="font-bold text-label-md">Genius Level</span>
+                    <div class="flex items-center gap-3 min-w-0">
+                        <span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim text-2xl sm:text-3xl flex-shrink-0">psychology</span>
+                        <div class="min-w-0">
+                            <span class="text-[9px] sm:text-[10px] uppercase tracking-wider text-outline block font-bold">Intelligence</span>
+                            <span id="fact-intel" class="font-bold text-xs sm:text-sm text-on-surface dark:text-white truncate block">Genius Level</span>
                         </div>
                     </div>
-                    <div class="flex items-center gap-3">
-                        <span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim text-3xl">volume_up</span>
-                        <div>
-                            <span class="text-[10px] uppercase tracking-wider text-outline block">Noise Level</span>
-                            <span id="fact-noise" class="font-bold text-label-md">Quiet</span>
+                    <div class="flex items-center gap-3 min-w-0">
+                        <span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim text-2xl sm:text-3xl flex-shrink-0">volume_up</span>
+                        <div class="min-w-0">
+                            <span class="text-[9px] sm:text-[10px] uppercase tracking-wider text-outline block font-bold">Noise Level</span>
+                            <span id="fact-noise" class="font-bold text-xs sm:text-sm text-on-surface dark:text-white truncate block">Quiet</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Marketplace Call to Action -->
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 bg-primary-container text-on-primary-container rounded-2xl">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 sm:p-6 bg-primary-container text-on-primary-container rounded-2xl">
                 <div>
                     <span class="text-label-sm uppercase text-on-primary-container/70">Estimated Price Range</span>
-                    <h3 id="detail-price-range" class="font-display-lg text-headline-lg font-bold text-white">$1,200 - $2,500</h3>
+                    <h3 id="detail-price-range" class="font-display-lg text-xl sm:text-2xl md:text-3xl font-bold text-white">$1,200 - $2,500</h3>
                 </div>
                 <button onclick="window.location.href='marketplace.php'" class="bg-tertiary text-white hover:bg-tertiary-container font-label-md px-6 py-3 rounded-lg shadow-md transition-all active:scale-95 flex items-center gap-2 w-full sm:w-auto justify-center">
                     Browse Marketplace <span class="material-symbols-outlined">shopping_bag</span>
@@ -268,52 +268,52 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
 
     <!-- Interactive Care Calculator & Species Details tabs -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-16">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 mb-16">
         <!-- Care details (Diet, training, grooming) -->
-        <div class="lg:col-span-2 space-y-8">
-            <h3 class="font-headline-lg text-headline-lg text-primary dark:text-primary-fixed border-b border-outline-variant/30 pb-3">Expert Care Guidelines</h3>
+        <div class="lg:col-span-2 space-y-6 sm:space-y-8">
+            <h3 class="font-headline-lg text-xl sm:text-2xl md:text-3xl font-bold text-primary dark:text-primary-fixed border-b border-outline-variant/30 pb-3">Expert Care Guidelines</h3>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
                 <!-- Diet -->
-                <div class="p-6 rounded-2xl bg-white dark:bg-on-surface/30 shadow-sm border border-outline-variant/20">
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="material-symbols-outlined text-tertiary text-3xl">nutrition</span>
-                        <h4 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed">Nutrition & Diet</h4>
+                <div class="p-4 sm:p-6 rounded-2xl bg-white dark:bg-on-surface/30 shadow-sm border border-outline-variant/20">
+                    <div class="flex items-center gap-3 mb-3 sm:mb-4">
+                        <span class="material-symbols-outlined text-tertiary text-2xl sm:text-3xl">nutrition</span>
+                        <h4 class="font-headline-md text-lg sm:text-xl font-bold text-primary dark:text-primary-fixed">Nutrition & Diet</h4>
                     </div>
-                    <p class="text-body-md text-on-surface-variant dark:text-surface-variant leading-relaxed">
+                    <p class="text-xs sm:text-sm text-on-surface-variant dark:text-surface-variant leading-relaxed">
                         A balanced pellet-based diet should make up 70% of intake. Supplement daily with fresh dark leafy greens (kale, spinach), chopped carrots, apples, and seeds. Avoid chocolate and avocados.
                     </p>
                 </div>
 
                 <!-- Training & Social -->
-                <div class="p-6 rounded-2xl bg-white dark:bg-on-surface/30 shadow-sm border border-outline-variant/20">
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="material-symbols-outlined text-tertiary text-3xl">sports_esports</span>
-                        <h4 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed">Socializing & Play</h4>
+                <div class="p-4 sm:p-6 rounded-2xl bg-white dark:bg-on-surface/30 shadow-sm border border-outline-variant/20">
+                    <div class="flex items-center gap-3 mb-3 sm:mb-4">
+                        <span class="material-symbols-outlined text-tertiary text-2xl sm:text-3xl">sports_esports</span>
+                        <h4 class="font-headline-md text-lg sm:text-xl font-bold text-primary dark:text-primary-fixed">Socializing & Play</h4>
                     </div>
-                    <p class="text-body-md text-on-surface-variant dark:text-surface-variant leading-relaxed">
+                    <p class="text-xs sm:text-sm text-on-surface-variant dark:text-surface-variant leading-relaxed">
                         Requires regular out-of-cage time daily. Engage their high intellect with puzzle toys, foraging blocks, and active companion chats.
                     </p>
                 </div>
 
                 <!-- Health & Hygiene -->
-                <div class="p-6 rounded-2xl bg-white dark:bg-on-surface/30 shadow-sm border border-outline-variant/20">
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="material-symbols-outlined text-tertiary text-3xl">medical_services</span>
-                        <h4 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed">Health Indicators</h4>
+                <div class="p-4 sm:p-6 rounded-2xl bg-white dark:bg-on-surface/30 shadow-sm border border-outline-variant/20">
+                    <div class="flex items-center gap-3 mb-3 sm:mb-4">
+                        <span class="material-symbols-outlined text-tertiary text-2xl sm:text-3xl">medical_services</span>
+                        <h4 class="font-headline-md text-lg sm:text-xl font-bold text-primary dark:text-primary-fixed">Health Indicators</h4>
                     </div>
-                    <p class="text-body-md text-on-surface-variant dark:text-surface-variant leading-relaxed">
+                    <p class="text-xs sm:text-sm text-on-surface-variant dark:text-surface-variant leading-relaxed">
                         Watch for active curiosity. Schedule annual vet checks. Clean the cage bottom daily and wash water bowls to prevent bacterial issues.
                     </p>
                 </div>
 
                 <!-- Habitat -->
-                <div class="p-6 rounded-2xl bg-white dark:bg-on-surface/30 shadow-sm border border-outline-variant/20">
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="material-symbols-outlined text-tertiary text-3xl">home</span>
-                        <h4 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed">Habitat Setup</h4>
+                <div class="p-4 sm:p-6 rounded-2xl bg-white dark:bg-on-surface/30 shadow-sm border border-outline-variant/20">
+                    <div class="flex items-center gap-3 mb-3 sm:mb-4">
+                        <span class="material-symbols-outlined text-tertiary text-2xl sm:text-3xl">home</span>
+                        <h4 class="font-headline-md text-lg sm:text-xl font-bold text-primary dark:text-primary-fixed">Habitat Setup</h4>
                     </div>
-                    <p class="text-body-md text-on-surface-variant dark:text-surface-variant leading-relaxed">
+                    <p class="text-xs sm:text-sm text-on-surface-variant dark:text-surface-variant leading-relaxed">
                         Provide a sturdy metal cage. Include multiple branches of varied thickness to help exercise their claws and feet.
                     </p>
                 </div>
@@ -321,8 +321,8 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
 
         <!-- Dynamic Cost Calculator Widget -->
-        <div class="bg-surface-container-low dark:bg-on-surface/40 p-8 rounded-2xl border border-outline-variant/30 shadow-md">
-            <h4 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed mb-2 flex items-center gap-2">
+        <div class="bg-surface-container-low dark:bg-on-surface/40 p-4 sm:p-6 md:p-8 rounded-2xl border border-outline-variant/30 shadow-md">
+            <h4 class="font-headline-md text-lg sm:text-xl font-bold text-primary dark:text-primary-fixed mb-2 flex items-center gap-2">
                 <span class="material-symbols-outlined text-primary dark:text-primary-fixed">calculate</span>
                 Care Cost Calculator
             </h4>
@@ -383,8 +383,8 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
 
     <!-- Breeder Inquiry Modal -->
-    <div id="inquiry-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-on-surface/60 dark:bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
-        <div class="glass-card w-full max-w-md p-8 rounded-xl shadow-2xl scale-95 transition-transform duration-300 relative text-on-surface dark:text-surface-bright">
+    <div id="inquiry-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-on-surface/60 dark:bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+        <div class="glass-card w-full max-w-md p-4 sm:p-6 md:p-8 rounded-xl shadow-2xl scale-95 transition-transform duration-300 relative text-on-surface dark:text-surface-bright max-h-[90vh] overflow-y-auto">
             <button class="absolute top-4 right-4 text-on-surface-variant hover:text-primary dark:text-surface-variant dark:hover:text-primary-fixed" id="close-inquiry-btn">
                 <span class="material-symbols-outlined text-2xl">close</span>
             </button>
@@ -413,7 +413,7 @@ if (session_status() === PHP_SESSION_NONE) {
 </main>
 
 <!-- Footer -->
-<footer class="w-full mt-section-gap bg-primary dark:bg-on-primary-fixed py-16 px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto rounded-t-3xl">
+<footer class="w-full mt-section-gap bg-primary dark:bg-on-primary-fixed py-10 sm:py-16 px-4 sm:px-6 md:px-margin-desktop grid grid-cols-1 md:grid-cols-4 gap-8 max-w-container-max mx-auto rounded-t-3xl">
     <div class="md:col-span-1">
         <div class="flex items-center gap-2 mb-6">
             <span class="text-3xl">🦜</span>
@@ -452,9 +452,9 @@ if (session_status() === PHP_SESSION_NONE) {
             <button class="bg-tertiary text-on-tertiary font-label-md py-2 rounded-lg hover:bg-tertiary-container transition-colors">Subscribe</button>
         </div>
     </div>
-    <div class="md:col-span-4 mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="md:col-span-4 mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
         <p class="text-primary-fixed-dim/60 font-label-md">© 2026 BirdBazaar. Celebrating Avian Life.</p>
-        <div class="flex gap-8">
+        <div class="flex flex-wrap justify-center gap-4 sm:gap-8">
             <span class="text-primary-fixed-dim/60 font-label-md">Secure Payments via Stripe</span>
             <span class="text-primary-fixed-dim/60 font-label-md">Verified Breeders Only</span>
         </div>
@@ -462,8 +462,8 @@ if (session_status() === PHP_SESSION_NONE) {
 </footer>
 
 <!-- FAB for Listing Action -->
-<button onclick="window.location.href='marketplace.php'" class="fixed bottom-8 right-8 bg-tertiary text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 animate-float" aria-label="Add listing">
-    <span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+<button onclick="window.location.href='marketplace.php'" class="fixed bottom-5 right-5 sm:bottom-8 sm:right-8 bg-tertiary text-white w-14 h-14 sm:w-16 sm:h-16 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 animate-float" aria-label="Add listing">
+    <span class="material-symbols-outlined text-2xl sm:text-3xl" data-icon="add">add</span>
 </button>
 
 <script>
@@ -653,24 +653,26 @@ if (session_status() === PHP_SESSION_NONE) {
             ` : '';
             
             const card = document.createElement('div');
-            card.className = 'p-6 rounded-2xl bg-white dark:bg-on-surface/40 shadow-sm border border-outline-variant/20 hover:border-primary/40 transition-all flex flex-col justify-between';
+            card.className = 'p-4 sm:p-6 rounded-2xl bg-white dark:bg-on-surface/40 shadow-sm border border-outline-variant/20 hover:border-primary/40 transition-all flex flex-col justify-between';
             card.innerHTML = `
                 <div>
-                    <div class="flex justify-between items-start mb-3">
-                        <div>
-                            <h4 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed">${breed.title}</h4>
-                            <span class="text-label-sm text-outline">${breed.name}</span>
-                            ${badgeHtml}
+                    <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-3">
+                        <div class="min-w-0">
+                            <h4 class="font-headline-md text-base sm:text-lg font-bold text-primary dark:text-primary-fixed truncate">${breed.title}</h4>
+                            <div class="flex items-center gap-2 flex-wrap mt-0.5">
+                                <span class="text-xs text-outline font-medium">${breed.name}</span>
+                                ${badgeHtml}
+                            </div>
                         </div>
-                        <span class="text-headline-md font-bold text-primary dark:text-primary-fixed">$${breed.price.toLocaleString()}</span>
+                        <span class="text-lg sm:text-xl font-bold text-primary dark:text-primary-fixed flex-shrink-0">$${breed.price.toLocaleString()}</span>
                     </div>
-                    <ul class="text-label-md text-on-surface-variant dark:text-surface-variant space-y-1 mb-6">
+                    <ul class="text-xs sm:text-sm text-on-surface-variant dark:text-surface-variant space-y-1 mb-6">
                         <li><strong>Age:</strong> ${breed.age}</li>
                         <li><strong>Location:</strong> ${breed.location}</li>
                         <li><strong>Breeder Rating:</strong> ${breed.rating}</li>
                     </ul>
                 </div>
-                <button onclick="triggerInquiry('${breed.name}', '${breed.title}')" class="w-full py-2.5 rounded-lg border border-primary text-primary dark:border-primary-fixed dark:text-primary-fixed font-label-md hover:bg-primary hover:text-white dark:hover:bg-primary-fixed dark:hover:text-on-primary-fixed transition-colors">Inquire Breeder</button>
+                <button onclick="triggerInquiry('${breed.name}', '${breed.title}')" class="w-full py-2.5 rounded-lg border border-primary text-primary dark:border-primary-fixed dark:text-primary-fixed font-label-md text-xs sm:text-sm hover:bg-primary hover:text-white dark:hover:bg-primary-fixed dark:hover:text-on-primary-fixed transition-colors">Inquire Breeder</button>
             `;
             breedersGrid.appendChild(card);
         });
