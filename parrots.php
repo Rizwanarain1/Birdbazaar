@@ -808,38 +808,38 @@ if (session_status() === PHP_SESSION_NONE) {
                         <h4 class="font-bold text-base sm:text-lg text-slate-900 dark:text-white mb-0.5 leading-snug truncate">${bird.name}</h4>
                         <p class="text-xs italic text-slate-400 mb-3 sm:mb-4 font-mono truncate">${bird.sci}</p>
                         
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-3 sm:mb-4 bg-slate-50 dark:bg-slate-700/40 p-2.5 sm:p-3 rounded-xl border border-slate-100 dark:border-slate-700 text-xs">
-                            <div class="flex items-center gap-2 min-w-0">
-                                <span class="material-symbols-outlined text-emerald-600 text-base flex-shrink-0">public</span>
-                                <div class="min-w-0">
-                                    <span class="text-[9px] block uppercase text-slate-400 font-bold">Origin</span>
-                                    <span class="font-semibold text-slate-700 dark:text-slate-200 text-[11px] truncate block">${bird.origin}</span>
+                        <div class="grid grid-cols-2 gap-2 mb-3 sm:mb-4 bg-slate-50 dark:bg-slate-700/40 p-2 sm:p-2.5 rounded-xl border border-slate-100 dark:border-slate-700 text-xs">
+                            <div class="flex items-center gap-1.5 min-w-0">
+                                <span class="material-symbols-outlined text-emerald-600 text-sm flex-shrink-0">public</span>
+                                <div class="min-w-0 overflow-hidden">
+                                    <span class="text-[9px] block uppercase text-slate-400 font-bold leading-tight">Origin</span>
+                                    <span class="font-semibold text-slate-700 dark:text-slate-200 text-[10px] sm:text-[11px] truncate block leading-tight">${bird.origin}</span>
                                 </div>
                             </div>
-                            <div class="flex items-center gap-2 min-w-0">
-                                <span class="material-symbols-outlined text-emerald-600 text-base flex-shrink-0">timelapse</span>
-                                <div class="min-w-0">
-                                    <span class="text-[9px] block uppercase text-slate-400 font-bold">Lifespan</span>
-                                    <span class="font-semibold text-slate-700 dark:text-slate-200 text-[11px] truncate block">${bird.life}</span>
+                            <div class="flex items-center gap-1.5 min-w-0">
+                                <span class="material-symbols-outlined text-emerald-600 text-sm flex-shrink-0">timelapse</span>
+                                <div class="min-w-0 overflow-hidden">
+                                    <span class="text-[9px] block uppercase text-slate-400 font-bold leading-tight">Lifespan</span>
+                                    <span class="font-semibold text-slate-700 dark:text-slate-200 text-[10px] sm:text-[11px] truncate block leading-tight">${bird.life}</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between text-xs text-slate-500 gap-1 mb-2">
+                        <div class="flex items-center justify-between text-[11px] sm:text-xs text-slate-500 mb-2">
                             <span class="truncate">Intel: <strong class="text-emerald-600 dark:text-emerald-400 font-semibold">${bird.intel}</strong></span>
                             <span class="truncate">Noise: <strong class="text-slate-700 dark:text-slate-300">${bird.volume}</strong></span>
                         </div>
                     </div>
                 </div>
 
-                <div class="p-4 sm:p-5 pt-0 flex flex-col sm:flex-row gap-2 w-full">
-                    <button class="quick-care-btn py-2.5 px-3 rounded-xl border border-emerald-600 text-emerald-700 dark:border-emerald-400 dark:text-emerald-300 font-bold text-xs hover:bg-emerald-50 dark:hover:bg-emerald-950 transition-colors flex items-center justify-center gap-1.5 cursor-pointer w-full flex-1">
-                        <span class="material-symbols-outlined text-sm">menu_book</span>
-                        <span>Care Guide</span>
+                <div class="p-4 sm:p-5 pt-0 grid grid-cols-2 gap-2 w-full">
+                    <button class="quick-care-btn py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl border border-emerald-600 text-emerald-700 dark:border-emerald-400 dark:text-emerald-300 font-bold text-[11px] sm:text-xs hover:bg-emerald-50 dark:hover:bg-emerald-950 transition-colors flex items-center justify-center gap-1 cursor-pointer w-full whitespace-nowrap">
+                        <span class="material-symbols-outlined text-sm sm:text-base flex-shrink-0">menu_book</span>
+                        <span class="whitespace-nowrap">Care Guide</span>
                     </button>
-                    <button onclick="window.location.href='marketplace.php?q=${encodeURIComponent(bird.name)}'" class="py-2.5 px-3 rounded-xl btn-emerald-glow text-white font-bold text-xs flex items-center justify-center gap-1.5 cursor-pointer w-full flex-1">
-                        <span>Find Sellers</span>
-                        <span class="material-symbols-outlined text-sm">storefront</span>
+                    <button onclick="window.location.href='marketplace.php?q=${encodeURIComponent(bird.name)}'" class="py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl btn-emerald-glow text-white font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 cursor-pointer w-full whitespace-nowrap">
+                        <span class="whitespace-nowrap">Find Sellers</span>
+                        <span class="material-symbols-outlined text-sm sm:text-base flex-shrink-0">storefront</span>
                     </button>
                 </div>
             `;
