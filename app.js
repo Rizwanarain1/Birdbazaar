@@ -8,72 +8,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* Mobile Navigation Drawer Initialization */
 function initMobileDrawer() {
+    // Pages already have mob-nav-drawer and hamburger button in HTML.
+    // Only create drawer if it doesn't exist (fallback for old pages).
     let drawer = document.querySelector('.mobile-nav-drawer');
     let overlay = document.querySelector('.drawer-overlay');
 
     if (!drawer) {
-        drawer = document.createElement('div');
-        drawer.className = 'mobile-nav-drawer p-6 flex flex-col justify-between text-white';
+        drawer = document.createElement('nav');
+        drawer.className = 'mobile-nav-drawer flex flex-col';
         drawer.innerHTML = `
-            <div>
-                <div class="flex items-center justify-between mb-8 pb-4 border-b border-emerald-500/20">
-                    <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.href='index.html'">
-                        <span class="material-symbols-outlined text-emerald-400 text-3xl">nest_eco</span>
-                        <span class="font-display-lg text-xl font-bold text-white">BirdBazaar</span>
-                    </div>
-                    <button id="close-drawer-btn" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20">
-                        <span class="material-symbols-outlined text-lg">close</span>
-                    </button>
-                </div>
-                <nav class="flex flex-col gap-4 font-semibold text-sm">
-                    <a href="index.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-colors">
-                        <span class="material-symbols-outlined text-emerald-400">home</span> Home
-                    </a>
-                    <a href="parrots.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-colors">
-                        <span class="material-symbols-outlined text-emerald-400">category</span> Categories Directory
-                    </a>
-                    <a href="marketplace.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-colors">
-                        <span class="material-symbols-outlined text-emerald-400">storefront</span> Marketplace
-                    </a>
-                    <a href="user-dashboard.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-colors">
-                        <span class="material-symbols-outlined text-emerald-400">dashboard</span> User Portal
-                    </a>
-                    <a href="admin.html" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition-colors">
-                        <span class="material-symbols-outlined text-emerald-400">admin_panel_settings</span> Admin Panel
-                    </a>
-                </nav>
+            <div class="flex items-center justify-between px-6 py-5 border-b border-emerald-500/20">
+                <span class="text-xl font-bold text-white">🦜 BirdBazaar</span>
+                <button id="close-drawer-btn" class="text-white"><span class="material-symbols-outlined">close</span></button>
             </div>
-            <div class="pt-6 border-t border-emerald-500/20 text-xs text-emerald-200/70">
-                <p class="font-bold text-white mb-1">BirdBazaar Premium Marketplace</p>
-                <p>Connecting verified breeders & bird owners safely.</p>
+            <div class="flex flex-col gap-1 px-4 py-6">
+                <a href="index.html" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">home</span>Home</a>
+                <a href="parrots.html" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">menu_book</span>Categories</a>
+                <a href="marketplace.html" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">storefront</span>Marketplace</a>
+                <a href="user-dashboard.html" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">dashboard</span>My Dashboard</a>
             </div>
         `;
-        document.body.appendChild(drawer);
+        document.body.insertBefore(drawer, document.body.firstChild);
     }
 
     if (!overlay) {
         overlay = document.createElement('div');
         overlay.className = 'drawer-overlay';
-        document.body.appendChild(overlay);
+        document.body.insertBefore(overlay, document.body.firstChild);
     }
 
-    const headers = document.querySelectorAll('header');
-    headers.forEach(header => {
-        if (!header.querySelector('.mobile-hamburger-btn')) {
-            const logoContainer = header.querySelector('.flex.items-center.gap-2') || header.firstElementChild;
-            const hamburgerBtn = document.createElement('button');
-            hamburgerBtn.className = 'mobile-hamburger-btn md:hidden p-2 text-primary dark:text-white hover:text-emerald-500 transition-colors focus:outline-none';
-            hamburgerBtn.setAttribute('aria-label', 'Open mobile menu');
-            hamburgerBtn.innerHTML = `<span class="material-symbols-outlined text-2xl">menu</span>`;
-
-            if (logoContainer) {
-                logoContainer.insertBefore(hamburgerBtn, logoContainer.firstElementChild);
-            }
-
-            hamburgerBtn.addEventListener('click', openDrawer);
-        }
-    });
-
+    // DO NOT inject hamburger into header — HTML already has it.
+    // Just wire up close button and overlay click.
     const closeBtn = drawer.querySelector('#close-drawer-btn');
     if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
     overlay.addEventListener('click', closeDrawer);
@@ -87,6 +52,18 @@ function initMobileDrawer() {
         drawer.classList.remove('open');
         overlay.classList.remove('active');
     }
+
+    // Wire up all hamburger buttons in HTML
+    document.querySelectorAll('[onclick="openMobNav()"]').forEach(btn => {
+        btn.removeAttribute('onclick');
+        btn.addEventListener('click', openDrawer);
+    });
+
+    // Wire up all close buttons in HTML
+    document.querySelectorAll('[onclick="closeMobNav()"]').forEach(btn => {
+        btn.removeAttribute('onclick');
+        btn.addEventListener('click', closeDrawer);
+    });
 }
 
 /* ==========================================
@@ -837,29 +814,23 @@ function renderHeaderAuth() {
 
     if (currentUser) {
         const isAdmin = currentUser.role === 'admin' || currentUser.email === 'admin@avinest.com';
-        const targetDashboard = isAdmin ? 'admin.html' : 'user-dashboard.html';
+        const targetDashboard = isAdmin ? 'admin.php' : 'user-dashboard.php';
 
         container.innerHTML = `
-            <div onclick="window.location.href='${targetDashboard}'" class="flex items-center gap-2 bg-primary text-white px-3.5 py-1.5 rounded-full hover:bg-primary/90 transition-all cursor-pointer shadow-sm">
-                <span class="material-symbols-outlined text-[18px] text-white">account_circle</span>
-                <span class="font-bold text-xs text-white">${currentUser.name}</span>
-                <span class="bg-white text-primary text-[10px] px-2 py-0.5 rounded-full font-bold">${isAdmin ? 'Admin' : 'Dashboard'}</span>
+            <div onclick="window.location.href='${targetDashboard}'" class="flex items-center gap-1.5 bg-primary text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full hover:bg-primary/90 transition-all cursor-pointer shadow-sm max-w-[120px] sm:max-w-none overflow-hidden flex-shrink-0">
+                <span class="material-symbols-outlined text-[16px] sm:text-[18px] text-white flex-shrink-0">account_circle</span>
+                <span class="font-bold text-xs text-white truncate hidden sm:block">${currentUser.name}</span>
+                <span class="bg-white text-primary text-[10px] px-1.5 py-0.5 rounded-full font-bold flex-shrink-0">${isAdmin ? 'Admin' : 'Me'}</span>
             </div>
-            <button onclick="logoutCurrentUser()" class="text-error hover:bg-error-container p-2 rounded-full transition-colors flex items-center justify-center cursor-pointer" title="Logout">
-                <span class="material-symbols-outlined text-[20px]">logout</span>
-            </button>
-            <button id="mobile-hamburger-btn" class="md:hidden p-2 text-slate-800 dark:text-white rounded-lg cursor-pointer">
-                <span class="material-symbols-outlined text-2xl">menu</span>
+            <button onclick="logoutCurrentUser()" class="text-error hover:bg-error-container p-1.5 rounded-full transition-colors flex items-center justify-center cursor-pointer flex-shrink-0" title="Logout">
+                <span class="material-symbols-outlined text-[18px] sm:text-[20px]">logout</span>
             </button>
         `;
     } else {
         container.innerHTML = `
-            <button onclick="openAuthModal()" class="bg-primary text-white dark:bg-primary-fixed dark:text-on-primary-fixed font-label-md px-4 py-2 rounded-full hover:scale-102 active:scale-98 transition-transform flex items-center gap-1.5 shadow-sm cursor-pointer">
-                <span class="material-symbols-outlined text-[20px]">login</span>
-                <span>Login / Signup</span>
-            </button>
-            <button id="mobile-hamburger-btn" class="md:hidden p-2 text-slate-800 dark:text-white rounded-lg cursor-pointer">
-                <span class="material-symbols-outlined text-2xl">menu</span>
+            <button onclick="openAuthModal()" class="bg-primary text-white dark:bg-primary-fixed dark:text-on-primary-fixed font-label-md px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full hover:scale-102 active:scale-98 transition-transform flex items-center gap-1 shadow-sm cursor-pointer text-xs sm:text-sm flex-shrink-0" title="Login / Signup">
+                <span class="material-symbols-outlined text-[18px]">login</span>
+                <span class="hidden sm:inline">Login / Signup</span>
             </button>
         `;
     }
@@ -876,10 +847,10 @@ function renderHeaderAuth() {
                 drawer.id = 'mobile-nav-drawer';
                 drawer.className = 'mobile-menu-drawer animate-fade-in';
                 drawer.innerHTML = `
-                    <a href="index.html" class="font-bold text-sm text-primary dark:text-primary-fixed py-2 border-b border-slate-100 dark:border-slate-800">🏠 Home</a>
-                    <a href="parrots.html" class="font-bold text-sm text-slate-700 dark:text-slate-200 py-2 border-b border-slate-100 dark:border-slate-800">🦜 Categories & Species</a>
-                    <a href="marketplace.html" class="font-bold text-sm text-slate-700 dark:text-slate-200 py-2 border-b border-slate-100 dark:border-slate-800">🛒 Marketplace Feed</a>
-                    ${currentUser ? `<a href="${currentUser.role === 'admin' ? 'admin.html' : 'user-dashboard.html'}" class="font-bold text-sm text-emerald-600 dark:text-emerald-400 py-2">👤 My Account Dashboard</a>` : ''}
+                    <a href="index.php" class="font-bold text-sm text-primary dark:text-primary-fixed py-2 border-b border-slate-100 dark:border-slate-800">🏠 Home</a>
+                    <a href="parrots.php" class="font-bold text-sm text-slate-700 dark:text-slate-200 py-2 border-b border-slate-100 dark:border-slate-800">🦜 Categories & Species</a>
+                    <a href="marketplace.php" class="font-bold text-sm text-slate-700 dark:text-slate-200 py-2 border-b border-slate-100 dark:border-slate-800">🛒 Marketplace Feed</a>
+                    ${currentUser ? `<a href="${currentUser.role === 'admin' ? 'admin.php' : 'user-dashboard.php'}" class="font-bold text-sm text-emerald-600 dark:text-emerald-400 py-2">👤 My Account Dashboard</a>` : ''}
                 `;
                 document.querySelector('header').appendChild(drawer);
             }
@@ -962,7 +933,7 @@ window.logoutCurrentUser = function() {
             sessionStorage.removeItem('avinest_current_user');
             fetch('api/auth.php?action=logout').finally(() => {
                 if (window.showToast) window.showToast("Logged out successfully");
-                window.location.href = 'index.html';
+                window.location.href = 'index.php';
             });
         }
     });
@@ -1552,9 +1523,9 @@ function fallbackForgotPassword(email, modal) {
 function redirectUserByRole(user) {
     const isAdmin = user.role === 'admin' || (user.email && user.email.toLowerCase() === 'admin@birdbazaar.com');
     if (isAdmin) {
-        window.location.href = 'admin.html';
+        window.location.href = 'admin.php';
     } else {
-        window.location.href = 'user-dashboard.html';
+        window.location.href = 'user-dashboard.php';
     }
 }
 

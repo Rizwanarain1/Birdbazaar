@@ -1,3 +1,8 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!-- BirdBazaar | Species Detail -->
 <!DOCTYPE html>
 <html class="light scroll-smooth" lang="en">
@@ -131,10 +136,10 @@
         <button onclick="closeMobNav()" class="text-white"><span class="material-symbols-outlined">close</span></button>
     </div>
     <div class="flex flex-col gap-1 px-4 py-6">
-        <a href="index.html" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">home</span>Home</a>
-        <a href="parrots.html" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">menu_book</span>Categories</a>
-        <a href="marketplace.html" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">storefront</span>Marketplace</a>
-        <a href="user-dashboard.html" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">dashboard</span>My Dashboard</a>
+        <a href="index.php" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">home</span>Home</a>
+        <a href="parrots.php" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">menu_book</span>Categories</a>
+        <a href="marketplace.php" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">storefront</span>Marketplace</a>
+        <a href="user-dashboard.php" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">dashboard</span>My Dashboard</a>
     </div>
 </nav>
 <script>
@@ -151,10 +156,10 @@
 <!-- TopNavBar -->
 <header class="sticky top-0 z-50 flex justify-between items-center px-4 sm:px-6 md:px-margin-desktop py-4 w-full max-w-container-max mx-auto bg-surface/80 dark:bg-on-surface/80 backdrop-blur-md shadow-md border-b border-white/40">
     <div class="flex items-center gap-3">
-        <h1 onclick="window.location.href='index.html'" class="font-display-lg text-headline-md font-bold text-primary dark:text-primary-fixed cursor-pointer">BirdBazaar</h1>
+        <h1 onclick="window.location.href='index.php'" class="font-display-lg text-headline-md font-bold text-primary dark:text-primary-fixed cursor-pointer">BirdBazaar</h1>
         <nav class="hidden md:flex items-center gap-8">
-            <a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md" href="index.html">Home</a>
-            <a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md" href="parrots.html">Categories</a>
+            <a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md" href="index.php">Home</a>
+            <a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md" href="parrots.php">Categories</a>
         </nav>
     </div>
     <div class="flex items-center gap-2 md:gap-6">
@@ -173,9 +178,9 @@
 <main class="max-w-container-max mx-auto px-4 sm:px-6 md:px-margin-desktop py-8 md:py-12 animate-fade-in">
     <!-- Breadcrumb -->
     <nav class="flex items-center gap-2 mb-8 text-label-md text-on-surface-variant dark:text-surface-variant">
-        <a href="index.html" class="hover:text-primary dark:hover:text-primary-fixed">Home</a>
+        <a href="index.php" class="hover:text-primary dark:hover:text-primary-fixed">Home</a>
         <span class="material-symbols-outlined text-[16px]">chevron_right</span>
-        <a href="parrots.html" class="hover:text-primary dark:hover:text-primary-fixed">Directory</a>
+        <a href="parrots.php" class="hover:text-primary dark:hover:text-primary-fixed">Directory</a>
         <span class="material-symbols-outlined text-[16px]">chevron_right</span>
         <span id="breadcrumb-species" class="font-bold text-primary dark:text-primary-fixed">African Grey</span>
     </nav>
@@ -255,7 +260,7 @@
                     <span class="text-label-sm uppercase text-on-primary-container/70">Estimated Price Range</span>
                     <h3 id="detail-price-range" class="font-display-lg text-headline-lg font-bold text-white">$1,200 - $2,500</h3>
                 </div>
-                <button onclick="window.location.href='marketplace.html'" class="bg-tertiary text-white hover:bg-tertiary-container font-label-md px-6 py-3 rounded-lg shadow-md transition-all active:scale-95 flex items-center gap-2 w-full sm:w-auto justify-center">
+                <button onclick="window.location.href='marketplace.php'" class="bg-tertiary text-white hover:bg-tertiary-container font-label-md px-6 py-3 rounded-lg shadow-md transition-all active:scale-95 flex items-center gap-2 w-full sm:w-auto justify-center">
                     Browse Marketplace <span class="material-symbols-outlined">shopping_bag</span>
                 </button>
             </div>
@@ -424,19 +429,19 @@
     <div>
         <h5 class="text-white font-headline-md mb-6">Quick Links</h5>
         <ul class="space-y-4">
-            <li><a class="text-primary-fixed-dim/80 hover:text-tertiary-fixed transition-colors" href="#">About Us</a></li>
-            <li><a class="text-primary-fixed-dim/80 hover:text-tertiary-fixed transition-colors" href="#">Terms of Service</a></li>
-            <li><a class="text-primary-fixed-dim/80 hover:text-tertiary-fixed transition-colors" href="#">Privacy Policy</a></li>
-            <li><a class="text-primary-fixed-dim/80 hover:text-tertiary-fixed transition-colors" href="#">Newsletter</a></li>
+            <li><a class="text-primary-fixed-dim/80 hover:text-tertiary-fixed transition-colors" href="index.php">Home Sanctuary</a></li>
+            <li><a class="text-primary-fixed-dim/80 hover:text-tertiary-fixed transition-colors" href="parrots.php">Species Guide</a></li>
+            <li><a class="text-primary-fixed-dim/80 hover:text-tertiary-fixed transition-colors" href="marketplace.php">Live Marketplace</a></li>
+            <li><a class="text-primary-fixed-dim/80 hover:text-tertiary-fixed transition-colors" href="user-dashboard.php">User Dashboard</a></li>
         </ul>
     </div>
     <div>
         <h5 class="text-white font-headline-md mb-6">Categories</h5>
         <ul class="space-y-4">
-            <li><a class="text-primary-fixed-dim/80 hover:text-tertiary-fixed transition-colors" href="parrots.html?cat=parrots">Parrots</a></li>
-            <li><a class="text-primary-fixed-dim/80 hover:text-tertiary-fixed transition-colors" href="parrots.html?cat=budgies">Budgies</a></li>
-            <li><a class="text-primary-fixed-dim/80 hover:text-tertiary-fixed transition-colors" href="parrots.html?cat=cockatiels">Cockatiels</a></li>
-            <li><a class="text-primary-fixed-dim/80 hover:text-tertiary-fixed transition-colors" href="parrots.html?cat=macaws">Macaws</a></li>
+            <li><a class="text-primary-fixed-dim/80 hover:text-tertiary-fixed transition-colors" href="parrots.php?cat=parrots">Parrots</a></li>
+            <li><a class="text-primary-fixed-dim/80 hover:text-tertiary-fixed transition-colors" href="parrots.php?cat=budgies">Budgies</a></li>
+            <li><a class="text-primary-fixed-dim/80 hover:text-tertiary-fixed transition-colors" href="parrots.php?cat=cockatiels">Cockatiels</a></li>
+            <li><a class="text-primary-fixed-dim/80 hover:text-tertiary-fixed transition-colors" href="parrots.php?cat=macaws">Macaws</a></li>
         </ul>
     </div>
     <div>
@@ -448,7 +453,7 @@
         </div>
     </div>
     <div class="md:col-span-4 mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="text-primary-fixed-dim/60 font-label-md">© 2024 BirdBazaar. Celebrating Avian Life.</p>
+        <p class="text-primary-fixed-dim/60 font-label-md">© 2026 BirdBazaar. Celebrating Avian Life.</p>
         <div class="flex gap-8">
             <span class="text-primary-fixed-dim/60 font-label-md">Secure Payments via Stripe</span>
             <span class="text-primary-fixed-dim/60 font-label-md">Verified Breeders Only</span>
@@ -457,7 +462,7 @@
 </footer>
 
 <!-- FAB for Listing Action -->
-<button class="fixed bottom-8 right-8 bg-tertiary text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 animate-float" aria-label="Add listing">
+<button onclick="window.location.href='marketplace.php'" class="fixed bottom-8 right-8 bg-tertiary text-white w-16 h-16 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 animate-float" aria-label="Add listing">
     <span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
 </button>
 

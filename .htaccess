@@ -1,4 +1,5 @@
 # AviNest Server Security & Performance Configuration (.htaccess)
+DirectoryIndex index.php index.html
 
 # ----------------------------------------------------------------------
 # 1. Protect Sensitive Directories

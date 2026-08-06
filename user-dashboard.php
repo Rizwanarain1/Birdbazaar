@@ -1,3 +1,8 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html class="light" lang="en">
 <head>
@@ -58,10 +63,10 @@
         <button onclick="closeMobNav()" class="text-white"><span class="material-symbols-outlined">close</span></button>
     </div>
     <div class="flex flex-col gap-1 px-4 py-6">
-        <a href="index.html" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">home</span>Home</a>
-        <a href="parrots.html" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">menu_book</span>Categories</a>
-        <a href="marketplace.html" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">storefront</span>Marketplace</a>
-        <a href="user-dashboard.html" class="text-white font-semibold px-4 py-3 rounded-xl bg-emerald-700/30 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">dashboard</span>My Dashboard</a>
+        <a href="index.php" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">home</span>Home</a>
+        <a href="parrots.php" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">menu_book</span>Categories</a>
+        <a href="marketplace.php" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">storefront</span>Marketplace</a>
+        <a href="user-dashboard.php" class="text-white font-semibold px-4 py-3 rounded-xl bg-emerald-700/30 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">dashboard</span>My Dashboard</a>
     </div>
 </nav>
 <script>
@@ -79,13 +84,13 @@
 <header class="sticky top-0 z-40 flex justify-between items-center px-4 sm:px-6 md:px-margin-desktop py-4 w-full max-w-container-max mx-auto bg-surface/80 dark:bg-on-surface/80 backdrop-blur-md shadow-sm border-b border-outline-variant/20">
     <div class="flex items-center gap-2">
         <span class="text-2xl">🦜</span>
-        <span class="font-display-lg text-headline-md font-bold text-primary dark:text-primary-fixed cursor-pointer" onclick="window.location.href='index.html'">BirdBazaar</span>
+        <span class="font-display-lg text-headline-md font-bold text-primary dark:text-primary-fixed cursor-pointer" onclick="window.location.href='index.php'">BirdBazaar</span>
         <span class="bg-primary-container text-primary font-bold text-xs px-2.5 py-0.5 rounded-full ml-2 hidden sm:inline">User Portal</span>
     </div>
     <nav class="hidden md:flex items-center gap-8 font-label-md">
-        <a class="text-on-surface-variant hover:text-primary dark:text-surface-variant" href="index.html">Home</a>
-        <a class="text-on-surface-variant hover:text-primary dark:text-surface-variant" href="parrots.html">Categories</a>
-        <a class="text-on-surface-variant hover:text-primary dark:text-surface-variant" href="marketplace.html">Marketplace Feed</a>
+        <a class="text-on-surface-variant hover:text-primary dark:text-surface-variant" href="index.php">Home</a>
+        <a class="text-on-surface-variant hover:text-primary dark:text-surface-variant" href="parrots.php">Categories</a>
+        <a class="text-on-surface-variant hover:text-primary dark:text-surface-variant" href="marketplace.php">Marketplace Feed</a>
     </nav>
     <div class="flex items-center gap-2">
         <div id="header-auth-container" class="flex items-center gap-2"></div>
@@ -213,7 +218,7 @@
                 window.logoutCurrentUser();
             } else {
                 sessionStorage.removeItem('avinest_current_user');
-                window.location.href = 'index.html';
+                window.location.href = 'index.php';
             }
         });
     });
@@ -398,211 +403,62 @@
         });
     }
 
-    window.openListingDetailsModal = function(bird) {
-        let modal = document.getElementById('listing-details-modal');
-        if (modal) modal.remove();
-
-        const photos = Array.isArray(bird.images) && bird.images.length > 0 ? bird.images : [bird.image || 'images/african_grey.png'];
-
-        modal = document.createElement('div');
-        modal.id = 'listing-details-modal';
-        modal.className = 'fixed inset-0 bg-black/75 backdrop-blur-md z-[160] flex items-center justify-center p-4 animate-fade-in overflow-y-auto';
-        modal.innerHTML = `
-            <div class="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden my-8">
-                <!-- Header -->
-                <div class="bg-gradient-to-r from-emerald-800 to-teal-900 text-white p-5 flex items-center justify-between shadow-md">
-                    <div>
-                        <h3 class="font-bold text-lg leading-tight flex items-center gap-2">
-                            <span class="material-symbols-outlined text-emerald-400">pets</span> ${bird.name}
-                        </h3>
-                        <p class="text-xs text-emerald-200 italic">${bird.sci || bird.category || 'Parrots'}</p>
-                    </div>
-                    <button onclick="this.closest('#listing-details-modal').remove()" class="text-emerald-200 hover:text-white transition-colors cursor-pointer">
-                        <span class="material-symbols-outlined text-2xl">close</span>
-                    </button>
-                </div>
-
-                <!-- Body -->
-                <div class="p-6 space-y-6 max-h-[75vh] overflow-y-auto custom-scrollbar">
-                    <!-- Price & Category Highlights -->
-                    <div class="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800">
-                        <div>
-                            <span class="text-xs text-emerald-700 dark:text-emerald-400 font-semibold block">Asking Price</span>
-                            <span class="text-2xl font-black text-emerald-900 dark:text-white">PKR ${Number(bird.price).toLocaleString()}</span>
-                        </div>
-                        <div class="flex gap-2">
-                            <span class="bg-emerald-600 text-white font-bold text-xs px-3.5 py-1.5 rounded-full shadow-sm">
-                                📍 ${bird.origin || 'Pakistan'}
-                            </span>
-                            <span class="bg-teal-700 text-white font-bold text-xs px-3.5 py-1.5 rounded-full shadow-sm">
-                                🏷️ ${bird.category || 'Parrots'}
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- Main Media Viewer -->
-                    <div>
-                        <h4 class="font-bold text-xs text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1">
-                            <span class="material-symbols-outlined text-sm">photo_library</span> Photo Gallery
-                        </h4>
-                        <div class="h-64 rounded-2xl overflow-hidden bg-slate-900 relative shadow-md">
-                            <img id="detail-main-photo" src="${photos[0]}" class="w-full h-full object-cover" />
-                        </div>
-                        ${photos.length > 1 ? `
-                            <div class="flex gap-2 mt-3 p-2 bg-slate-100 dark:bg-slate-800 rounded-xl overflow-x-auto">
-                                ${photos.map((p, idx) => `
-                                    <img src="${p}" onclick="document.getElementById('detail-main-photo').src='${p}'" class="w-14 h-14 object-cover rounded-lg cursor-pointer border-2 border-transparent hover:border-emerald-500 transition-all flex-shrink-0" />
-                                `).join('')}
-                            </div>
-                        ` : ''}
-                    </div>
-
-                    <!-- Video Clip Viewer -->
-                    ${bird.video ? `
-                        <div>
-                            <h4 class="font-bold text-xs text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1">
-                                <span class="material-symbols-outlined text-sm">videocam</span> Video Clip Stream
-                            </h4>
-                            <div class="rounded-2xl overflow-hidden bg-black border-2 border-emerald-500/40 shadow-lg">
-                                <video controls playsinline preload="metadata" src="${bird.video}" class="w-full max-h-72 object-cover bg-black"></video>
-                            </div>
-                        </div>
-                    ` : ''}
-
-                    <!-- Description & Details -->
-                    <div class="space-y-3 pt-2">
-                        <h4 class="font-bold text-xs text-slate-400 uppercase tracking-wider flex items-center gap-1">
-                            <span class="material-symbols-outlined text-sm">notes</span> Care & Health Information
-                        </h4>
-                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 leading-relaxed space-y-2">
-                            <p>${bird.description || 'Health checked bird listing created on AviNest Marketplace.'}</p>
-                            <div class="grid grid-cols-2 gap-2 pt-2 text-[11px] border-t border-slate-200 dark:border-slate-700">
-                                <div><strong class="text-slate-900 dark:text-white">Breeder / Seller:</strong> ${bird.breeder || 'Registered Member'}</div>
-                                <div><strong class="text-slate-900 dark:text-white">Date Posted:</strong> ${bird.date || 'Recent'}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Footer -->
-                <div class="p-4 bg-slate-100 dark:bg-slate-800/80 border-t border-slate-200 dark:border-slate-800 flex justify-end">
-                    <button onclick="this.closest('#listing-details-modal').remove()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-md cursor-pointer transition-colors">
-                        Close Details
-                    </button>
-                </div>
-            </div>
-        `;
-        document.body.appendChild(modal);
-    };
-
     function fetchMyInquiries() {
         const tbody = document.getElementById('inquiries-tbody');
         if (!tbody) return;
         tbody.innerHTML = '';
-
         const currentUser = JSON.parse(sessionStorage.getItem('avinest_current_user') || '{}');
-        let sessionInquiries = [];
-        try {
-            const stored = sessionStorage.getItem('avinest_inquiries');
-            if (stored) sessionInquiries = JSON.parse(stored);
-        } catch(e) {}
-
-        if (currentUser.name) {
-            sessionInquiries = sessionInquiries.filter(i => !i.seller_name || i.seller_name === currentUser.name || currentUser.role === 'admin');
-        }
-
-        fetch('api/inquiry.php')
-            .then(res => res.json())
-            .then(data => {
-                let dbInquiries = [];
-                if (data.success && Array.isArray(data.data)) dbInquiries = data.data;
-                renderCombinedInquiries(dbInquiries, sessionInquiries);
-            })
-            .catch(() => {
-                renderCombinedInquiries([], sessionInquiries);
-            });
-    }
-
-    function renderCombinedInquiries(dbInquiries, sessionInquiries) {
-        const tbody = document.getElementById('inquiries-tbody');
-        if (!tbody) return;
-        let rawInquiries = [...sessionInquiries, ...dbInquiries];
-
         let blocked = JSON.parse(sessionStorage.getItem('avinest_blocked_users') || '[]');
 
-        // Group inquiries by Buyer (WhatsApp Style Threading!)
-        const threads = {};
-        rawInquiries.forEach(inq => {
-            const key = (inq.buyer_email || inq.buyer_name || 'buyer').toLowerCase();
-            if (!threads[key]) {
-                threads[key] = {
-                    buyer_name: inq.buyer_name || 'Buyer',
-                    buyer_email: inq.buyer_email || key,
-                    last_message: inq.message,
-                    bird_title: inq.bird_title || 'Listing Inquiry',
-                    date_sent: inq.date_sent || 'Recent',
-                    messages: [inq]
-                };
-            } else {
-                threads[key].messages.push(inq);
-                threads[key].last_message = inq.message;
-            }
-        });
+        let inquiries = [];
+        try {
+            const stored = sessionStorage.getItem('avinest_inquiries');
+            if (stored) inquiries = JSON.parse(stored);
+        } catch(e) {}
 
-        const threadList = Object.values(threads);
-        document.getElementById('stat-my-inquiries').textContent = threadList.length;
-        tbody.innerHTML = '';
+        const userInq = inquiries.filter(i => 
+            !i.seller_name || i.seller_name.toLowerCase() === (currentUser.name || '').toLowerCase()
+        );
 
-        if (threadList.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-outline">No buyer inquiries received yet.</td></tr>`;
+        document.getElementById('stat-my-inquiries').textContent = userInq.length;
+
+        if (userInq.length === 0) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="4" class="p-6 text-center text-outline text-xs italic">
+                        No buyer inquiries received yet.
+                    </td>
+                </tr>
+            `;
             return;
         }
 
-        threadList.forEach(thread => {
-            const unreadCount = thread.messages.filter(m => !m.seen).length;
-            const isBlocked = blocked.includes(thread.buyer_name);
-
-            const blockBtnHtml = isBlocked ? `
-                <button onclick="toggleBlockUser('${thread.buyer_name}')" class="bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs px-3.5 py-2 rounded-xl shadow-md flex items-center gap-1 cursor-pointer transition-all" title="Unblock User">
-                    <span class="material-symbols-outlined text-sm">lock_open</span> Unblock User
-                </button>
-            ` : `
-                <button onclick="toggleBlockUser('${thread.buyer_name}')" class="bg-red-600 hover:bg-red-700 text-white font-bold text-xs px-3.5 py-2 rounded-xl shadow-md flex items-center gap-1 cursor-pointer transition-all" title="Block User">
-                    <span class="material-symbols-outlined text-sm">block</span> Block User
-                </button>
-            `;
+        userInq.forEach((inq) => {
+            const isBlocked = blocked.includes(inq.buyer_name);
+            const isUnread = inq.seen === false;
 
             const tr = document.createElement('tr');
-            tr.className = 'border-b border-outline-variant/10 hover:bg-surface-container-low/50 transition-colors';
+            tr.className = `border-b border-outline-variant/10 hover:bg-surface-container-low dark:hover:bg-on-surface/50 text-xs text-on-surface transition-colors ${isUnread ? 'bg-emerald-50/70 dark:bg-emerald-950/30 font-semibold' : ''}`;
             tr.innerHTML = `
-                <td class="p-4 font-bold text-slate-900 dark:text-white flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-emerald-700 text-white font-bold flex items-center justify-center text-sm shadow-sm relative">
-                        ${thread.buyer_name.charAt(0).toUpperCase()}
-                        ${unreadCount > 0 ? `<span class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-extrabold shadow-md animate-pulse">${unreadCount}</span>` : ''}
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-sm leading-tight flex items-center gap-1.5">
-                            ${thread.buyer_name}
-                            ${isBlocked ? '<span class="bg-red-600 text-white text-[10px] px-2 py-0.5 rounded-md font-extrabold flex items-center gap-0.5 shadow-sm">🚫 BLOCKED</span>' : ''}
-                        </h4>
-                        <span class="text-[11px] ${unreadCount > 0 ? 'text-red-500 font-extrabold' : 'text-emerald-600 font-semibold'}">${unreadCount > 0 ? unreadCount + ' Unread Messages' : 'All Messages Seen ✓'}</span>
-                    </div>
+                <td class="p-4 font-bold text-primary dark:text-primary-fixed flex items-center gap-2">
+                    ${isUnread ? '<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>' : ''}
+                    <span>${inq.buyer_name || 'Anonymous'}</span>
+                    ${isBlocked ? '<span class="bg-red-100 text-red-700 text-[10px] px-1.5 py-0.5 rounded font-bold">BLOCKED</span>' : ''}
                 </td>
-                <td class="p-4 text-slate-600 dark:text-slate-300 text-xs">${thread.buyer_email}</td>
-                <td class="p-4 text-xs font-medium max-w-md">
-                    <span class="text-slate-800 dark:text-slate-200 block text-xs truncate">"${thread.last_message}"</span>
-                    <span class="text-[10px] text-emerald-600 font-bold">Item: ${thread.bird_title}</span>
+                <td class="p-4 text-outline font-mono text-[11px]">${inq.buyer_email || 'n/a'}</td>
+                <td class="p-4 max-w-xs truncate text-on-surface-variant dark:text-surface-variant">
+                    <span class="font-bold text-emerald-700 dark:text-emerald-300 mr-1">[${inq.bird_title || 'Listing'}]:</span>
+                    ${inq.message || 'Interested in your bird listing.'}
                 </td>
-                <td class="p-4 text-xs text-slate-400">${thread.date_sent}</td>
-                <td class="p-4 text-center">
-                    <div class="flex items-center justify-center gap-2">
-                        <button onclick="openDashboardChatModal('${thread.buyer_name}', '${thread.buyer_email}')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-3 py-2 rounded-xl shadow-md transition-all flex items-center gap-1 cursor-pointer">
-                            <span class="material-symbols-outlined text-sm">chat</span> Chat
+                <td class="p-4 text-outline text-[11px] whitespace-nowrap">${inq.date_sent || 'Recent'}</td>
+                <td class="p-4 text-right">
+                    <div class="flex items-center justify-end gap-1.5">
+                        <button onclick="openChatThreadModal('${(inq.buyer_name || '').replace(/'/g, "\\'")}', '${(inq.buyer_email || '').replace(/'/g, "\\'")}', '${(inq.bird_title || '').replace(/'/g, "\\'")}')" class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold text-[11px] px-3 py-1.5 rounded-xl shadow-sm hover:from-emerald-500 hover:to-teal-500 transition-all flex items-center gap-1 cursor-pointer">
+                            <span class="material-symbols-outlined text-xs">chat</span> Open Chat Thread
                         </button>
-                        <button onclick="clearInboxConversationThread('${thread.buyer_email}', '${thread.buyer_name}')" class="bg-slate-700 hover:bg-red-700 text-white font-bold text-xs px-3 py-2 rounded-xl shadow-md flex items-center gap-1 cursor-pointer transition-colors" title="Delete Conversation Thread">
-                            <span class="material-symbols-outlined text-sm">delete_forever</span> Clear Chat
+                        <button onclick="toggleBlockUser('${(inq.buyer_name || '').replace(/'/g, "\\'")}')" class="${isBlocked ? 'bg-slate-700 text-white' : 'bg-red-100 text-red-700 hover:bg-red-600 hover:text-white'} font-bold text-[11px] px-2.5 py-1.5 rounded-xl transition-all flex items-center gap-1 cursor-pointer" title="${isBlocked ? 'Unblock User' : 'Block User'}">
+                            <span class="material-symbols-outlined text-xs">${isBlocked ? 'lock_open' : 'block'}</span>
                         </button>
-                        ${blockBtnHtml}
                     </div>
                 </td>
             `;
@@ -610,52 +466,25 @@
         });
     }
 
-    window.clearInboxConversationThread = function(buyerEmail, buyerName) {
-        const doClear = () => {
-            try {
-                let inquiries = JSON.parse(sessionStorage.getItem('avinest_inquiries') || '[]');
-                inquiries = inquiries.filter(i => (i.buyer_email || '').toLowerCase() !== (buyerEmail || '').toLowerCase() && (i.buyer_name || '').toLowerCase() !== (buyerName || '').toLowerCase());
-                sessionStorage.setItem('avinest_inquiries', JSON.stringify(inquiries));
-            } catch(e) {}
-
-            try {
-                const keysToRemove = [];
-                for (let i = 0; i < sessionStorage.length; i++) {
-                    const key = sessionStorage.key(i);
-                    if (key && key.startsWith('avinest_chat_history_') && (key.toLowerCase().includes((buyerEmail || '').toLowerCase()) || key.toLowerCase().includes((buyerName || '').toLowerCase()))) {
-                        keysToRemove.push(key);
-                    }
-                }
-                keysToRemove.forEach(k => sessionStorage.removeItem(k));
-            } catch(e) {}
-
-            if (window.showToast) window.showToast(`🗑️ Chat thread with ${buyerName} cleared & deleted!`, false);
-            fetchMyInquiries();
-        };
-
-        if (window.showConfirmModal) {
-            window.showConfirmModal({
-                title: "🗑️ Clear & Delete Chat Thread",
-                message: `Are you sure you want to delete the conversation thread with ${buyerName}? Old chat history will be cleared just like WhatsApp.`,
-                icon: "delete_forever",
-                confirmText: "Yes, Delete Thread",
-                cancelText: "Cancel",
-                onConfirm: doClear
-            });
-        } else if (confirm(`Clear chat thread with ${buyerName}?`)) {
-            doClear();
-        }
-    };
-
-    let pendingDashAttachment = null;
-
     let dashMediaRecorder = null;
     let dashAudioChunks = [];
     let isRecordingDashVoice = false;
+    let pendingDashAttachment = null;
+
+    function clearDashAttachment() {
+        pendingDashAttachment = null;
+        const modal = document.getElementById('dash-chat-modal');
+        if (modal) {
+            const preview = modal.querySelector('#dash-attachment-preview');
+            if (preview) preview.classList.add('hidden');
+        }
+    }
 
     window.toggleDashboardVoiceRecording = async function() {
-        const micBtn = document.getElementById('dash-mic-btn');
-        
+        const modal = document.getElementById('dash-chat-modal');
+        if (!modal) return;
+        const micBtn = modal.querySelector('#dash-mic-btn');
+
         if (isRecordingDashVoice) {
             if (dashMediaRecorder && dashMediaRecorder.state !== 'inactive') {
                 dashMediaRecorder.stop();
@@ -670,7 +499,6 @@
 
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-
             let mimeType = 'audio/webm';
             if (typeof MediaRecorder.isTypeSupported === 'function') {
                 if (MediaRecorder.isTypeSupported('audio/webm')) mimeType = 'audio/webm';
@@ -690,11 +518,10 @@
                 const reader = new FileReader();
                 reader.onload = e => {
                     pendingDashAttachment = { type: 'audio', data: e.target.result };
-                    const preview = document.getElementById('dash-attachment-preview');
-                    const thumb = document.getElementById('dash-preview-thumb');
-                    const label = document.getElementById('dash-preview-label');
-
-                    if (label) label.textContent = `Attached VOICE: Voice_Note.mp3`;
+                    const preview = modal.querySelector('#dash-attachment-preview');
+                    const label = modal.querySelector('#dash-preview-label');
+                    const thumb = modal.querySelector('#dash-preview-thumb');
+                    if (label) label.textContent = 'Voice Note recorded! Click send below.';
                     if (thumb) thumb.innerHTML = `<span class="material-symbols-outlined text-emerald-400 text-xl">mic</span>`;
                     if (preview) preview.classList.remove('hidden');
                 };
@@ -707,69 +534,50 @@
 
             if (micBtn) {
                 micBtn.className = 'text-red-500 animate-pulse p-1 cursor-pointer font-bold flex items-center gap-1 scale-110';
-                micBtn.title = "Recording... Click Mic to Stop & Save";
+                micBtn.title = "Recording... Click Mic to Stop & Send Voice Note";
             }
 
             if (window.showToast) window.showToast("🎙️ Voice Recording Started! Speak into your microphone.", false);
         } catch(err) {
-            document.getElementById('dash-file-audio').click();
+            console.error("Microphone recording error:", err);
+            if (window.showToast) window.showToast("⚠️ Microphone access failed or denied.", true);
         }
     };
 
-    window.clearDashAttachment = function() {
-        pendingDashAttachment = null;
-        const preview = document.getElementById('dash-attachment-preview');
-        if (preview) preview.classList.add('hidden');
-    };
-
     window.insertDashEmoji = function(emoji) {
-        const input = document.getElementById('dash-chat-input');
+        const modal = document.getElementById('dash-chat-modal');
+        if (!modal) return;
+        const input = modal.querySelector('#dash-chat-input');
         if (input) {
             input.value += emoji;
             input.focus();
         }
     };
 
-    window.openDashboardChatModal = function(buyerName, buyerEmail) {
-        // Mark all messages as SEEN in session storage!
-        try {
-            const stored = sessionStorage.getItem('avinest_inquiries');
-            if (stored) {
-                let inquiries = JSON.parse(stored);
-                inquiries.forEach(i => {
-                    if ((i.buyer_name && i.buyer_name.toLowerCase() === buyerName.toLowerCase()) || (i.buyer_email && i.buyer_email.toLowerCase() === buyerEmail.toLowerCase())) {
-                        i.seen = true;
-                    }
-                });
-                sessionStorage.setItem('avinest_inquiries', JSON.stringify(inquiries));
-            }
-        } catch(e) {}
-
-        fetchMyInquiries();
-
-        let modal = document.getElementById('dashboard-chat-modal');
+    window.openChatThreadModal = function(buyerName, buyerEmail, birdTitle) {
+        let modal = document.getElementById('dash-chat-modal');
         if (modal) modal.remove();
 
         let blocked = JSON.parse(sessionStorage.getItem('avinest_blocked_users') || '[]');
         const isBlocked = blocked.includes(buyerName);
 
         modal = document.createElement('div');
-        modal.id = 'dashboard-chat-modal';
-        modal.className = 'fixed inset-0 bg-black/70 backdrop-blur-sm z-[150] flex items-center justify-center p-4 animate-fade-in';
+        modal.id = 'dash-chat-modal';
+        modal.className = 'fixed inset-0 bg-black/75 backdrop-blur-sm z-[160] flex items-center justify-center p-4 animate-fade-in';
         modal.innerHTML = `
-            <div class="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-lg shadow-2xl border border-slate-200 dark:border-slate-800 flex flex-col overflow-hidden h-[580px]">
-                <!-- Header (No Block Button Here as requested!) -->
+            <div class="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-lg shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col h-[560px]">
+                <!-- Header -->
                 <div class="bg-gradient-to-r from-emerald-800 to-teal-900 text-white p-4 flex items-center justify-between shadow-md">
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-emerald-500 text-slate-950 font-bold flex items-center justify-center text-sm shadow-sm">
+                        <div class="w-10 h-10 rounded-full bg-emerald-500 text-slate-950 font-bold flex items-center justify-center text-base shadow-sm">
                             ${buyerName.charAt(0).toUpperCase()}
                         </div>
                         <div>
-                            <h4 class="font-bold text-sm leading-tight">${buyerName}</h4>
-                            <p class="text-[11px] text-emerald-200 flex items-center gap-1">
-                                <span class="w-2 h-2 rounded-full ${isBlocked ? 'bg-red-500' : 'bg-emerald-400 animate-pulse'}"></span>
-                                ${buyerEmail} ${isBlocked ? '• <span class="text-red-300 font-bold">Blocked</span>' : ''}
-                            </p>
+                            <h4 class="font-bold text-sm leading-tight flex items-center gap-1.5">
+                                <span>${buyerName}</span>
+                                ${isBlocked ? '<span class="bg-red-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">BLOCKED</span>' : ''}
+                            </h4>
+                            <p class="text-[11px] text-emerald-200 font-mono">${buyerEmail}</p>
                         </div>
                     </div>
                     <button id="close-dash-chat-btn" class="text-emerald-200 hover:text-white transition-colors cursor-pointer">
@@ -777,18 +585,20 @@
                     </button>
                 </div>
 
-                <!-- Chat History -->
+                <!-- Messages Body -->
                 <div id="dash-chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3 bg-slate-50 dark:bg-slate-950/60 custom-scrollbar text-xs">
-                    <div class="text-center text-[11px] text-slate-400 py-1">🔒 WhatsApp End-to-End Encrypted Conversation</div>
+                    <div class="text-center text-[11px] text-slate-400 py-1">
+                        🔒 Direct Seller-Buyer Messenger Thread
+                    </div>
                 </div>
 
-                <!-- Attachment Preview Card -->
+                <!-- Attachment Preview -->
                 <div id="dash-attachment-preview" class="hidden px-3 py-2 bg-emerald-100 dark:bg-emerald-950 border-t border-emerald-300 dark:border-emerald-800 flex items-center justify-between animate-fade-in">
                     <div class="flex items-center gap-3 overflow-hidden">
-                        <div id="dash-preview-thumb" class="w-12 h-12 rounded-xl overflow-hidden bg-black flex items-center justify-center flex-shrink-0 text-white text-xs border border-white/20"></div>
+                        <div id="dash-preview-thumb" class="w-10 h-10 rounded-xl overflow-hidden bg-black flex items-center justify-center flex-shrink-0 text-white text-xs border border-white/20"></div>
                         <div>
                             <p id="dash-preview-label" class="font-bold text-xs text-emerald-900 dark:text-emerald-200 truncate">Attachment selected</p>
-                            <p class="text-[10px] text-emerald-700 dark:text-emerald-400">⚡ Instant 1-Click Send | Media attached</p>
+                            <p class="text-[10px] text-emerald-700 dark:text-emerald-400">⚡ Instant Send Attachment</p>
                         </div>
                     </div>
                     <button type="button" onclick="clearDashAttachment()" class="text-slate-500 hover:text-red-600 p-1 cursor-pointer">
@@ -796,7 +606,7 @@
                     </button>
                 </div>
 
-                <!-- Emojis Toolbar -->
+                <!-- Emojis -->
                 <div class="px-3 py-1.5 bg-slate-100 dark:bg-slate-800/80 border-t border-slate-200 dark:border-slate-800 flex gap-1.5 overflow-x-auto text-[11px] items-center scrollbar-none">
                     <button type="button" onclick="insertDashEmoji('😀')" class="hover:scale-125 transition-transform">😀</button>
                     <button type="button" onclick="insertDashEmoji('😊')" class="hover:scale-125 transition-transform">😊</button>
@@ -981,7 +791,7 @@
                 type: "primary",
                 buttonText: "Open Marketplace Messenger",
                 onAction: () => {
-                    window.location.href = 'marketplace.html';
+                    window.location.href = 'marketplace.php';
                 }
             });
         }

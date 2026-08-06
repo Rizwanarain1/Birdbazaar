@@ -1,3 +1,8 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!-- BirdBazaar | Home -->
 <!DOCTYPE html>
 <html class="light" lang="en">
@@ -137,10 +142,10 @@
             <button onclick="closeMobNav()" class="text-white"><span class="material-symbols-outlined">close</span></button>
         </div>
         <div class="flex flex-col gap-1 px-4 py-6">
-            <a href="index.html" class="text-white font-semibold px-4 py-3 rounded-xl bg-emerald-700/30 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">home</span>Home</a>
-            <a href="parrots.html" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">menu_book</span>Categories</a>
-            <a href="marketplace.html" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">storefront</span>Marketplace</a>
-            <a href="user-dashboard.html" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">dashboard</span>My Dashboard</a>
+            <a href="index.php" class="text-white font-semibold px-4 py-3 rounded-xl bg-emerald-700/30 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">home</span>Home</a>
+            <a href="parrots.php" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">menu_book</span>Categories</a>
+            <a href="marketplace.php" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">storefront</span>Marketplace</a>
+            <a href="user-dashboard.php" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">dashboard</span>My Dashboard</a>
         </div>
     </nav>
 
@@ -150,15 +155,15 @@
         <div class="flex items-center gap-2">
             <span class="text-2xl">🦜</span>
             <span class="font-display-lg text-headline-md font-bold text-primary dark:text-primary-fixed cursor-pointer"
-                onclick="window.location.href='index.html'">BirdBazaar</span>
+                onclick="window.location.href='index.php'">BirdBazaar</span>
         </div>
         <nav class="hidden md:flex items-center gap-8">
             <a class="font-body-md text-body-md text-primary dark:text-primary-fixed font-bold border-b-2 border-primary dark:border-primary-fixed pb-1"
-                href="index.html">Home</a>
+                href="index.php">Home</a>
             <a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors"
-                href="parrots.html">Categories</a>
+                href="parrots.php">Categories</a>
             <a class="font-body-md text-body-md text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors"
-                href="marketplace.html">Marketplace</a>
+                href="marketplace.php">Marketplace</a>
         </nav>
         <div class="flex items-center gap-2 md:gap-4">
             <button id="lang-toggle-btn"
@@ -225,12 +230,12 @@
 
                     <!-- Dual Action CTAs -->
                     <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                        <button onclick="window.location.href='parrots.html'"
+                        <button onclick="window.location.href='parrots.php'"
                             class="btn-emerald-glow font-label-md px-5 sm:px-7 py-3 sm:py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-lg text-sm cursor-pointer">
                             <span class="material-symbols-outlined text-lg">menu_book</span>
                             <span>Explore Species Guide</span>
                         </button>
-                        <button onclick="window.location.href='marketplace.html'"
+                        <button onclick="window.location.href='marketplace.php'"
                             class="bg-white/10 hover:bg-white/20 text-white font-label-md px-5 sm:px-7 py-3 sm:py-3.5 rounded-xl transition-all border border-white/20 hover:border-emerald-400/50 text-sm flex items-center justify-center gap-2 cursor-pointer">
                             <span class="material-symbols-outlined text-lg text-emerald-400">storefront</span>
                             <span>Visit Live Marketplace</span>
@@ -253,7 +258,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Hub Card 1: Categories / Species Knowledge -->
-                <div onclick="window.location.href='parrots.html'"
+                <div onclick="window.location.href='parrots.php'"
                     class="bg-gradient-to-br from-emerald-900 to-teal-950 text-white p-8 md:p-10 rounded-3xl border border-emerald-500/30 shadow-xl hover:shadow-2xl transition-all cursor-pointer group hover:-translate-y-1 relative overflow-hidden flex flex-col justify-between">
                     <div
                         class="absolute -right-8 -bottom-8 opacity-10 text-emerald-300 pointer-events-none group-hover:scale-110 transition-transform duration-500">
@@ -284,7 +289,7 @@
                 </div>
 
                 <!-- Hub Card 2: Live Marketplace -->
-                <div onclick="window.location.href='marketplace.html'"
+                <div onclick="window.location.href='marketplace.php'"
                     class="bg-gradient-to-br from-slate-900 to-emerald-950 text-white p-8 md:p-10 rounded-3xl border border-teal-500/30 shadow-xl hover:shadow-2xl transition-all cursor-pointer group hover:-translate-y-1 relative overflow-hidden flex flex-col justify-between">
                     <div
                         class="absolute -right-8 -bottom-8 opacity-10 text-teal-300 pointer-events-none group-hover:scale-110 transition-transform duration-500">
@@ -486,11 +491,11 @@
                     Join thousands of verified breeders and bird enthusiasts on Pakistan's #1 digital avian platform.
                 </p>
                 <div class="flex flex-wrap justify-center gap-4 pt-2">
-                    <button onclick="window.location.href='parrots.html'"
+                    <button onclick="window.location.href='parrots.php'"
                         class="bg-white text-emerald-950 font-bold text-sm px-8 py-3.5 rounded-xl hover:bg-emerald-100 transition-colors shadow-lg cursor-pointer">
                         Explore Species Guide
                     </button>
-                    <button onclick="window.location.href='marketplace.html'"
+                    <button onclick="window.location.href='marketplace.php'"
                         class="border border-white/40 bg-white/10 text-white font-bold text-sm px-8 py-3.5 rounded-xl hover:bg-white/20 transition-colors cursor-pointer">
                         Visit Marketplace
                     </button>
@@ -529,19 +534,19 @@
                 <h5 class="text-emerald-400 font-bold text-sm mb-4 uppercase tracking-wider">Quick Links</h5>
                 <ul class="space-y-3 text-xs">
                     <li><a class="text-slate-300 hover:text-emerald-400 transition-colors flex items-center gap-1"
-                            href="index.html"><span
+                            href="index.php"><span
                                 class="material-symbols-outlined text-sm text-emerald-500">home</span> Home
                             Sanctuary</a></li>
                     <li><a class="text-slate-300 hover:text-emerald-400 transition-colors flex items-center gap-1"
-                            href="parrots.html"><span
+                            href="parrots.php"><span
                                 class="material-symbols-outlined text-sm text-emerald-500">menu_book</span> Species
                             Guide</a></li>
                     <li><a class="text-slate-300 hover:text-emerald-400 transition-colors flex items-center gap-1"
-                            href="marketplace.html"><span
+                            href="marketplace.php"><span
                                 class="material-symbols-outlined text-sm text-emerald-500">storefront</span> Live
                             Marketplace</a></li>
                     <li><a class="text-slate-300 hover:text-emerald-400 transition-colors flex items-center gap-1"
-                            href="user-dashboard.html"><span
+                            href="user-dashboard.php"><span
                                 class="material-symbols-outlined text-sm text-emerald-500">dashboard</span> User
                             Dashboard</a></li>
                 </ul>
@@ -552,13 +557,13 @@
                 <h5 class="text-emerald-400 font-bold text-sm mb-4 uppercase tracking-wider">Bird Categories</h5>
                 <ul class="space-y-3 text-xs">
                     <li><a class="text-slate-300 hover:text-emerald-400 transition-colors"
-                            href="parrots.html?cat=parrots">Congo & Timneh Parrots</a></li>
+                            href="parrots.php?cat=parrots">Congo & Timneh Parrots</a></li>
                     <li><a class="text-slate-300 hover:text-emerald-400 transition-colors"
-                            href="parrots.html?cat=macaws">Scarlet & Blue Macaws</a></li>
+                            href="parrots.php?cat=macaws">Scarlet & Blue Macaws</a></li>
                     <li><a class="text-slate-300 hover:text-emerald-400 transition-colors"
-                            href="parrots.html?cat=cockatiels">Whistle Cockatiels</a></li>
+                            href="parrots.php?cat=cockatiels">Whistle Cockatiels</a></li>
                     <li><a class="text-slate-300 hover:text-emerald-400 transition-colors"
-                            href="parrots.html?cat=lovebirds">Opaline Lovebirds</a></li>
+                            href="parrots.php?cat=lovebirds">Opaline Lovebirds</a></li>
                 </ul>
             </div>
 

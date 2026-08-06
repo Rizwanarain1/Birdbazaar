@@ -1,3 +1,8 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!-- BirdBazaar | Categories Directory -->
 <!DOCTYPE html>
 <html class="light scroll-smooth" lang="en">
@@ -57,10 +62,10 @@
         <button onclick="closeMobNav()" class="text-white"><span class="material-symbols-outlined">close</span></button>
     </div>
     <div class="flex flex-col gap-1 px-4 py-6">
-        <a href="index.html" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">home</span>Home</a>
-        <a href="parrots.html" class="text-white font-semibold px-4 py-3 rounded-xl bg-emerald-700/30 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">menu_book</span>Categories</a>
-        <a href="marketplace.html" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">storefront</span>Marketplace</a>
-        <a href="user-dashboard.html" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">dashboard</span>My Dashboard</a>
+        <a href="index.php" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">home</span>Home</a>
+        <a href="parrots.php" class="text-white font-semibold px-4 py-3 rounded-xl bg-emerald-700/30 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">menu_book</span>Categories</a>
+        <a href="marketplace.php" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">storefront</span>Marketplace</a>
+        <a href="user-dashboard.php" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">dashboard</span>My Dashboard</a>
     </div>
 </nav>
 <script>
@@ -77,11 +82,11 @@
 <!-- Top Navigation Bar -->
 <header class="sticky top-0 z-50 flex justify-between items-center px-4 sm:px-6 md:px-margin-desktop py-4 w-full max-w-container-max mx-auto bg-surface/80 dark:bg-on-surface/80 backdrop-blur-md shadow-md border-b border-white/40">
     <div class="flex items-center gap-3">
-        <h1 onclick="window.location.href='index.html'" class="font-display-lg text-headline-md font-bold text-primary dark:text-primary-fixed cursor-pointer">BirdBazaar</h1>
+        <h1 onclick="window.location.href='index.php'" class="font-display-lg text-headline-md font-bold text-primary dark:text-primary-fixed cursor-pointer">BirdBazaar</h1>
         <nav class="hidden md:flex items-center gap-8">
-            <a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md" href="index.html">Home</a>
-            <a class="text-primary dark:text-primary-fixed font-bold border-b-2 border-primary dark:border-primary-fixed pb-1 font-body-md text-body-md" href="parrots.html">Categories</a>
-            <a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md" href="marketplace.html">Marketplace</a>
+            <a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md" href="index.php">Home</a>
+            <a class="text-primary dark:text-primary-fixed font-bold border-b-2 border-primary dark:border-primary-fixed pb-1 font-body-md text-body-md" href="parrots.php">Categories</a>
+            <a class="text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors font-body-md text-body-md" href="marketplace.php">Marketplace</a>
         </nav>
     </div>
     <div class="flex items-center gap-2 md:gap-4">
@@ -369,10 +374,10 @@
         <div>
             <h5 class="text-emerald-400 font-bold text-sm mb-4 uppercase tracking-wider">Quick Links</h5>
             <ul class="space-y-3 text-xs">
-                <li><a class="text-slate-300 hover:text-emerald-400 transition-colors flex items-center gap-1" href="index.html"><span class="material-symbols-outlined text-sm text-emerald-500">home</span> Home Sanctuary</a></li>
-                <li><a class="text-slate-300 hover:text-emerald-400 transition-colors flex items-center gap-1" href="parrots.html"><span class="material-symbols-outlined text-sm text-emerald-500">menu_book</span> Species Guide</a></li>
-                <li><a class="text-slate-300 hover:text-emerald-400 transition-colors flex items-center gap-1" href="marketplace.html"><span class="material-symbols-outlined text-sm text-emerald-500">storefront</span> Live Marketplace</a></li>
-                <li><a class="text-slate-300 hover:text-emerald-400 transition-colors flex items-center gap-1" href="user-dashboard.html"><span class="material-symbols-outlined text-sm text-emerald-500">dashboard</span> User Dashboard</a></li>
+                <li><a class="text-slate-300 hover:text-emerald-400 transition-colors flex items-center gap-1" href="index.php"><span class="material-symbols-outlined text-sm text-emerald-500">home</span> Home Sanctuary</a></li>
+                <li><a class="text-slate-300 hover:text-emerald-400 transition-colors flex items-center gap-1" href="parrots.php"><span class="material-symbols-outlined text-sm text-emerald-500">menu_book</span> Species Guide</a></li>
+                <li><a class="text-slate-300 hover:text-emerald-400 transition-colors flex items-center gap-1" href="marketplace.php"><span class="material-symbols-outlined text-sm text-emerald-500">storefront</span> Live Marketplace</a></li>
+                <li><a class="text-slate-300 hover:text-emerald-400 transition-colors flex items-center gap-1" href="user-dashboard.php"><span class="material-symbols-outlined text-sm text-emerald-500">dashboard</span> User Dashboard</a></li>
             </ul>
         </div>
 
@@ -380,10 +385,10 @@
         <div>
             <h5 class="text-emerald-400 font-bold text-sm mb-4 uppercase tracking-wider">Bird Categories</h5>
             <ul class="space-y-3 text-xs">
-                <li><a class="text-slate-300 hover:text-emerald-400 transition-colors" href="parrots.html?cat=parrots">Congo & Timneh Parrots</a></li>
-                <li><a class="text-slate-300 hover:text-emerald-400 transition-colors" href="parrots.html?cat=macaws">Scarlet & Blue Macaws</a></li>
-                <li><a class="text-slate-300 hover:text-emerald-400 transition-colors" href="parrots.html?cat=cockatiels">Whistle Cockatiels</a></li>
-                <li><a class="text-slate-300 hover:text-emerald-400 transition-colors" href="parrots.html?cat=lovebirds">Opaline Lovebirds</a></li>
+                <li><a class="text-slate-300 hover:text-emerald-400 transition-colors" href="parrots.php?cat=parrots">Congo & Timneh Parrots</a></li>
+                <li><a class="text-slate-300 hover:text-emerald-400 transition-colors" href="parrots.php?cat=macaws">Scarlet & Blue Macaws</a></li>
+                <li><a class="text-slate-300 hover:text-emerald-400 transition-colors" href="parrots.php?cat=cockatiels">Whistle Cockatiels</a></li>
+                <li><a class="text-slate-300 hover:text-emerald-400 transition-colors" href="parrots.php?cat=lovebirds">Opaline Lovebirds</a></li>
             </ul>
         </div>
 
@@ -568,7 +573,7 @@
         if (findSellersBtn) {
             findSellersBtn.addEventListener('click', () => {
                 if (selectedBirdForModal) {
-                    window.location.href = `marketplace.html?q=${encodeURIComponent(selectedBirdForModal.name)}`;
+                    window.location.href = `marketplace.php?q=${encodeURIComponent(selectedBirdForModal.name)}`;
                 }
             });
         }
@@ -839,7 +844,7 @@
                         <span class="material-symbols-outlined text-sm">menu_book</span>
                         <span>Care Guide</span>
                     </button>
-                    <button onclick="window.location.href='marketplace.html?q=${encodeURIComponent(bird.name)}'" class="py-2.5 rounded-xl btn-emerald-glow text-white font-bold text-xs flex items-center justify-center gap-1 cursor-pointer">
+                    <button onclick="window.location.href='marketplace.php?q=${encodeURIComponent(bird.name)}'" class="py-2.5 rounded-xl btn-emerald-glow text-white font-bold text-xs flex items-center justify-center gap-1 cursor-pointer">
                         <span>Find Sellers</span>
                         <span class="material-symbols-outlined text-sm">storefront</span>
                     </button>

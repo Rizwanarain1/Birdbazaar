@@ -457,3 +457,92 @@ header {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+
+/* ============================================================
+   Mobile Navigation Drawer (Hamburger Menu)
+   Used across all pages for mobile-first navigation
+   ============================================================ */
+
+/* Backdrop overlay */
+.drawer-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 999;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}
+.drawer-overlay.active {
+    display: block;
+}
+
+/* Slide-in nav drawer */
+.mobile-nav-drawer {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: min(280px, 85vw);
+    height: 100vh;
+    background: linear-gradient(180deg, #002d1d 0%, #003d26 60%, #001a10 100%);
+    z-index: 1000;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.4);
+}
+.mobile-nav-drawer.open {
+    left: 0;
+}
+
+/* Ensure drawer is hidden on desktop */
+@media (min-width: 768px) {
+    .mobile-nav-drawer,
+    .drawer-overlay {
+        display: none !important;
+    }
+}
+
+/* ============================================================
+   Mobile Header & Navigation Controls
+   Prevents any text/icon overlap on mobile screens (320px - 640px)
+   ============================================================ */
+
+header {
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+header .flex-shrink-0 {
+    flex-shrink: 0;
+}
+
+/* Ensure right action controls container doesn't overflow or wrap awkwardly */
+@media (max-width: 639px) {
+    header {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+    header .gap-4, header .gap-6, header .gap-2 {
+        gap: 0.35rem !important;
+    }
+    header #lang-toggle-btn {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+}
+
+/* Fix comparison table container for mobile horizontal scroll */
+.table-responsive-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 1.5rem;
+}
+.table-responsive-container::-webkit-scrollbar {
+    height: 6px;
+}
+.table-responsive-container::-webkit-scrollbar-thumb {
+    background: rgba(16, 185, 129, 0.3);
+    border-radius: 9999px;
+}
+

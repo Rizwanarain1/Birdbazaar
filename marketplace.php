@@ -1,3 +1,8 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!-- BirdBazaar | Facebook-Style Avian Marketplace -->
 <!DOCTYPE html>
 <html class="light scroll-smooth" lang="en">
@@ -69,10 +74,10 @@
         <button onclick="closeMobNav()" class="text-white"><span class="material-symbols-outlined">close</span></button>
     </div>
     <div class="flex flex-col gap-1 px-4 py-6">
-        <a href="index.html" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">home</span>Home</a>
-        <a href="parrots.html" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">menu_book</span>Categories</a>
-        <a href="marketplace.html" class="text-white font-semibold px-4 py-3 rounded-xl bg-emerald-700/30 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">storefront</span>Marketplace</a>
-        <a href="user-dashboard.html" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">dashboard</span>My Dashboard</a>
+        <a href="index.php" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">home</span>Home</a>
+        <a href="parrots.php" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">menu_book</span>Categories</a>
+        <a href="marketplace.php" class="text-white font-semibold px-4 py-3 rounded-xl bg-emerald-700/30 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">storefront</span>Marketplace</a>
+        <a href="user-dashboard.php" class="text-emerald-100 px-4 py-3 rounded-xl hover:bg-emerald-700/20 flex items-center gap-2"><span class="material-symbols-outlined text-emerald-400">dashboard</span>My Dashboard</a>
     </div>
 </nav>
 <script>
@@ -89,13 +94,13 @@
 <!-- Top Navigation Bar -->
 <header class="sticky top-0 z-40 flex justify-between items-center px-4 sm:px-6 md:px-margin-desktop py-4 w-full max-w-container-max mx-auto bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-sm border-b border-slate-200 dark:border-slate-800">
     <div class="flex items-center gap-3">
-        <span class="material-symbols-outlined text-emerald-700 dark:text-emerald-400 text-3xl cursor-pointer" onclick="window.location.href='index.html'">storefront</span>
-        <h1 onclick="window.location.href='index.html'" class="font-display-lg text-lg sm:text-2xl font-bold text-emerald-950 dark:text-emerald-400 cursor-pointer tracking-tight">BirdBazaar <span class="text-xs bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300 px-2 py-0.5 rounded-full font-bold uppercase ml-1 hidden sm:inline">Marketplace</span></h1>
+        <span class="material-symbols-outlined text-emerald-700 dark:text-emerald-400 text-3xl cursor-pointer" onclick="window.location.href='index.php'">storefront</span>
+        <h1 onclick="window.location.href='index.php'" class="font-display-lg text-lg sm:text-2xl font-bold text-emerald-950 dark:text-emerald-400 cursor-pointer tracking-tight">BirdBazaar <span class="text-xs bg-emerald-100 text-emerald-800 dark:bg-emerald-900/60 dark:text-emerald-300 px-2 py-0.5 rounded-full font-bold uppercase ml-1 hidden sm:inline">Marketplace</span></h1>
     </div>
     <nav class="hidden md:flex items-center gap-8 font-semibold text-sm">
-        <a class="text-slate-600 dark:text-slate-300 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors" href="index.html">Home</a>
-        <a class="text-slate-600 dark:text-slate-300 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors" href="parrots.html">Categories</a>
-        <a class="text-emerald-800 dark:text-emerald-400 font-bold border-b-2 border-emerald-700 pb-1" href="marketplace.html">Marketplace</a>
+        <a class="text-slate-600 dark:text-slate-300 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors" href="index.php">Home</a>
+        <a class="text-slate-600 dark:text-slate-300 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors" href="parrots.php">Categories</a>
+        <a class="text-emerald-800 dark:text-emerald-400 font-bold border-b-2 border-emerald-700 pb-1" href="marketplace.php">Marketplace</a>
     </nav>
     <div class="flex items-center gap-2">
         <div id="header-auth-container" class="flex items-center gap-2"></div>
