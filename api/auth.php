@@ -168,14 +168,18 @@ function handleLogin($db, $data) {
         return;
     }
 
+    if ($user && (strpos($user['name'], 'AviNest') !== false)) {
+        $user['name'] = ($user['role'] === 'admin') ? 'Admin' : str_replace('AviNest', 'BirdBazaar', $user['name']);
+    }
+
     if (!$user && $isAdminEmail) {
         $user = [
             "id" => 1,
-            "name" => "AviNest Admin",
+            "name" => "Admin",
             "email" => $email,
             "role" => "admin",
             "status" => "active",
-            "avatar" => "images/african_grey.png"
+            "avatar" => "images/logo.png"
         ];
     }
 

@@ -816,10 +816,17 @@ function renderHeaderAuth() {
         const isAdmin = currentUser.role === 'admin' || currentUser.email === 'admin@avinest.com';
         const targetDashboard = isAdmin ? 'admin.php' : 'user-dashboard.php';
 
+        let displayName = currentUser.name || 'User';
+        if (displayName.includes('AviNest') || displayName.toLowerCase().includes('avinest')) {
+            displayName = isAdmin ? 'Admin' : displayName.replace(/AviNest/gi, 'BirdBazaar');
+            currentUser.name = displayName;
+            sessionStorage.setItem('avinest_current_user', JSON.stringify(currentUser));
+        }
+
         container.innerHTML = `
-            <div onclick="window.location.href='${targetDashboard}'" class="flex items-center gap-1.5 bg-primary text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full hover:bg-primary/90 transition-all cursor-pointer shadow-sm max-w-[120px] sm:max-w-none overflow-hidden flex-shrink-0">
+            <div onclick="window.location.href='${targetDashboard}'" class="flex items-center gap-1.5 bg-primary text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full hover:bg-primary/90 transition-all cursor-pointer shadow-sm max-w-[140px] sm:max-w-none overflow-hidden flex-shrink-0">
                 <span class="material-symbols-outlined text-[16px] sm:text-[18px] text-white flex-shrink-0">account_circle</span>
-                <span class="font-bold text-xs text-white truncate hidden sm:block">${currentUser.name}</span>
+                <span class="font-bold text-xs text-white truncate hidden sm:block">${displayName}</span>
                 <span class="bg-white text-primary text-[10px] px-1.5 py-0.5 rounded-full font-bold flex-shrink-0">${isAdmin ? 'Admin' : 'Me'}</span>
             </div>
             <button onclick="logoutCurrentUser()" class="text-error hover:bg-error-container p-1.5 rounded-full transition-colors flex items-center justify-center cursor-pointer flex-shrink-0" title="Logout">
