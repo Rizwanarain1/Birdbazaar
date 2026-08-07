@@ -422,18 +422,21 @@ if (session_status() === PHP_SESSION_NONE) {
     const PKR_RATE = 280;
 
     const birdDataset = [
-        { name: 'African Grey', sci: 'Psittacus erithacus', origin: 'Central Africa', life: '40-60 Years', price: 1500, volume: 'Quiet', friendly: true, intel: 'Genius Level', category: 'parrots', tag: 'Rare Genus', image: 'images/african_grey.png', care: 'Requires spacious flight cage, daily mental stimulation, puzzle toys, and high-protein pellet diet.' },
-        { name: 'Scarlet Macaw', sci: 'Ara macao', origin: 'South America', life: '50-75 Years', price: 3200, volume: 'Loud', friendly: false, intel: 'Highly Social', category: 'macaws', tag: 'Featured', image: 'images/scarlet_macaw.png', care: 'Needs large aviary, sturdy chew toys, nuts, and extensive social interaction.' },
-        { name: 'Sun Conure', sci: 'Aratinga solstitialis', origin: 'South America', life: '25-30 Years', price: 650, volume: 'Moderate', friendly: true, intel: 'Active Learner', category: 'parrots', tag: 'Aesthetic', image: 'images/sun_conure.png', care: 'Loves affection, climbing ropes, fresh fruits, and warm housing environments.' },
-        { name: 'Eclectus Parrot', sci: 'Eclectus roratus', origin: 'Solomon Islands', life: '30-40 Years', price: 1800, volume: 'Quiet', friendly: true, intel: 'Highly Social', category: 'parrots', tag: 'Rare Genus', image: 'images/eclectus_parrot.png', care: 'High-fiber diet rich in fresh fruits, vegetables, and soft cooked grains.' },
-        { name: 'Hyacinth Macaw', sci: 'Anodorhynchus hyacinthinus', origin: 'Brazil', life: '60 Years', price: 4800, volume: 'Loud', friendly: false, intel: 'Genius Level', category: 'macaws', tag: 'Featured', image: 'images/hyacinth_macaw.png', care: 'Requires custom extra-heavy steel aviary, macadamia nuts, and expert handling.' },
-        { name: 'Cockatiel (Lutino)', sci: 'Nymphicus hollandicus', origin: 'Australia', life: '15-20 Years', price: 200, volume: 'Quiet', friendly: true, intel: 'Active Learner', category: 'cockatiels', tag: 'Best Seller', image: 'images/cockatiel.png', care: 'Gentle family companion, whistle-trained easily, enjoys seeds, leafy greens, and cuttlebone.' },
-        { name: 'Budgerigar (Classic)', sci: 'Melopsittacus undulatus', origin: 'Australia', life: '5-10 Years', price: 80, volume: 'Quiet', friendly: true, intel: 'Active Learner', category: 'budgies', tag: 'Beginner Choice', image: 'images/budgie.png', care: 'Great apartment bird, loves mirrors, small swings, and seed mixtures.' },
-        { name: 'Peach-faced Lovebird', sci: 'Agapornis roseicollis', origin: 'Southwest Africa', life: '12-15 Years', price: 180, volume: 'Moderate', friendly: true, intel: 'Highly Social', category: 'lovebirds', tag: 'Sweet Companion', image: 'images/lovebird.png', care: 'Very energetic, keeps close pair bond, enjoys paper shredding and foraging toys.' },
-        { name: 'Fischer\'s Lovebird', sci: 'Agapornis fischeri', origin: 'East Africa', life: '12-15 Years', price: 220, volume: 'Moderate', friendly: true, intel: 'Active Learner', category: 'lovebirds', tag: 'Energetic', image: 'images/lovebird.png', care: 'Playful active bird, requires pair caging and mineral blocks for beak health.' },
-        { name: 'Zebra Finch', sci: 'Taeniopygia guttata', origin: 'Australia', life: '5-8 Years', price: 40, volume: 'Quiet', friendly: true, intel: 'Active Learner', category: 'finches', tag: 'Best Seller', image: 'images/finch.png', care: 'Peaceful flocking bird, needs flight room, small seed blend, and water bath dish.' },
-        { name: 'Gouldian Finch', sci: 'Erythrura gouldiae', origin: 'Australia', life: '6-8 Years', price: 150, volume: 'Quiet', friendly: true, intel: 'Active Learner', category: 'finches', tag: 'Rainbow Finch', image: 'images/finch.png', care: 'Vibrant rainbow feathers, warmth sensitive, requires clean flight cage and millets.' },
-        { name: 'Red Factor Canary', sci: 'Serinus canaria', origin: 'Canary Islands', life: '10-12 Years', price: 160, volume: 'Quiet', friendly: true, intel: 'Active Learner', category: 'canaries', tag: 'Beautiful Voice', image: 'images/canary.png', care: 'Famed singing bird, requires carotenoid-rich diet for feather color preservation.' }
+        { name: 'Pacific Parrotlet', sci: 'Forpus coelestis', origin: 'Ecuador & Peru', life: '12-20 Years', price: 250, volume: 'Quiet', friendly: true, intel: '10-15 Words', category: 'parrots', tag: '#1 Tiny Talker', image: 'images/pacific_parrotlet.png', care: 'Can learn 10-15 words. Quiet, whisper-like voice. Tiny bird with big personality. Size: 4.5-5.5 in (11-14 cm).' },
+        { name: 'Budgerigar (Budgie)', sci: 'Melopsittacus undulatus', origin: 'Australia', life: '5-10 Years', price: 80, volume: 'Quiet', friendly: true, intel: 'Hundreds of Words', category: 'budgies', tag: '#2 Record Talker', image: 'images/budgie.png', care: 'Can learn hundreds of words. One of the best talking small parrots. Friendly and intelligent. Size: 6-8 in (15-20 cm).' },
+        { name: 'Cockatiel', sci: 'Nymphicus hollandicus', origin: 'Australia', life: '15-20 Years', price: 200, volume: 'Quiet', friendly: true, intel: 'Whistles & Words', category: 'cockatiels', tag: '#3 Whistle Master', image: 'images/cockatiel.png', care: 'Mimics words, whistles, and household sounds. Gentle and affectionate. Best known for whistling tunes. Size: 12-13 in (30-33 cm).' },
+        { name: 'Indian Ringneck Parakeet', sci: 'Psittacula krameri', origin: 'Asia & Africa', life: '20-30 Years', price: 500, volume: 'Moderate', friendly: true, intel: 'Up to 200 Words', category: 'parrots', tag: '#4 Clear Voice', image: 'images/indian_ringneck.png', care: 'Vocabulary of up to 200 words. Fast learner with a clear voice. Highly intelligent and playful. Size: 14-17 in (36-43 cm).' },
+        { name: 'Quaker Parrot (Monk Parakeet)', sci: 'Myiopsitta monachus', origin: 'South America', life: '20-30 Years', price: 400, volume: 'Moderate', friendly: true, intel: 'Phrases & Songs', category: 'parrots', tag: '#5 Song Mimic', image: 'images/quaker_parrot.png', care: 'Learns many words and short phrases. Loves mimicking sounds and songs. Ownership is restricted in some areas. Size: 11-12 in (28-30 cm).' },
+        { name: 'Blue-Crowned Conure', sci: 'Thectocercus acuticaudatus', origin: 'South America', life: '25-30 Years', price: 600, volume: 'Loud', friendly: true, intel: 'Social Mimic', category: 'parrots', tag: '#6 Social Talker', image: 'images/sun_conure.png', care: 'Learns a few words and phrases. Friendly and social. Naturally loud. Size: 14-16 in (36-41 cm).' },
+        { name: 'Senegal Parrot', sci: 'Poicephalus senegalus', origin: 'West Africa', life: '25-30 Years', price: 800, volume: 'Quiet', friendly: true, intel: 'Dozens of Words', category: 'parrots', tag: '#7 Apartment Favorite', image: 'images/senegal_parrot.png', care: 'Can learn dozens of words. Quieter than many parrots. Great for apartment living. Size: 10 in (25 cm).' },
+        { name: 'Black-Hooded (Nanday) Parakeet', sci: 'Aratinga nenday', origin: 'South America', life: '20-30 Years', price: 550, volume: 'Moderate', friendly: true, intel: 'Up to 20 Words', category: 'parrots', tag: '#8 Playful Mimic', image: 'images/pacific_parrotlet.png', care: 'Can learn up to 20 words. Playful with a raspy voice. Famous for sleeping on its back. Size: 10-11 in (25-28 cm).' },
+        { name: 'White-Fronted Amazon', sci: 'Amazona albifrons', origin: 'Central America', life: '40-50 Years', price: 1200, volume: 'Loud', friendly: true, intel: 'Excellent Mimic', category: 'parrots', tag: '#9 Household Mimic', image: 'images/eclectus_parrot.png', care: 'Excellent mimic. Loud but very talkative. Copies household sounds. Size: 10 in (25 cm).' },
+        { name: 'White-Capped Pionus', sci: 'Pionus senilis', origin: 'Central America', life: '25-40 Years', price: 900, volume: 'Quiet', friendly: true, intel: 'Calm & Simple Words', category: 'parrots', tag: '#10 Gentle Companion', image: 'images/african_grey.png', care: 'Learns a few simple words. Calm and quiet personality. Gentle companion. Size: 9-10 in (23-25 cm).' },
+        { name: 'Cuban Amazon', sci: 'Amazona leucocephala', origin: 'Cuba & Caribbean', life: '40-50 Years', price: 1400, volume: 'Moderate', friendly: true, intel: 'Smart & Trainable', category: 'parrots', tag: '#11 Fast Learner', image: 'images/eclectus_parrot.png', care: 'Smart and trainable. Learns words easily. Can be noisy. Size: 11-13 in (28-33 cm).' },
+        { name: 'Goffin Cockatoo', sci: 'Cacatua goffiniana', origin: 'Indonesia', life: '30-40 Years', price: 1600, volume: 'Moderate', friendly: true, intel: 'Curious & Talkative', category: 'cockatiels', tag: '#12 Self Talker', image: 'images/cockatiel.png', care: 'Enjoys talking to itself. Curious and playful. Very affectionate. Size: 12 in (30 cm).' },
+        { name: 'Yellow-Shouldered Amazon', sci: 'Amazona barbadensis', origin: 'Venezuela & Caribbean', life: '40-50 Years', price: 1800, volume: 'Moderate', friendly: true, intel: 'Energetic Talker', category: 'parrots', tag: '#13 Acrobatic Mimic', image: 'images/sun_conure.png', care: 'Excellent talking ability. Loves hanging upside down. Playful and energetic. Size: 13 in (33 cm).' },
+        { name: 'Rose-Breasted Cockatoo (Galah)', sci: 'Eolophus patricapillus', origin: 'Australia', life: '40-50 Years', price: 2200, volume: 'Moderate', friendly: true, intel: 'Mimics Many Sounds', category: 'cockatiels', tag: '#14 Pink Beauty', image: 'images/galah_cockatoo.png', care: 'Talks and mimics many sounds. Friendly and social. Males are often more talkative. Size: 12-15 in (30-38 cm).' },
+        { name: 'Timneh African Grey', sci: 'Psittacus timneh', origin: 'West Africa', life: '40-50 Years', price: 1900, volume: 'Quiet', friendly: true, intel: 'Genius Level', category: 'parrots', tag: '#15 Genius Talker', image: 'images/african_grey.png', care: 'One of the world\'s best talking parrots. Understands words in context. Exceptional vocabulary and intelligence. Size: 9-11 in (23-28 cm).' }
     ];
 
     let activeCategory = 'all';
@@ -569,12 +572,52 @@ if (session_status() === PHP_SESSION_NONE) {
             });
         }
 
+        // Smart Find Seller Handler with Availability Guard
+        window.findSellerForBird = function(speciesName) {
+            fetch('api/birds.php?action=list')
+                .then(res => res.json())
+                .then(data => {
+                    const listings = (data && data.success && Array.isArray(data.data)) ? data.data : [];
+                    const query = speciesName.toLowerCase().trim();
+                    const matches = listings.filter(item => {
+                        const title = (item.title || '').toLowerCase();
+                        const breed = (item.breed || '').toLowerCase();
+                        const category = (item.category || '').toLowerCase();
+                        const desc = (item.description || '').toLowerCase();
+                        return title.includes(query) || breed.includes(query) || category.includes(query) || desc.includes(query) || query.includes(breed);
+                    });
+
+                    if (matches.length > 0) {
+                        window.location.href = `marketplace.php?q=${encodeURIComponent(speciesName)}`;
+                    } else {
+                        if (window.showCustomModal) {
+                            window.showCustomModal({
+                                title: "⚠️ Currently Unavailable",
+                                message: `Afsoos! Is waqt Marketplace par "${speciesName}" ka koi active seller ya listing maujood nahi hai.\n\nAap custom post request laga sakte hain ya kuch waqt baad dobara check karein.`,
+                                icon: "storefront",
+                                type: "warning",
+                                buttonText: "Browse All Marketplace Birds",
+                                onAction: () => {
+                                    window.location.href = 'marketplace.php';
+                                }
+                            });
+                        } else {
+                            alert(`Afsoos! Is waqt "${speciesName}" marketplace par available nahi hai.`);
+                        }
+                    }
+                })
+                .catch(() => {
+                    window.location.href = `marketplace.php?q=${encodeURIComponent(speciesName)}`;
+                });
+        };
+
         // Modal Action listeners
         const findSellersBtn = document.getElementById('modal-find-sellers-btn');
         if (findSellersBtn) {
             findSellersBtn.addEventListener('click', () => {
                 if (selectedBirdForModal) {
-                    window.location.href = `marketplace.php?q=${encodeURIComponent(selectedBirdForModal.name)}`;
+                    closeModal();
+                    findSellerForBird(selectedBirdForModal.name);
                 }
             });
         }
@@ -838,7 +881,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         <span class="material-symbols-outlined text-sm sm:text-base flex-shrink-0">menu_book</span>
                         <span class="whitespace-nowrap">Care Guide</span>
                     </button>
-                    <button onclick="window.location.href='marketplace.php?q=${encodeURIComponent(bird.name)}'" class="py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl btn-emerald-glow text-white font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 cursor-pointer w-full whitespace-nowrap">
+                    <button onclick="findSellerForBird('${bird.name}')" class="py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl btn-emerald-glow text-white font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 cursor-pointer w-full whitespace-nowrap">
                         <span class="whitespace-nowrap">Find Sellers</span>
                         <span class="material-symbols-outlined text-sm sm:text-base flex-shrink-0">storefront</span>
                     </button>
