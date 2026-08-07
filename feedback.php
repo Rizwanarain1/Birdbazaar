@@ -215,15 +215,9 @@ if (session_status() === PHP_SESSION_NONE) {
                     <p class="text-xs text-slate-700 dark:text-slate-300 mb-6 font-medium">Tell us about your experience with BirdBazaar website, bird listings, or breeders.</p>
 
                     <form id="user-feedback-form" class="space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-bold text-slate-900 dark:text-white mb-1">Your Name</label>
-                                <input type="text" id="fb-name" required placeholder="e.g. Usama Khan" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-xs text-slate-900 dark:text-white font-medium focus:outline-none focus:border-emerald-500 focus:bg-white dark:focus:bg-slate-900" />
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-slate-900 dark:text-white mb-1">Email Address</label>
-                                <input type="email" id="fb-email" required placeholder="e.g. usama@gmail.com" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-xs text-slate-900 dark:text-white font-medium focus:outline-none focus:border-emerald-500 focus:bg-white dark:focus:bg-slate-900" />
-                            </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-900 dark:text-white mb-1">Your Name</label>
+                            <input type="text" id="fb-name" required placeholder="e.g. Usama Khan" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-xs text-slate-900 dark:text-white font-medium focus:outline-none focus:border-emerald-500 focus:bg-white dark:focus:bg-slate-900" />
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
@@ -621,7 +615,12 @@ if (session_status() === PHP_SESSION_NONE) {
                                     ${(f.user_name || 'U').charAt(0).toUpperCase()}
                                 </div>
                                 <div>
-                                    <h4 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">${f.user_name}</h4>
+                                    <h4 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white flex items-center gap-1.5 flex-wrap">
+                                        ${f.user_name}
+                                        <span class="bg-emerald-700 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md shadow-sm">
+                                            User ID: #${f.user_id ? f.user_id : f.id}
+                                        </span>
+                                    </h4>
                                     <span class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">${f.date_formatted}</span>
                                 </div>
                             </div>
@@ -640,18 +639,42 @@ if (session_status() === PHP_SESSION_NONE) {
 
         // Submit User Feedback
         function submitUserFeedback() {
-            const name = document.getElementById('fb-name').value.trim();
-            const email = document.getElementById('fb-email').value.trim();
+            const currentUser = JSON.parse(sessionStorage.getItem('avinest_current_user') || 'null');
+            if (!currentUser) {
+                if (window.showCustomModal) {
+                    window.showCustomModal({
+                        title: "🔒 Login Required",
+                        message: "Feedback ya Star Rating dene ke liye pehle apne BirdBazaar account me login karein.",
+                        icon: "lock",
+                        type: "warning",
+                        buttonText: "Login / Register Now",
+                        onAction: () => {
+                            if (window.openAuthModal) window.openAuthModal();
+                        }
+                    });
+                } else if (window.openAuthModal) {
+                    window.openAuthModal();
+                }
+                return;
+            }
+
+            const name = document.getElementById('fb-name').value.trim() || currentUser.name || 'Avian Lover';
             const category = document.getElementById('fb-category').value;
             const rating = document.getElementById('fb-rating').value;
             const comment = document.getElementById('fb-comment').value.trim();
+
+            if (!comment) {
+                if (window.showToast) window.showToast("Baraye meherbani feedback detail zaroor darj karein.");
+                return;
+            }
 
             fetch('api/feedback.php?action=submit_feedback', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
+                    user_id: currentUser.id || null,
                     user_name: name,
-                    user_email: email,
+                    user_email: currentUser.email || 'user@birdbazaar.com',
                     category: category,
                     rating: rating,
                     comment: comment
@@ -660,7 +683,7 @@ if (session_status() === PHP_SESSION_NONE) {
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
-                    document.getElementById('user-feedback-form').reset();
+                    document.getElementById('fb-comment').value = '';
                     setupStarPicker();
                     loadFeedbacks();
                     if (window.showCustomModal) {

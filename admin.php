@@ -232,6 +232,40 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
     </div>
 
+    <!-- Admin Official Announcement Publisher Card -->
+    <div class="bg-primary text-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-emerald-500/30 shadow-md mb-8">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-white dark:text-emerald-400 flex items-center gap-2">
+                <span class="material-symbols-outlined text-emerald-400">campaign</span> Publish Official Announcement to Feedback Page
+            </h3>
+            <span class="text-xs bg-emerald-700 text-white font-bold px-3 py-1 rounded-full">Admin Only</span>
+        </div>
+        <form id="admin-post-announcement-form" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="sm:col-span-2">
+                    <label class="block text-xs font-bold text-emerald-100 mb-1">Announcement Title</label>
+                    <input type="text" id="admin-ann-title" required placeholder="e.g. System Maintenance Notice or New Breeding Guidelines" class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-emerald-400 font-medium" />
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-emerald-100 mb-1">Category</label>
+                    <select id="admin-ann-category" class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-400 font-bold cursor-pointer">
+                        <option value="Official Update">Official Update</option>
+                        <option value="Community Notice">Community Notice</option>
+                        <option value="Marketplace Advisory">Marketplace Advisory</option>
+                        <option value="Avian Care Tip">Avian Care Tip</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-emerald-100 mb-1">Announcement Details / Content</label>
+                <textarea id="admin-ann-content" rows="3" required placeholder="Write the announcement message details here..." class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-emerald-400 font-medium"></textarea>
+            </div>
+            <button type="submit" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs px-6 py-3 rounded-xl shadow-md transition-all flex items-center gap-2 cursor-pointer">
+                <span class="material-symbols-outlined text-sm">send</span> Publish Announcement
+            </button>
+        </form>
+    </div>
+
     <!-- Table Filter Controls -->
     <div class="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4 mb-6 sm:mb-8 w-full">
         <div class="flex items-center gap-4 w-full md:w-auto">
@@ -257,7 +291,6 @@ if (session_status() === PHP_SESSION_NONE) {
                     <tr class="bg-primary text-white dark:bg-on-primary-fixed dark:text-on-primary-fixed border-b border-outline-variant/30 font-bold">
                         <th class="p-5">Username</th>
                         <th class="p-5">Email Address</th>
-                        <th class="p-5">Password</th>
                         <th class="p-5">Role</th>
                         <th class="p-5">Status</th>
                         <th class="p-5 text-center">Actions</th>
@@ -386,6 +419,44 @@ if (session_status() === PHP_SESSION_NONE) {
             searchQuery = e.target.value.toLowerCase().trim();
             renderTable();
         });
+
+        const annForm = document.getElementById('admin-post-announcement-form');
+        if (annForm) {
+            annForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const currentUser = JSON.parse(sessionStorage.getItem('avinest_current_user') || 'null');
+                const title = document.getElementById('admin-ann-title').value.trim();
+                const category = document.getElementById('admin-ann-category').value;
+                const content = document.getElementById('admin-ann-content').value.trim();
+
+                fetch('api/feedback.php?action=create_announcement', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        admin_name: currentUser ? currentUser.name : 'AviNest Admin',
+                        title: title,
+                        category: category,
+                        content: content
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        annForm.reset();
+                        if (window.showCustomModal) {
+                            window.showCustomModal({
+                                title: "📢 Announcement Published!",
+                                message: "Your official announcement has been published and is now visible on the Community Feedback Page.",
+                                icon: "campaign",
+                                type: "success",
+                                buttonText: "View Feedback Page",
+                                onAction: () => { window.location.href = 'feedback.php'; }
+                            });
+                        }
+                    }
+                });
+            });
+        }
     }
 
     // Fetch dashboard stats counters from API
@@ -494,7 +565,6 @@ if (session_status() === PHP_SESSION_NONE) {
                     ${appealHtml}
                 </td>
                 <td class="p-5 text-on-surface-variant dark:text-surface-variant font-light">${user.email}</td>
-                <td class="p-5 font-mono text-xs text-slate-600 dark:text-slate-300 font-bold max-w-[150px] truncate" title="${user.plain_password || 'N/A'}">${user.plain_password || 'N/A'}</td>
                 <td class="p-5">
                     <select onchange="changeUserRole(${user.id}, this.value)" class="bg-surface-container-low dark:bg-on-surface/40 text-xs font-bold text-primary rounded-lg border-outline-variant p-2 focus:border-primary cursor-pointer shadow-sm">
                         <option value="user" ${user.role.toLowerCase() === 'user' ? 'selected' : ''}>User</option>
@@ -601,7 +671,6 @@ if (session_status() === PHP_SESSION_NONE) {
                     <div>
                         <h3 class="font-display-lg text-2xl font-bold text-primary dark:text-primary-fixed">${user.name}</h3>
                         <p class="text-on-surface-variant text-sm">${user.email}</p>
-                        <p class="text-outline text-xs mt-1 font-mono font-bold text-emerald-800 dark:text-emerald-400" title="${user.plain_password || ''}">Password: ${user.plain_password || 'N/A'}</p>
                         <div class="flex items-center gap-2 mt-1.5">
                             <span class="bg-primary-container text-on-primary-container text-xs px-2.5 py-0.5 rounded font-bold">${(user.role || 'User').toUpperCase()}</span>
                             <span class="bg-secondary-container text-on-secondary-fixed-variant text-xs px-2.5 py-0.5 rounded font-bold">${user.status || 'Active'}</span>

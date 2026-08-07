@@ -50,7 +50,7 @@ switch ($action) {
 if (!function_exists('listFeedbacks')) {
     function listFeedbacks($db) {
         try {
-            $stmt = $db->query("SELECT id, user_name, user_email, rating, category, comment, DATE_FORMAT(created_at, '%M %d, %Y') AS date_formatted FROM feedbacks WHERE status = 'approved' ORDER BY id DESC");
+            $stmt = $db->query("SELECT id, user_id, user_name, user_email, rating, category, comment, DATE_FORMAT(created_at, '%M %d, %Y') AS date_formatted FROM feedbacks WHERE status = 'approved' ORDER BY id DESC");
             $feedbacks = $stmt->fetchAll();
 
             $totalCount = count($feedbacks);
@@ -89,6 +89,7 @@ if (!function_exists('submitFeedback')) {
             return;
         }
 
+        $userId = !empty($data['user_id']) ? (int)$data['user_id'] : null;
         $userName = !empty($data['user_name']) ? trim($data['user_name']) : 'Avian Lover';
         $userEmail = !empty($data['user_email']) ? trim($data['user_email']) : 'community@birdbazaar.com';
         $rating = max(1, min(5, (int)$data['rating']));
@@ -96,8 +97,9 @@ if (!function_exists('submitFeedback')) {
         $comment = trim($data['comment']);
 
         try {
-            $stmt = $db->prepare("INSERT INTO feedbacks (user_name, user_email, rating, category, comment, status) VALUES (:name, :email, :rating, :cat, :comment, 'approved')");
+            $stmt = $db->prepare("INSERT INTO feedbacks (user_id, user_name, user_email, rating, category, comment, status) VALUES (:uid, :name, :email, :rating, :cat, :comment, 'approved')");
             $result = $stmt->execute([
+                ':uid' => $userId,
                 ':name' => $userName,
                 ':email' => $userEmail,
                 ':rating' => $rating,
