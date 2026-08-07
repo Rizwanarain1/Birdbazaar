@@ -693,7 +693,10 @@ if (session_status() === PHP_SESSION_NONE) {
                     comment: comment
                 })
             })
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) throw new Error("HTTP error " + res.status);
+                return res.json();
+            })
             .then(data => {
                 if (data.success) {
                     if (commentInput) commentInput.value = '';
@@ -712,11 +715,27 @@ if (session_status() === PHP_SESSION_NONE) {
                         });
                     }
                 } else {
-                    alert(data.message || "Failed to submit feedback.");
+                    if (window.showCustomModal) {
+                        window.showCustomModal({
+                            title: "❌ Submission Error",
+                            message: data.message || "Feedback submit karne me masala aaya.",
+                            icon: "error",
+                            type: "error",
+                            buttonText: "OK"
+                        });
+                    }
                 }
             })
             .catch(err => {
-                alert("Error submitting feedback: " + err.message);
+                if (window.showCustomModal) {
+                    window.showCustomModal({
+                        title: "❌ Error",
+                        message: "Feedback submit nahi ho saka: " + err.message,
+                        icon: "error",
+                        type: "error",
+                        buttonText: "OK"
+                    });
+                }
             });
         };
     </script>

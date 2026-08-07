@@ -456,7 +456,10 @@ if (session_status() === PHP_SESSION_NONE) {
                     content: content
                 })
             })
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) throw new Error("HTTP error " + res.status);
+                return res.json();
+            })
             .then(data => {
                 if (data.success) {
                     titleInput.value = '';
@@ -472,11 +475,27 @@ if (session_status() === PHP_SESSION_NONE) {
                         });
                     }
                 } else {
-                    alert(data.message || "Failed to publish announcement.");
+                    if (window.showCustomModal) {
+                        window.showCustomModal({
+                            title: "❌ Publishing Error",
+                            message: data.message || "Announcement publish nahi ho saki.",
+                            icon: "error",
+                            type: "error",
+                            buttonText: "OK"
+                        });
+                    }
                 }
             })
             .catch(err => {
-                alert("Error publishing announcement: " + err.message);
+                if (window.showCustomModal) {
+                    window.showCustomModal({
+                        title: "❌ Error",
+                        message: "Announcement publish nahi ho saki: " + err.message,
+                        icon: "error",
+                        type: "error",
+                        buttonText: "OK"
+                    });
+                }
             });
         };
     }
