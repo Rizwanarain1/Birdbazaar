@@ -188,7 +188,7 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
 
     <!-- Received Buyer Inquiries Section -->
-    <div>
+    <div class="mb-12">
         <h3 class="font-display-lg text-xl font-bold text-primary dark:text-primary-fixed mb-6 flex items-center gap-2">
             <span class="material-symbols-outlined text-primary">mark_email_unread</span>
             Received Buyer Inquiries
@@ -207,6 +207,59 @@ if (session_status() === PHP_SESSION_NONE) {
                     <!-- Rendered dynamically -->
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <!-- Account Security & Change Password Section -->
+    <div class="mb-12">
+        <div class="bg-white dark:bg-on-surface/40 rounded-3xl p-6 sm:p-8 shadow-sm border border-outline-variant/20">
+            <h3 class="font-display-lg text-xl font-bold text-primary dark:text-primary-fixed mb-2 flex items-center gap-2">
+                <span class="material-symbols-outlined text-emerald-600">lock_reset</span>
+                Account Security & Change Password
+            </h3>
+            <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm mb-6">Update your account password securely. Use the eye icon toggle to verify your entry.</p>
+
+            <form id="user-change-password-form" class="max-w-xl space-y-5">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">Current Password</label>
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-3.5 top-3.5 text-slate-400 text-lg">lock</span>
+                        <input type="password" id="user-curr-pass" required placeholder="Enter current password" class="w-full pl-10 pr-12 py-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface-container-low dark:bg-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+                        <button type="button" onclick="togglePassVisibility('user-curr-pass', this)" class="absolute right-3.5 top-3 text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer">
+                            <span class="material-symbols-outlined text-lg">visibility</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">New Password</label>
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-3.5 top-3.5 text-slate-400 text-lg">key</span>
+                            <input type="password" id="user-new-pass" required minlength="6" placeholder="Min 6 characters" class="w-full pl-10 pr-12 py-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface-container-low dark:bg-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+                            <button type="button" onclick="togglePassVisibility('user-new-pass', this)" class="absolute right-3.5 top-3 text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer">
+                                <span class="material-symbols-outlined text-lg">visibility</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">Confirm New Password</label>
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-3.5 top-3.5 text-slate-400 text-lg">enhanced_encryption</span>
+                            <input type="password" id="user-confirm-pass" required minlength="6" placeholder="Re-enter new password" class="w-full pl-10 pr-12 py-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface-container-low dark:bg-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+                            <button type="button" onclick="togglePassVisibility('user-confirm-pass', this)" class="absolute right-3.5 top-3 text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer">
+                                <span class="material-symbols-outlined text-lg">visibility</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-3 rounded-2xl shadow-md transition-all inline-flex items-center gap-2 text-sm cursor-pointer">
+                        <span class="material-symbols-outlined text-base">check_circle</span> Update Password
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </main>
@@ -318,7 +371,76 @@ if (session_status() === PHP_SESSION_NONE) {
         });
     };
 
+    window.togglePassVisibility = function(inputId, btn) {
+        const input = document.getElementById(inputId);
+        const icon = btn.querySelector('.material-symbols-outlined');
+        if (!input || !icon) return;
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.textContent = 'visibility_off';
+        } else {
+            input.type = 'password';
+            icon.textContent = 'visibility';
+        }
+    };
+
     document.addEventListener('DOMContentLoaded', () => {
+        // Change Password Form Submission
+        const changePassForm = document.getElementById('user-change-password-form');
+        if (changePassForm) {
+            changePassForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const currPass = document.getElementById('user-curr-pass').value.trim();
+                const newPass = document.getElementById('user-new-pass').value.trim();
+                const confirmPass = document.getElementById('user-confirm-pass').value.trim();
+
+                if (newPass.length < 6) {
+                    if (window.showCustomModal) {
+                        window.showCustomModal({ title: "Validation Error", message: "New password must be at least 6 characters long.", type: "warning" });
+                    } else { alert("New password must be at least 6 characters long."); }
+                    return;
+                }
+
+                if (newPass !== confirmPass) {
+                    if (window.showCustomModal) {
+                        window.showCustomModal({ title: "Validation Error", message: "New password and Confirm password do not match.", type: "warning" });
+                    } else { alert("Passwords do not match."); }
+                    return;
+                }
+
+                fetch('api/auth.php?action=change_password', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        current_password: currPass,
+                        new_password: newPass,
+                        confirm_password: confirmPass
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        if (window.showSuccessModal) {
+                            window.showSuccessModal("🔒 Password Changed!", data.message);
+                        } else if (window.showCustomModal) {
+                            window.showCustomModal({ title: "Success", message: data.message, type: "success" });
+                        } else { alert(data.message); }
+                        changePassForm.reset();
+                    } else {
+                        if (window.showCustomModal) {
+                            window.showCustomModal({ title: "Error", message: data.message || "Failed to update password.", type: "warning" });
+                        } else { alert(data.message || "Failed to update password."); }
+                    }
+                })
+                .catch(err => {
+                    console.error("Change password error:", err);
+                    if (window.showCustomModal) {
+                        window.showCustomModal({ title: "Server Error", message: "Server communication error. Please try again.", type: "warning" });
+                    }
+                });
+            });
+        }
+
         // Load User Profile Data from Session
         const currentData = JSON.parse(sessionStorage.getItem('avinest_current_user') || 'null');
         

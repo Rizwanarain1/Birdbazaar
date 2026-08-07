@@ -590,43 +590,9 @@ if (session_status() === PHP_SESSION_NONE) {
             });
         }
 
-        // Smart Find Seller Handler with Availability Guard
+        // Smart Find Seller Handler with Marketplace Search Redirect
         window.findSellerForBird = function(speciesName) {
-            fetch('api/birds.php?action=list')
-                .then(res => res.json())
-                .then(data => {
-                    const listings = (data && data.success && Array.isArray(data.data)) ? data.data : [];
-                    const query = speciesName.toLowerCase().trim();
-                    const matches = listings.filter(item => {
-                        const title = (item.title || '').toLowerCase();
-                        const breed = (item.breed || '').toLowerCase();
-                        const category = (item.category || '').toLowerCase();
-                        const desc = (item.description || '').toLowerCase();
-                        return title.includes(query) || breed.includes(query) || category.includes(query) || desc.includes(query) || query.includes(breed);
-                    });
-
-                    if (matches.length > 0) {
-                        window.location.href = `marketplace.php?q=${encodeURIComponent(speciesName)}`;
-                    } else {
-                        if (window.showCustomModal) {
-                            window.showCustomModal({
-                                title: "⚠️ Currently Unavailable",
-                                message: `Afsoos! Is waqt Marketplace par "${speciesName}" ka koi active seller ya listing maujood nahi hai.\n\nAap custom post request laga sakte hain ya kuch waqt baad dobara check karein.`,
-                                icon: "storefront",
-                                type: "warning",
-                                buttonText: "Browse All Marketplace Birds",
-                                onAction: () => {
-                                    window.location.href = 'marketplace.php';
-                                }
-                            });
-                        } else {
-                            alert(`Afsoos! Is waqt "${speciesName}" marketplace par available nahi hai.`);
-                        }
-                    }
-                })
-                .catch(() => {
-                    window.location.href = `marketplace.php?q=${encodeURIComponent(speciesName)}`;
-                });
+            window.location.href = `marketplace.php?search=${encodeURIComponent(speciesName)}`;
         };
 
         // Modal Action listeners

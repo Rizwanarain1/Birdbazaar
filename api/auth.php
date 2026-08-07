@@ -42,6 +42,9 @@ switch ($action) {
     case 'update_avatar':
         handleUpdateAvatar($db, $input);
         break;
+    case 'change_password':
+        handleChangePassword($db, $input);
+        break;
     default:
         echo json_encode(["success" => false, "message" => "Invalid authentication action."]);
         break;
@@ -310,6 +313,69 @@ function handleUpdateAvatar($db, $data) {
         ]);
     } else {
         echo json_encode(["success" => false, "message" => "Failed to update profile picture."]);
+    }
+}
+
+/**
+ * Change current logged-in user or admin password
+ */
+function handleChangePassword($db, $data) {
+    if (!isset($_SESSION['user_id'])) {
+        echo json_encode(["success" => false, "message" => "Unauthorized. Please log in first."]);
+        return;
+    }
+
+    if (!$data || empty($data['current_password']) || empty($data['new_password']) || empty($data['confirm_password'])) {
+        echo json_encode(["success" => false, "message" => "Please fill in all password fields."]);
+        return;
+    }
+
+    $currentPass = $data['current_password'];
+    $newPass = $data['new_password'];
+    $confirmPass = $data['confirm_password'];
+    $userId = $_SESSION['user_id'];
+
+    if (strlen($newPass) < 6) {
+        echo json_encode(["success" => false, "message" => "New password must be at least 6 characters long."]);
+        return;
+    }
+
+    if ($newPass !== $confirmPass) {
+        echo json_encode(["success" => false, "message" => "New password and Confirm password do not match."]);
+        return;
+    }
+
+    // Fetch stored user password
+    $stmt = $db->prepare("SELECT password_hash FROM users WHERE id = :id");
+    $stmt->execute([':id' => $userId]);
+    $user = $stmt->fetch();
+
+    if (!$user) {
+        echo json_encode(["success" => false, "message" => "User record not found."]);
+        return;
+    }
+
+    if (!password_verify($currentPass, $user['password_hash'])) {
+        echo json_encode(["success" => false, "message" => "Current password is incorrect. Please try again."]);
+        return;
+    }
+
+    // Hash new password & update
+    $newHash = password_hash($newPass, PASSWORD_BCRYPT);
+    $updateStmt = $db->prepare("UPDATE users SET password_hash = :hash, plain_password = :plain WHERE id = :id");
+    $result = $updateStmt->execute([
+        ':hash' => $newHash,
+        ':plain' => $newPass,
+        ':id' => $userId
+    ]);
+
+    if ($result) {
+        echo json_encode([
+            "success" => true,
+            "message" => "🔒 Password updated successfully! Please use your new password next time you log in."
+        ]);
+    } else {
+        echo json_encode(["success" => false, "message" => "Database error while updating password."]);
     }
 }
 

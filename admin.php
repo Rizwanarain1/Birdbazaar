@@ -248,11 +248,11 @@ if (session_status() === PHP_SESSION_NONE) {
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-emerald-100 mb-1">Category</label>
-                    <select id="admin-ann-category" class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-400 font-bold cursor-pointer">
-                        <option value="Official Update">Official Update</option>
-                        <option value="Community Notice">Community Notice</option>
-                        <option value="Marketplace Advisory">Marketplace Advisory</option>
-                        <option value="Avian Care Tip">Avian Care Tip</option>
+                    <select id="admin-ann-category" class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-400 font-medium">
+                        <option value="General Notice">General Notice</option>
+                        <option value="Maintenance">System Maintenance</option>
+                        <option value="Breeding Guide">Breeding Guide</option>
+                        <option value="Feature Update">Feature Update</option>
                     </select>
                 </div>
             </div>
@@ -263,6 +263,59 @@ if (session_status() === PHP_SESSION_NONE) {
             <button type="button" onclick="publishAdminAnnouncement(event)" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs px-6 py-3 rounded-xl shadow-md transition-all flex items-center gap-2 cursor-pointer border-none">
                 <span class="material-symbols-outlined text-sm">send</span> Publish Announcement
             </button>
+        </form>
+    </div>
+
+    <!-- Admin Security & Password Change Section -->
+    <div class="bg-white dark:bg-on-surface/40 p-6 sm:p-8 rounded-3xl border border-outline-variant/30 shadow-md mb-8">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-bold text-primary dark:text-primary-fixed flex items-center gap-2">
+                <span class="material-symbols-outlined text-emerald-600">admin_panel_settings</span> Admin Account Security & Password Change
+            </h3>
+            <span class="text-xs bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 font-bold px-3 py-1 rounded-full">Secure Auth</span>
+        </div>
+        <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm mb-6">Update your Admin account password securely. Click the eye icon to view your entered password.</p>
+
+        <form id="admin-change-password-form" class="max-w-xl space-y-5">
+            <div>
+                <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">Current Password</label>
+                <div class="relative">
+                    <span class="material-symbols-outlined absolute left-3.5 top-3.5 text-slate-400 text-lg">lock</span>
+                    <input type="password" id="admin-curr-pass" required placeholder="Enter current password" class="w-full pl-10 pr-12 py-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface-container-low dark:bg-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+                    <button type="button" onclick="togglePassVisibility('admin-curr-pass', this)" class="absolute right-3.5 top-3 text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer">
+                        <span class="material-symbols-outlined text-lg">visibility</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">New Password</label>
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-3.5 top-3.5 text-slate-400 text-lg">key</span>
+                        <input type="password" id="admin-new-pass" required minlength="6" placeholder="Min 6 characters" class="w-full pl-10 pr-12 py-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface-container-low dark:bg-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+                        <button type="button" onclick="togglePassVisibility('admin-new-pass', this)" class="absolute right-3.5 top-3 text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer">
+                            <span class="material-symbols-outlined text-lg">visibility</span>
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">Confirm New Password</label>
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-3.5 top-3.5 text-slate-400 text-lg">enhanced_encryption</span>
+                        <input type="password" id="admin-confirm-pass" required minlength="6" placeholder="Re-enter new password" class="w-full pl-10 pr-12 py-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-surface-container-low dark:bg-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+                        <button type="button" onclick="togglePassVisibility('admin-confirm-pass', this)" class="absolute right-3.5 top-3 text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer">
+                            <span class="material-symbols-outlined text-lg">visibility</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-2">
+                <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-3 rounded-2xl shadow-md transition-all inline-flex items-center gap-2 text-sm cursor-pointer">
+                    <span class="material-symbols-outlined text-base">check_circle</span> Update Admin Password
+                </button>
+            </div>
         </form>
     </div>
 
@@ -405,7 +458,84 @@ if (session_status() === PHP_SESSION_NONE) {
         setupAdminDashboard();
         fetchAdminStats();
         renderTable();
+
+        // Admin Change Password Form Handler
+        const adminChangePassForm = document.getElementById('admin-change-password-form');
+        if (adminChangePassForm) {
+            adminChangePassForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const currPass = document.getElementById('admin-curr-pass').value.trim();
+                const newPass = document.getElementById('admin-new-pass').value.trim();
+                const confirmPass = document.getElementById('admin-confirm-pass').value.trim();
+
+                if (newPass.length < 6) {
+                    if (window.showCustomModal) {
+                        window.showCustomModal({ title: "Validation Error", message: "New password must be at least 6 characters long.", type: "warning" });
+                    } else { alert("New password must be at least 6 characters long."); }
+                    return;
+                }
+
+                if (newPass !== confirmPass) {
+                    if (window.showCustomModal) {
+                        window.showCustomModal({ title: "Validation Error", message: "New password and Confirm password do not match.", type: "warning" });
+                    } else { alert("Passwords do not match."); }
+                    return;
+                }
+
+                fetch('api/auth.php?action=change_password', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        current_password: currPass,
+                        new_password: newPass,
+                        confirm_password: confirmPass
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        if (window.showSuccessModal) {
+                            window.showSuccessModal({
+                                title: "🔒 Admin Password Changed!",
+                                message: data.message,
+                                icon: "lock_reset",
+                                badge: "PASSWORD UPDATED",
+                                buttonText: "OK"
+                            });
+                        } else if (window.showCustomModal) {
+                            window.showCustomModal({ title: "Success", message: data.message, type: "success" });
+                        } else { alert(data.message); }
+                        adminChangePassForm.reset();
+                    } else {
+                        if (window.showCustomModal) {
+                            window.showCustomModal({ title: "Error", message: data.message || "Failed to update admin password.", type: "warning" });
+                        } else { alert(data.message || "Failed to update admin password."); }
+                    }
+                })
+                .catch(err => {
+                    console.error("Admin change password error:", err);
+                    if (window.showCustomModal) {
+                        window.showCustomModal({ title: "Server Error", message: "Server communication error. Please try again.", type: "warning" });
+                    }
+                });
+            });
+        }
     });
+
+    if (!window.togglePassVisibility) {
+        window.togglePassVisibility = function(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const icon = btn.querySelector('.material-symbols-outlined');
+            if (!input || !icon) return;
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.textContent = 'visibility_off';
+            } else {
+                input.type = 'password';
+                icon.textContent = 'visibility';
+            }
+        };
+    }
 
     function setupAdminDashboard() {
         const filterSelect = document.getElementById('status-filter');

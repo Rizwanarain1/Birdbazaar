@@ -306,7 +306,28 @@ if (session_status() === PHP_SESSION_NONE) {
     let searchQuery = '';
     let currentActiveBirdId = null;
 
+    window.clearMarketSearch = function() {
+        searchQuery = '';
+        const searchInput = document.getElementById('market-search');
+        if (searchInput) searchInput.value = '';
+        const url = new URL(window.location);
+        url.searchParams.delete('search');
+        url.searchParams.delete('q');
+        window.history.replaceState({}, '', url);
+        renderFeed();
+    };
+
     document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchParam = urlParams.get('search') || urlParams.get('q');
+        if (searchParam) {
+            searchQuery = searchParam.toLowerCase().trim();
+            const searchInput = document.getElementById('market-search');
+            if (searchInput) {
+                searchInput.value = searchParam;
+            }
+        }
+
         setupFilters();
         renderFeed();
 
@@ -399,33 +420,63 @@ if (session_status() === PHP_SESSION_NONE) {
             }
         });
 
-        let combined = uniqueFeed.filter(item => 
+        let allAvailable = uniqueFeed.filter(item => 
             item.breeder !== 'Local Avian Owner' && 
             item.breeder !== 'Luxe Avian Farms' && 
             !['101','102','103','104','105','106','107','108'].includes(String(item.id))
         );
 
+        let combined = [...allAvailable];
+
         if (activeCategory !== 'all') {
             combined = combined.filter(item => item.category === activeCategory);
         }
 
+        let isSearchMismatch = false;
         if (searchQuery) {
-            combined = combined.filter(item => 
-                item.name.toLowerCase().includes(searchQuery) ||
+            const filtered = combined.filter(item => 
+                (item.name || '').toLowerCase().includes(searchQuery) ||
+                (item.title || '').toLowerCase().includes(searchQuery) ||
+                (item.breed || '').toLowerCase().includes(searchQuery) ||
                 (item.origin && item.origin.toLowerCase().includes(searchQuery)) ||
                 (item.breeder && item.breeder.toLowerCase().includes(searchQuery))
             );
+            if (filtered.length > 0) {
+                combined = filtered;
+            } else {
+                isSearchMismatch = true;
+                combined = allAvailable; // fallback to show all listings below banner
+            }
         }
 
-        displayFeedCards(combined);
+        displayFeedCards(combined, isSearchMismatch);
     }
 
-    function displayFeedCards(listings) {
+    function displayFeedCards(listings, isSearchMismatch = false) {
         const feed = document.getElementById('marketplace-feed');
         feed.innerHTML = '';
 
+        let bannerHtml = '';
+        if (isSearchMismatch && searchQuery) {
+            bannerHtml = `
+                <div class="col-span-full mb-6 p-6 sm:p-8 rounded-3xl bg-amber-500/10 border-2 border-amber-500/30 text-center shadow-lg animate-fade-in">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-amber-500/20 text-amber-500 rounded-full mb-3 shadow-inner">
+                        <span class="material-symbols-outlined text-3xl">storefront</span>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-bold text-amber-600 dark:text-amber-400 mb-2">⚠️ Currently Unavailable in Marketplace</h3>
+                    <p class="text-slate-700 dark:text-slate-300 text-sm max-w-xl mx-auto mb-5 leading-relaxed">
+                        Afsoos! Is waqt <strong class="text-emerald-700 dark:text-emerald-400 uppercase tracking-wide">"${escapeHtml(searchQuery)}"</strong> Marketplace par sale ke liye available nahi hai.<br class="hidden sm:inline" />
+                        Niche maujood doosre active birds dekhte hue apno pasand ki choice explore karein!
+                    </p>
+                    <button onclick="clearMarketSearch()" class="px-6 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm shadow-lg transition-all inline-flex items-center gap-2 cursor-pointer transform hover:-translate-y-0.5">
+                        <span class="material-symbols-outlined text-base">grid_view</span> Browse All Marketplace Listings
+                    </button>
+                </div>
+            `;
+        }
+
         if (listings.length === 0) {
-            feed.innerHTML = `
+            feed.innerHTML = bannerHtml + `
                 <div class="col-span-full py-16 text-center bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm">
                     <span class="material-symbols-outlined text-emerald-600 text-6xl mb-3">storefront</span>
                     <h4 class="font-display-lg text-xl font-bold text-slate-900 dark:text-white mb-2">No Marketplace Listings Found</h4>
@@ -437,6 +488,8 @@ if (session_status() === PHP_SESSION_NONE) {
             `;
             return;
         }
+
+        feed.innerHTML = bannerHtml;
 
         const currentUser = JSON.parse(sessionStorage.getItem('avinest_current_user') || '{}');
 
