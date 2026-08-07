@@ -898,6 +898,35 @@ window.showCustomModal = function({ title, message, icon = 'info', type = 'prima
     });
 };
 
+/* Amazing Animated Success Modal Engine */
+window.showSuccessModal = function({ title, message, icon = 'verified', badge = 'SUCCESS', buttonText = 'Awesome!', onConfirm = null }) {
+    let modal = document.getElementById('success-custom-modal');
+    if (modal) modal.remove();
+
+    modal = document.createElement('div');
+    modal.id = 'success-custom-modal';
+    modal.className = 'fixed inset-0 bg-black/75 backdrop-blur-md z-[200] flex items-center justify-center p-4 transition-all duration-300 animate-fade-in';
+    modal.innerHTML = `
+        <div class="bg-slate-900 text-white p-6 sm:p-8 rounded-3xl max-w-md w-full shadow-2xl relative border-2 border-emerald-500/50 text-center animate-scale-up">
+            <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-emerald-600 to-emerald-400 text-white mx-auto flex items-center justify-center mb-5 shadow-lg shadow-emerald-500/30">
+                <span class="material-symbols-outlined text-4xl">${icon}</span>
+            </div>
+            <span class="bg-emerald-500/20 text-emerald-300 text-[10px] font-extrabold px-3.5 py-1 rounded-full uppercase tracking-wider mb-3 inline-block border border-emerald-400/30">${badge}</span>
+            <h3 class="text-xl sm:text-2xl font-extrabold text-white mb-2 tracking-tight">${title}</h3>
+            <p class="text-xs sm:text-sm text-slate-300 mb-6 leading-relaxed font-medium">${message}</p>
+            <button id="success-modal-close-btn" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold py-3.5 rounded-xl transition-all shadow-lg text-xs sm:text-sm cursor-pointer border-none flex items-center justify-center gap-2">
+                ${buttonText} <span class="material-symbols-outlined text-base">arrow_forward</span>
+            </button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    modal.querySelector('#success-modal-close-btn').addEventListener('click', () => {
+        modal.remove();
+        if (typeof onConfirm === 'function') onConfirm();
+    });
+};
+
 window.showConfirmModal = function({ title, message, icon = 'help', confirmText = 'Confirm', cancelText = 'Cancel', onConfirm = null }) {
     let modal = document.getElementById('confirm-ui-modal');
     if (modal) modal.remove();

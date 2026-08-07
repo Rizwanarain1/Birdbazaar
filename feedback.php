@@ -214,7 +214,7 @@ if (session_status() === PHP_SESSION_NONE) {
                     </h3>
                     <p class="text-xs text-slate-700 dark:text-slate-300 mb-6 font-medium">Tell us about your experience with BirdBazaar website, bird listings, or breeders.</p>
 
-                    <form id="user-feedback-form" class="space-y-4">
+                    <form id="user-feedback-form" onsubmit="submitUserFeedback(event)" class="space-y-4">
                         <div>
                             <label class="block text-xs font-bold text-slate-900 dark:text-white mb-1">Your Name</label>
                             <input type="text" id="fb-name" required placeholder="e.g. Usama Khan" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-xs text-slate-900 dark:text-white font-medium focus:outline-none focus:border-emerald-500 focus:bg-white dark:focus:bg-slate-900" />
@@ -249,7 +249,7 @@ if (session_status() === PHP_SESSION_NONE) {
                             <textarea id="fb-comment" rows="3" required placeholder="Describe your experience with BirdBazaar..." class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-xs text-slate-900 dark:text-white font-medium focus:outline-none focus:border-emerald-500 focus:bg-white dark:focus:bg-slate-900"></textarea>
                         </div>
 
-                        <button type="submit" class="w-full sm:w-auto bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs px-6 py-3 rounded-xl shadow-md transition-all cursor-pointer flex items-center justify-center gap-2">
+                        <button type="button" onclick="submitUserFeedback(event)" class="w-full sm:w-auto bg-emerald-700 hover:bg-emerald-600 text-white font-extrabold text-xs px-6 py-3 rounded-xl shadow-md transition-all cursor-pointer flex items-center justify-center gap-2 border-none">
                             <span class="material-symbols-outlined text-sm">send</span> Submit Review
                         </button>
                     </form>
@@ -638,7 +638,8 @@ if (session_status() === PHP_SESSION_NONE) {
         }
 
         // Submit User Feedback
-        function submitUserFeedback() {
+        window.submitUserFeedback = function(e) {
+            if (e) e.preventDefault();
             const currentUser = JSON.parse(sessionStorage.getItem('avinest_current_user') || 'null');
             if (!currentUser) {
                 if (window.showCustomModal) {
@@ -658,13 +659,25 @@ if (session_status() === PHP_SESSION_NONE) {
                 return;
             }
 
-            const name = document.getElementById('fb-name').value.trim() || currentUser.name || 'Avian Lover';
+            const nameInput = document.getElementById('fb-name');
+            const name = (nameInput && nameInput.value.trim()) ? nameInput.value.trim() : (currentUser.name || 'Avian Lover');
             const category = document.getElementById('fb-category').value;
             const rating = document.getElementById('fb-rating').value;
-            const comment = document.getElementById('fb-comment').value.trim();
+            const commentInput = document.getElementById('fb-comment');
+            const comment = commentInput ? commentInput.value.trim() : '';
 
             if (!comment) {
-                if (window.showToast) window.showToast("Baraye meherbani feedback detail zaroor darj karein.");
+                if (window.showCustomModal) {
+                    window.showCustomModal({
+                        title: "⚠️ Missing Comment Details",
+                        message: "Baraye meherbani feedback comment box me apne taassurat zaroor likhein.",
+                        icon: "warning",
+                        type: "warning",
+                        buttonText: "OK"
+                    });
+                } else {
+                    alert("Baraye meherbani feedback comment zaroor darj karein.");
+                }
                 return;
             }
 
@@ -672,32 +685,40 @@ if (session_status() === PHP_SESSION_NONE) {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    user_id: currentUser.id || null,
+                    user_id: currentUser.id || 1,
                     user_name: name,
                     user_email: currentUser.email || 'user@birdbazaar.com',
                     category: category,
-                    rating: rating,
+                    rating: parseInt(rating || 5),
                     comment: comment
                 })
             })
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
-                    document.getElementById('fb-comment').value = '';
+                    if (commentInput) commentInput.value = '';
                     setupStarPicker();
                     loadFeedbacks();
-                    if (window.showCustomModal) {
-                        window.showCustomModal({
-                            title: "🎉 Review Submitted!",
-                            message: "Thank you for rating BirdBazaar. Your feedback helps make our community better!",
-                            icon: "thumb_up",
-                            type: "success",
-                            buttonText: "Awesome"
+                    if (window.showSuccessModal) {
+                        window.showSuccessModal({
+                            title: "🎉 Review Submitted Successfully!",
+                            message: "Shukriya! Aapka feedback aur star rating BirdBazaar community par live publish ho gaya hai.",
+                            icon: "star",
+                            badge: "FEEDBACK LIVE",
+                            buttonText: "Awesome!",
+                            onConfirm: () => {
+                                document.getElementById('reviews-feed-container').scrollIntoView({ behavior: 'smooth' });
+                            }
                         });
                     }
+                } else {
+                    alert(data.message || "Failed to submit feedback.");
                 }
+            })
+            .catch(err => {
+                alert("Error submitting feedback: " + err.message);
             });
-        }
+        };
     </script>
 </body>
 

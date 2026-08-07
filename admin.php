@@ -240,7 +240,7 @@ if (session_status() === PHP_SESSION_NONE) {
             </h3>
             <span class="text-xs bg-emerald-700 text-white font-bold px-3 py-1 rounded-full">Admin Only</span>
         </div>
-        <form id="admin-post-announcement-form" class="space-y-4">
+        <form id="admin-post-announcement-form" onsubmit="publishAdminAnnouncement(event)" class="space-y-4">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div class="sm:col-span-2">
                     <label class="block text-xs font-bold text-emerald-100 mb-1">Announcement Title</label>
@@ -260,7 +260,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <label class="block text-xs font-bold text-emerald-100 mb-1">Announcement Details / Content</label>
                 <textarea id="admin-ann-content" rows="3" required placeholder="Write the announcement message details here..." class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-emerald-400 font-medium"></textarea>
             </div>
-            <button type="submit" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs px-6 py-3 rounded-xl shadow-md transition-all flex items-center gap-2 cursor-pointer">
+            <button type="button" onclick="publishAdminAnnouncement(event)" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs px-6 py-3 rounded-xl shadow-md transition-all flex items-center gap-2 cursor-pointer border-none">
                 <span class="material-symbols-outlined text-sm">send</span> Publish Announcement
             </button>
         </form>
@@ -420,43 +420,65 @@ if (session_status() === PHP_SESSION_NONE) {
             renderTable();
         });
 
-        const annForm = document.getElementById('admin-post-announcement-form');
-        if (annForm) {
-            annForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const currentUser = JSON.parse(sessionStorage.getItem('avinest_current_user') || 'null');
-                const title = document.getElementById('admin-ann-title').value.trim();
-                const category = document.getElementById('admin-ann-category').value;
-                const content = document.getElementById('admin-ann-content').value.trim();
+        window.publishAdminAnnouncement = function(e) {
+            if (e) e.preventDefault();
+            const currentUser = JSON.parse(sessionStorage.getItem('avinest_current_user') || 'null');
+            const titleInput = document.getElementById('admin-ann-title');
+            const categoryInput = document.getElementById('admin-ann-category');
+            const contentInput = document.getElementById('admin-ann-content');
 
-                fetch('api/feedback.php?action=create_announcement', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        admin_name: currentUser ? currentUser.name : 'AviNest Admin',
-                        title: title,
-                        category: category,
-                        content: content
-                    })
+            if (!titleInput || !contentInput) return;
+
+            const title = titleInput.value.trim();
+            const category = categoryInput ? categoryInput.value : 'Official Update';
+            const content = contentInput.value.trim();
+
+            if (!title || !content) {
+                if (window.showCustomModal) {
+                    window.showCustomModal({
+                        title: "⚠️ Missing Fields",
+                        message: "Baraye meherbani Announcement Title aur Content dono mukammal darj karein.",
+                        icon: "warning",
+                        type: "warning",
+                        buttonText: "OK"
+                    });
+                }
+                return;
+            }
+
+            fetch('api/feedback.php?action=create_announcement', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    admin_name: currentUser ? currentUser.name : 'AviNest Admin',
+                    title: title,
+                    category: category,
+                    content: content
                 })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        annForm.reset();
-                        if (window.showCustomModal) {
-                            window.showCustomModal({
-                                title: "📢 Announcement Published!",
-                                message: "Your official announcement has been published and is now visible on the Community Feedback Page.",
-                                icon: "campaign",
-                                type: "success",
-                                buttonText: "View Feedback Page",
-                                onAction: () => { window.location.href = 'feedback.php'; }
-                            });
-                        }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    titleInput.value = '';
+                    contentInput.value = '';
+                    if (window.showSuccessModal) {
+                        window.showSuccessModal({
+                            title: "📢 Announcement Published!",
+                            message: "Aapki official announcement live publish ho gayi hai aur Feedback Page par display ho rahi hai.",
+                            icon: "campaign",
+                            badge: "ANNOUNCEMENT LIVE",
+                            buttonText: "View Feedback Page",
+                            onConfirm: () => { window.location.href = 'feedback.php'; }
+                        });
                     }
-                });
+                } else {
+                    alert(data.message || "Failed to publish announcement.");
+                }
+            })
+            .catch(err => {
+                alert("Error publishing announcement: " + err.message);
             });
-        }
+        };
     }
 
     // Fetch dashboard stats counters from API
