@@ -117,7 +117,8 @@ function createAnnouncement($db, $data) {
         return;
     }
 
-    $adminName = !empty($data['admin_name']) ? trim($data['admin_name']) : 'AviNest Admin';
+    $adminName = !empty($data['admin_name']) ? trim($data['admin_name']) : 'Admin';
+    if ($adminName === 'AviNest Admin') $adminName = 'Admin';
     $title = trim($data['title']);
     $content = trim($data['content']);
     $category = !empty($data['category']) ? trim($data['category']) : 'Official Update';

@@ -545,13 +545,65 @@ if (session_status() === PHP_SESSION_NONE) {
 
         // Delete Announcement Post (Admin Only)
         window.deleteAnnouncementPost = function(id) {
-            if (confirm("Are you sure you want to delete this announcement post?")) {
+            if (window.showConfirmModal) {
+                window.showConfirmModal({
+                    title: "🗑️ Delete Announcement Post?",
+                    message: "Are you sure you want to delete this official announcement post?",
+                    icon: "delete",
+                    confirmText: "Yes, Delete",
+                    cancelText: "Cancel",
+                    onConfirm: () => {
+                        fetch(`api/feedback.php?action=delete_announcement&id=${id}`, { method: 'POST' })
+                            .then(res => res.json())
+                            .then(data => {
+                                loadAnnouncements();
+                                if (window.showSuccessModal) {
+                                    window.showSuccessModal({
+                                        title: "Deleted!",
+                                        message: "Announcement post has been deleted.",
+                                        icon: "delete",
+                                        badge: "DELETED",
+                                        buttonText: "OK"
+                                    });
+                                }
+                            });
+                    }
+                });
+            } else if (confirm("Are you sure you want to delete this announcement post?")) {
                 fetch(`api/feedback.php?action=delete_announcement&id=${id}`, { method: 'POST' })
                     .then(res => res.json())
                     .then(data => {
                         loadAnnouncements();
-                        if (window.showToast) window.showToast("Deleted announcement!");
                     });
+            }
+        };
+
+        // Delete User Feedback (Admin Only)
+        window.deleteUserFeedback = function(id) {
+            if (window.showConfirmModal) {
+                window.showConfirmModal({
+                    title: "🗑️ Delete User Feedback?",
+                    message: "Are you sure you want to delete this user feedback review?",
+                    icon: "delete",
+                    confirmText: "Yes, Delete",
+                    cancelText: "Cancel",
+                    onConfirm: () => {
+                        fetch(`api/feedback.php?action=delete_feedback&id=${id}`, { method: 'POST' })
+                            .then(res => res.json())
+                            .then(data => {
+                                loadFeedbacks();
+                                if (window.showSuccessModal) {
+                                    window.showSuccessModal({
+                                        title: "Feedback Deleted!",
+                                        message: "User feedback review has been deleted.",
+                                        icon: "delete",
+                                        badge: "DELETED",
+                                        buttonText: "OK"
+                                    });
+                                }
+                            });
+                    }
+                });
             }
         };
 
@@ -606,6 +658,9 @@ if (session_status() === PHP_SESSION_NONE) {
                 return;
             }
 
+            const currentUser = JSON.parse(sessionStorage.getItem('avinest_current_user') || 'null');
+            const isAdmin = currentUser && (currentUser.role === 'admin' || currentUser.email === 'admin@avinest.com');
+
             container.innerHTML = filtered.map(f => `
                 <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between space-y-4 hover:shadow-md transition-shadow">
                     <div>
@@ -624,9 +679,12 @@ if (session_status() === PHP_SESSION_NONE) {
                                     <span class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">${f.date_formatted}</span>
                                 </div>
                             </div>
-                            <span class="bg-emerald-100 dark:bg-emerald-950 text-emerald-900 dark:text-emerald-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-emerald-300 dark:border-emerald-800">
-                                ${f.category || 'General'}
-                            </span>
+                            <div class="flex items-center gap-2">
+                                <span class="bg-emerald-100 dark:bg-emerald-950 text-emerald-900 dark:text-emerald-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-emerald-300 dark:border-emerald-800">
+                                    ${f.category || 'General'}
+                                </span>
+                                ${isAdmin ? `<button onclick="deleteUserFeedback(${f.id})" class="text-red-600 hover:text-red-800 text-xs font-bold flex items-center gap-1 cursor-pointer" title="Delete Feedback"><span class="material-symbols-outlined text-sm">delete</span></button>` : ''}
+                            </div>
                         </div>
                         <div class="text-amber-400 text-xs mb-2">
                             ${'⭐'.repeat(parseInt(f.rating || 5))}

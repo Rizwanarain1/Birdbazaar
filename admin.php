@@ -450,7 +450,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    admin_name: currentUser ? currentUser.name : 'AviNest Admin',
+                    admin_name: (currentUser && currentUser.name && !currentUser.name.includes('AviNest')) ? currentUser.name : 'Admin',
                     title: title,
                     category: category,
                     content: content
