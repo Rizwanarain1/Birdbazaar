@@ -14,7 +14,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
 
     <!-- Custom CSS Styles -->
     <link href="styles.css" rel="stylesheet" />
@@ -57,7 +57,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <script src="app.js" defer></script>
 </head>
 
-<body class="font-body-md text-on-surface bg-[#f8f9ff] dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col justify-between custom-scrollbar">
+<body class="font-body-md text-slate-900 bg-[#f8f9ff] dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col justify-between custom-scrollbar">
 
     <!-- Mobile Nav Drawer Backdrop -->
     <div id="mob-nav-overlay" class="drawer-overlay" onclick="closeMobNav()"></div>
@@ -95,18 +95,18 @@ if (session_status() === PHP_SESSION_NONE) {
         <div class="flex items-center gap-2.5 sm:gap-4 min-w-0">
             <div onclick="window.location.href='index.php'" class="flex items-center gap-2.5 cursor-pointer flex-shrink-0">
                 <img src="images/logo.png" alt="BirdBazaar Logo" class="w-16 h-16 sm:w-20 sm:h-20 object-contain" />
-                <span class="font-display-lg text-lg sm:text-2xl font-bold text-primary dark:text-emerald-400 truncate max-w-[120px] sm:max-w-none tracking-tight">BirdBazaar</span>
+                <span class="font-display-lg text-lg sm:text-2xl font-bold text-slate-900 dark:text-emerald-400 truncate max-w-[120px] sm:max-w-none tracking-tight">BirdBazaar</span>
             </div>
         </div>
         <nav class="hidden md:flex items-center gap-8 font-semibold text-sm">
-            <a class="text-slate-600 dark:text-slate-300 hover:text-emerald-700 transition-colors" href="index.php">Home</a>
-            <a class="text-slate-600 dark:text-slate-300 hover:text-emerald-700 transition-colors" href="parrots.php">Categories</a>
-            <a class="text-slate-600 dark:text-slate-300 hover:text-emerald-700 transition-colors" href="marketplace.php">Marketplace</a>
-            <a class="text-emerald-700 dark:text-emerald-400 border-b-2 border-emerald-700 pb-1" href="feedback.php">Community & Feedback</a>
+            <a class="text-slate-700 dark:text-slate-300 hover:text-emerald-700 transition-colors" href="index.php">Home</a>
+            <a class="text-slate-700 dark:text-slate-300 hover:text-emerald-700 transition-colors" href="parrots.php">Categories</a>
+            <a class="text-slate-700 dark:text-slate-300 hover:text-emerald-700 transition-colors" href="marketplace.php">Marketplace</a>
+            <a class="text-emerald-800 dark:text-emerald-400 font-bold border-b-2 border-emerald-700 pb-1" href="feedback.php">Community & Feedback</a>
         </nav>
         <div class="flex items-center gap-2 md:gap-4">
             <div id="header-auth-container" class="flex items-center gap-2"></div>
-            <button onclick="openMobNav()" class="md:hidden flex items-center justify-center w-10 h-10 rounded-xl bg-primary/10 text-primary dark:text-emerald-300">
+            <button onclick="openMobNav()" class="md:hidden flex items-center justify-center w-10 h-10 rounded-xl bg-slate-100 text-slate-900 dark:bg-slate-800 dark:text-emerald-300">
                 <span class="material-symbols-outlined">menu</span>
             </button>
         </div>
@@ -116,46 +116,48 @@ if (session_status() === PHP_SESSION_NONE) {
     <main class="w-full max-w-container-max mx-auto px-4 sm:px-6 md:px-margin-desktop py-8 space-y-12">
         
         <!-- Hero Title Banner -->
-        <div class="relative bg-gradient-to-br from-emerald-900 via-primary to-slate-900 text-white rounded-3xl p-6 sm:p-10 shadow-xl overflow-hidden border border-emerald-500/20">
+        <div class="relative bg-gradient-to-br from-emerald-950 via-slate-900 to-emerald-900 text-white rounded-3xl p-6 sm:p-10 shadow-xl overflow-hidden border border-emerald-500/30">
             <div class="relative z-10 max-w-2xl">
-                <span class="bg-emerald-500/20 text-emerald-300 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-4 inline-block border border-emerald-400/30">Community Voices & Official Hub</span>
-                <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-3 font-display-lg">BirdBazaar Feedback & Announcements</h1>
-                <p class="text-emerald-100/80 text-xs sm:text-sm leading-relaxed mb-6 font-light">Share your experiences, rate your transactions, and participate in official announcements with breeders and bird enthusiasts across Pakistan.</p>
+                <span class="bg-emerald-500/30 text-emerald-300 text-xs font-bold px-3.5 py-1 rounded-full uppercase tracking-wider mb-4 inline-block border border-emerald-400/40">Community Voices & Official Hub</span>
+                <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-3 font-display-lg text-white">BirdBazaar Feedback & Announcements</h1>
+                <p class="text-emerald-100 text-xs sm:text-sm leading-relaxed mb-6 font-medium">Share your experiences, rate your transactions, and participate in official announcements with breeders and bird enthusiasts across Pakistan.</p>
                 <a href="#feedback-form-card" class="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs sm:text-sm px-5 py-3 rounded-xl shadow-lg transition-all transform hover:-translate-y-0.5">
                     <span class="material-symbols-outlined text-lg">rate_review</span> Give Your Rating & Review
                 </a>
             </div>
             <!-- Background Decorative Symbol -->
-            <span class="material-symbols-outlined absolute -bottom-10 -right-10 text-white/5 text-[220px] pointer-events-none">forum</span>
+            <span class="material-symbols-outlined absolute -bottom-10 -right-10 text-white/10 text-[220px] pointer-events-none">forum</span>
         </div>
 
         <!-- Section 1: Official Admin Announcements & User Discussions -->
         <section class="space-y-6">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
                 <div>
-                    <h2 class="text-xl sm:text-2xl font-bold text-primary dark:text-emerald-400 flex items-center gap-2">
+                    <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-emerald-400 flex items-center gap-2">
                         <span class="material-symbols-outlined text-emerald-600">campaign</span> Official Admin Announcements & Discussions
                     </h2>
-                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Official posts from BirdBazaar Administrators. You can reply and discuss below!</p>
+                    <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">Official posts from BirdBazaar Administrators. You can reply and discuss below!</p>
                 </div>
                 <div id="admin-post-btn-container"></div>
             </div>
 
             <!-- Admin Post Creator Form (Visible only for Admin) -->
-            <div id="admin-create-post-card" class="hidden bg-emerald-950 text-white p-6 rounded-2xl border border-emerald-500/40 shadow-md">
+            <div id="admin-create-post-card" class="hidden bg-slate-900 text-white p-6 rounded-2xl border border-emerald-500/50 shadow-xl">
                 <h3 class="text-lg font-bold mb-3 flex items-center gap-2 text-emerald-400">
                     <span class="material-symbols-outlined">add_comment</span> Post Official Announcement
                 </h3>
                 <form id="admin-announcement-form" class="space-y-4">
                     <div>
-                        <input type="text" id="ann-title" required placeholder="Announcement Title (e.g. New Marketplace Security Rules)" class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-emerald-400" />
+                        <label class="block text-xs font-bold text-slate-200 mb-1">Announcement Title</label>
+                        <input type="text" id="ann-title" required placeholder="e.g. New Marketplace Security & Breeder Verification Rules" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-emerald-400 font-medium" />
                     </div>
                     <div>
-                        <textarea id="ann-content" rows="3" required placeholder="Write the announcement message details here..." class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-emerald-400"></textarea>
+                        <label class="block text-xs font-bold text-slate-200 mb-1">Message Details</label>
+                        <textarea id="ann-content" rows="3" required placeholder="Write the announcement message details here..." class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-emerald-400 font-medium"></textarea>
                     </div>
                     <div class="flex justify-end gap-3">
                         <button type="button" onclick="document.getElementById('admin-create-post-card').classList.add('hidden')" class="px-4 py-2 text-xs font-bold text-slate-300 hover:text-white">Cancel</button>
-                        <button type="submit" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-5 py-2 rounded-xl font-bold text-xs shadow-md transition-all">Publish Announcement</button>
+                        <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2 rounded-xl font-bold text-xs shadow-md transition-all">Publish Announcement</button>
                     </div>
                 </form>
             </div>
@@ -175,30 +177,30 @@ if (session_status() === PHP_SESSION_NONE) {
                 <!-- Rating Score Summary Card -->
                 <div class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-md flex flex-col justify-between">
                     <div>
-                        <h3 class="text-lg font-bold text-primary dark:text-emerald-400 mb-4 flex items-center gap-2">
+                        <h3 class="text-lg font-extrabold text-slate-900 dark:text-emerald-400 mb-4 flex items-center gap-2">
                             <span class="material-symbols-outlined text-amber-500">stars</span> Community Satisfaction
                         </h3>
                         <div class="flex items-baseline gap-3 mb-2">
                             <span id="summary-avg-rating" class="text-4xl sm:text-5xl font-extrabold text-slate-900 dark:text-white">5.0</span>
                             <div class="flex flex-col">
                                 <div id="summary-stars-html" class="flex text-amber-400 text-lg">⭐⭐⭐⭐⭐</div>
-                                <span id="summary-total-count" class="text-xs text-slate-500 dark:text-slate-400 font-medium">Based on 0 reviews</span>
+                                <span id="summary-total-count" class="text-xs text-slate-700 dark:text-slate-300 font-bold">Based on 0 reviews</span>
                             </div>
                         </div>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-6">Real ratings from buyers, sellers, and verified bird breeders across Pakistan.</p>
+                        <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed mb-6 font-medium">Real ratings from buyers, sellers, and verified bird breeders across Pakistan.</p>
                     </div>
 
                     <!-- Rating Progress Bars -->
-                    <div id="rating-bars-container" class="space-y-2 border-t border-slate-100 dark:border-slate-800 pt-4 text-xs font-semibold text-slate-600 dark:text-slate-300">
+                    <div id="rating-bars-container" class="space-y-2.5 border-t border-slate-200 dark:border-slate-800 pt-4 text-xs font-bold text-slate-800 dark:text-slate-200">
                         <div class="flex items-center gap-2">
                             <span>5 Stars</span>
-                            <div class="flex-1 bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div class="flex-1 bg-slate-200 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden">
                                 <div id="bar-5" class="bg-emerald-500 h-full w-full transition-all"></div>
                             </div>
                         </div>
                         <div class="flex items-center gap-2">
                             <span>4 Stars</span>
-                            <div class="flex-1 bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+                            <div class="flex-1 bg-slate-200 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden">
                                 <div id="bar-4" class="bg-emerald-400 h-full w-0 transition-all"></div>
                             </div>
                         </div>
@@ -207,27 +209,27 @@ if (session_status() === PHP_SESSION_NONE) {
 
                 <!-- Submit Feedback Form Card -->
                 <div id="feedback-form-card" class="lg:col-span-2 bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-md">
-                    <h3 class="text-lg sm:text-xl font-bold text-primary dark:text-emerald-400 mb-1 flex items-center gap-2">
+                    <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-emerald-400 mb-1 flex items-center gap-2">
                         <span class="material-symbols-outlined text-emerald-600">edit_note</span> Submit Your Review & Star Rating
                     </h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-6">Tell us about your experience with BirdBazaar website, bird listings, or breeders.</p>
+                    <p class="text-xs text-slate-700 dark:text-slate-300 mb-6 font-medium">Tell us about your experience with BirdBazaar website, bird listings, or breeders.</p>
 
                     <form id="user-feedback-form" class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">Your Name</label>
-                                <input type="text" id="fb-name" required placeholder="e.g. Usama Khan" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500" />
+                                <label class="block text-xs font-bold text-slate-900 dark:text-white mb-1">Your Name</label>
+                                <input type="text" id="fb-name" required placeholder="e.g. Usama Khan" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-xs text-slate-900 dark:text-white font-medium focus:outline-none focus:border-emerald-500 focus:bg-white dark:focus:bg-slate-900" />
                             </div>
                             <div>
-                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">Email Address</label>
-                                <input type="email" id="fb-email" required placeholder="e.g. usama@gmail.com" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500" />
+                                <label class="block text-xs font-bold text-slate-900 dark:text-white mb-1">Email Address</label>
+                                <input type="email" id="fb-email" required placeholder="e.g. usama@gmail.com" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-xs text-slate-900 dark:text-white font-medium focus:outline-none focus:border-emerald-500 focus:bg-white dark:focus:bg-slate-900" />
                             </div>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
                             <div>
-                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">Category / Aspect</label>
-                                <select id="fb-category" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 font-semibold cursor-pointer">
+                                <label class="block text-xs font-bold text-slate-900 dark:text-white mb-1">Category / Aspect</label>
+                                <select id="fb-category" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-xs text-slate-900 dark:text-white font-bold focus:outline-none focus:border-emerald-500 cursor-pointer">
                                     <option value="Website Experience">Website Experience</option>
                                     <option value="Bird Quality">Bird Quality & Health</option>
                                     <option value="Breeder Trust">Breeder Trust & Security</option>
@@ -235,7 +237,7 @@ if (session_status() === PHP_SESSION_NONE) {
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">Select Star Rating</label>
+                                <label class="block text-xs font-bold text-slate-900 dark:text-white mb-1">Select Star Rating</label>
                                 <div id="star-picker" class="star-rating flex items-center gap-1 text-2xl text-slate-300">
                                     <span data-star="1" class="material-symbols-outlined active">star</span>
                                     <span data-star="2" class="material-symbols-outlined active">star</span>
@@ -249,11 +251,11 @@ if (session_status() === PHP_SESSION_NONE) {
                         </div>
 
                         <div>
-                            <label class="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">Your Detailed Feedback</label>
-                            <textarea id="fb-comment" rows="3" required placeholder="Describe your experience with BirdBazaar..." class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500"></textarea>
+                            <label class="block text-xs font-bold text-slate-900 dark:text-white mb-1">Your Detailed Feedback</label>
+                            <textarea id="fb-comment" rows="3" required placeholder="Describe your experience with BirdBazaar..." class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-xs text-slate-900 dark:text-white font-medium focus:outline-none focus:border-emerald-500 focus:bg-white dark:focus:bg-slate-900"></textarea>
                         </div>
 
-                        <button type="submit" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-6 py-3 rounded-xl shadow-md transition-all cursor-pointer flex items-center justify-center gap-2">
+                        <button type="submit" class="w-full sm:w-auto bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs px-6 py-3 rounded-xl shadow-md transition-all cursor-pointer flex items-center justify-center gap-2">
                             <span class="material-symbols-outlined text-sm">send</span> Submit Review
                         </button>
                     </form>
@@ -263,13 +265,13 @@ if (session_status() === PHP_SESSION_NONE) {
             <!-- Reviews Feed Header & Filters -->
             <div class="space-y-4">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
-                    <h3 class="text-lg sm:text-xl font-bold text-primary dark:text-emerald-400 flex items-center gap-2">
+                    <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-emerald-400 flex items-center gap-2">
                         <span class="material-symbols-outlined text-emerald-600">rate_review</span> Verified Community Reviews
                     </h3>
                     <div class="flex items-center gap-2 overflow-x-auto max-w-full py-1">
-                        <button onclick="filterFeedbacks('all')" class="fb-filter-btn px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-600 text-white shadow-sm">All</button>
-                        <button onclick="filterFeedbacks(5)" class="fb-filter-btn px-3 py-1.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">5 Stars ⭐</button>
-                        <button onclick="filterFeedbacks(4)" class="fb-filter-btn px-3 py-1.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">4 Stars ⭐</button>
+                        <button onclick="filterFeedbacks('all')" class="fb-filter-btn px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-700 text-white shadow-sm">All</button>
+                        <button onclick="filterFeedbacks(5)" class="fb-filter-btn px-3.5 py-1.5 rounded-full text-xs font-bold bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-300">5 Stars ⭐</button>
+                        <button onclick="filterFeedbacks(4)" class="fb-filter-btn px-3.5 py-1.5 rounded-full text-xs font-bold bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-300">4 Stars ⭐</button>
                     </div>
                 </div>
 
@@ -428,46 +430,46 @@ if (session_status() === PHP_SESSION_NONE) {
             container.innerHTML = list.map(ann => {
                 const comments = ann.comments || [];
                 return `
-                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-emerald-500/30 shadow-md relative space-y-4">
-                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-3">
+                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border-2 border-emerald-500/30 shadow-md relative space-y-4">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-3">
                             <div class="flex items-center gap-2">
-                                <span class="bg-emerald-600 text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1">
+                                <span class="bg-emerald-700 text-white text-[11px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1 shadow-sm">
                                     <span class="material-symbols-outlined text-xs">verified</span> ${ann.category || 'Announcement'}
                                 </span>
-                                <span class="text-xs font-bold text-slate-500">${ann.admin_name} • ${ann.date_formatted}</span>
+                                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">${ann.admin_name} • ${ann.date_formatted}</span>
                             </div>
-                            ${isAdmin ? `<button onclick="deleteAnnouncementPost(${ann.id})" class="text-red-500 hover:text-red-700 text-xs font-bold flex items-center gap-1"><span class="material-symbols-outlined text-sm">delete</span> Delete Post</button>` : ''}
+                            ${isAdmin ? `<button onclick="deleteAnnouncementPost(${ann.id})" class="text-red-600 dark:text-red-400 hover:underline text-xs font-bold flex items-center gap-1"><span class="material-symbols-outlined text-sm">delete</span> Delete Post</button>` : ''}
                         </div>
 
                         <div>
-                            <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-2">${ann.title}</h3>
-                            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-light whitespace-pre-line">${ann.content}</p>
+                            <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white mb-2">${ann.title}</h3>
+                            <p class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-normal whitespace-pre-line">${ann.content}</p>
                         </div>
 
                         <!-- Comment Thread Section -->
-                        <div class="bg-slate-50 dark:bg-slate-950 p-4 sm:p-5 rounded-2xl border border-slate-200/60 dark:border-slate-800 space-y-3">
-                            <h4 class="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1">
+                        <div class="bg-slate-100 dark:bg-slate-950 p-4 sm:p-5 rounded-2xl border border-slate-300 dark:border-slate-800 space-y-3">
+                            <h4 class="text-xs font-extrabold text-slate-900 dark:text-emerald-400 flex items-center gap-1">
                                 <span class="material-symbols-outlined text-sm text-emerald-600">forum</span> Community Replies (${comments.length})
                             </h4>
 
-                            <div class="space-y-2 max-h-56 overflow-y-auto pr-2 custom-scrollbar">
+                            <div class="space-y-2.5 max-h-64 overflow-y-auto pr-2 custom-scrollbar">
                                 ${comments.length > 0 ? comments.map(c => `
-                                    <div class="p-3 bg-white dark:bg-slate-900 rounded-xl text-xs border border-slate-200/50 dark:border-slate-800 shadow-sm">
+                                    <div class="p-3.5 bg-white dark:bg-slate-900 rounded-xl text-xs border border-slate-200 dark:border-slate-800 shadow-sm">
                                         <div class="flex justify-between items-center mb-1">
-                                            <span class="font-bold text-emerald-800 dark:text-emerald-400 flex items-center gap-1">
-                                                <span class="material-symbols-outlined text-xs">account_circle</span> ${c.user_name}
+                                            <span class="font-extrabold text-emerald-900 dark:text-emerald-300 flex items-center gap-1 text-xs">
+                                                <span class="material-symbols-outlined text-sm">account_circle</span> ${c.user_name}
                                             </span>
-                                            <span class="text-[10px] text-slate-400">${c.date_formatted}</span>
+                                            <span class="text-[10px] font-semibold text-slate-500 dark:text-slate-400">${c.date_formatted}</span>
                                         </div>
-                                        <p class="text-slate-600 dark:text-slate-300">${c.comment_text}</p>
+                                        <p class="text-slate-800 dark:text-slate-100 font-normal leading-relaxed">${c.comment_text}</p>
                                     </div>
-                                `).join('') : '<p class="text-xs text-slate-400 italic">No replies yet. Be the first to comment!</p>'}
+                                `).join('') : '<p class="text-xs text-slate-500 dark:text-slate-400 font-medium italic">No replies yet. Be the first to comment!</p>'}
                             </div>
 
                             <!-- Reply Box -->
-                            <div class="flex gap-2 pt-2 border-t border-slate-200/40 dark:border-slate-800">
-                                <input type="text" id="reply-input-${ann.id}" placeholder="Write a reply under this announcement..." class="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500" />
-                                <button onclick="submitUserReply(${ann.id})" class="bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs px-4 py-2 rounded-xl shadow-sm transition-all flex items-center gap-1 flex-shrink-0">
+                            <div class="flex gap-2 pt-2 border-t border-slate-300 dark:border-slate-800">
+                                <input type="text" id="reply-input-${ann.id}" placeholder="Write a reply under this announcement..." class="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 dark:text-white font-medium focus:outline-none focus:border-emerald-500" />
+                                <button onclick="submitUserReply(${ann.id})" class="bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-sm transition-all flex items-center gap-1 flex-shrink-0 cursor-pointer">
                                     <span class="material-symbols-outlined text-sm">send</span> Reply
                                 </button>
                             </div>
@@ -591,9 +593,9 @@ if (session_status() === PHP_SESSION_NONE) {
         window.filterFeedbacks = function(rating) {
             activeFilter = rating;
             document.querySelectorAll('.fb-filter-btn').forEach(btn => {
-                btn.className = 'fb-filter-btn px-3 py-1.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300';
+                btn.className = 'fb-filter-btn px-3.5 py-1.5 rounded-full text-xs font-bold bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-300';
             });
-            event.target.className = 'fb-filter-btn px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-600 text-white shadow-sm';
+            event.target.className = 'fb-filter-btn px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-700 text-white shadow-sm';
             renderFeedbacks();
         };
 
@@ -606,7 +608,7 @@ if (session_status() === PHP_SESSION_NONE) {
             }
 
             if (filtered.length === 0) {
-                container.innerHTML = '<div class="col-span-full text-center py-12 text-slate-400 italic text-xs">No reviews matching filter.</div>';
+                container.innerHTML = '<div class="col-span-full text-center py-12 text-slate-500 font-medium italic text-xs">No reviews matching filter.</div>';
                 return;
             }
 
@@ -614,23 +616,23 @@ if (session_status() === PHP_SESSION_NONE) {
                 <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between space-y-4 hover:shadow-md transition-shadow">
                     <div>
                         <div class="flex justify-between items-start mb-3">
-                            <div class="flex items-center gap-2">
-                                <div class="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 font-bold flex items-center justify-center text-sm">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-9 h-9 rounded-full bg-emerald-700 text-white font-extrabold flex items-center justify-center text-sm shadow-sm">
                                     ${(f.user_name || 'U').charAt(0).toUpperCase()}
                                 </div>
                                 <div>
-                                    <h4 class="font-bold text-xs text-slate-900 dark:text-white">${f.user_name}</h4>
-                                    <span class="text-[10px] text-slate-400">${f.date_formatted}</span>
+                                    <h4 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">${f.user_name}</h4>
+                                    <span class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">${f.date_formatted}</span>
                                 </div>
                             </div>
-                            <span class="bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200/40">
+                            <span class="bg-emerald-100 dark:bg-emerald-950 text-emerald-900 dark:text-emerald-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-emerald-300 dark:border-emerald-800">
                                 ${f.category || 'General'}
                             </span>
                         </div>
                         <div class="text-amber-400 text-xs mb-2">
                             ${'⭐'.repeat(parseInt(f.rating || 5))}
                         </div>
-                        <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-light italic">"${f.comment}"</p>
+                        <p class="text-xs sm:text-sm text-slate-800 dark:text-slate-100 leading-relaxed font-normal italic">"${f.comment}"</p>
                     </div>
                 </div>
             `).join('');
